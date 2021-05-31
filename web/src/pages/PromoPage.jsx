@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HowItWorkPage() {
+function PromoPage() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function HowItWorkPage() {
     )
 }
 
-export default HowItWorkPage
+export default PromoPage

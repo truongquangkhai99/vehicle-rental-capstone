@@ -1,7 +1,10 @@
+
+//Đổi cursor thành pointer (đánh dấu có thể bấm)
 .cursor--pointer{
     cursor: pointer;
 }
 
+//.fs--1 đến .fs--7 để chỉnh font-size (bootstrap có fs-1 -> fs-6 tương đương với h1 -> h6 )
 @for $i from 1 through 7{
     .fs--#{$i}{
         font-size: 26-$i*2;

@@ -1,26 +1,25 @@
 @charset "UTF-8";
-
-
+//Không thay đổi thứ tự các import!!! Chỉ thêm import cở components và pages
 @import 
 'abstracts/variables',
 'abstracts/functions',
 'abstracts/mixins';
 
-// 3. Base stuff
+
 @import 
 './base/fonts',
 './base/base',
 './base/typography',
 './base/helpers';
 
-// 4. Layout-related sections
-@import 
-'./components/layout/footer',
-'./components/layout/notfound';
-
-// 5. Components
+//components
 @import 
 './components/header';
-// 6. Page-specific styles
+
+//pages
 @import 
 './pages/home';
+
+@import 
+'./pages/layout/footer',
+'./pages/layout/notfound';

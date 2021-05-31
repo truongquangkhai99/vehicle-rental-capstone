@@ -8,7 +8,7 @@ export function NotLoggedNav(props) {
         <div>
             <Nav className="d-none d-lg-flex text-white">
                 <Nav.Link onClick={showLoginForm}>Đăng nhập</Nav.Link>
-                <Nav.Link className="nav-link__register" href="/sign-up">Đăng ký</Nav.Link>
+                <Nav.Link className="nav-link__register" href="/signup">Đăng ký</Nav.Link>
             </Nav>
         </div>
     )
