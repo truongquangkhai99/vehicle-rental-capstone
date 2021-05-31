@@ -1,0 +1,30 @@
+html,body{
+    overflow-x: hidden;
+}
+
+form{
+    max-width: 600px;
+    margin: auto;
+    padding: 30px 10px;
+}
+.page-content{
+    min-height: $page-min-height;
+}
+.close-button{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.backdrop{
+    background-color: rgba(0, 0, 0, 0.075);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1051;
+}
+.icon {
+    display: inline-block;
+    margin-bottom: 4px;
+}

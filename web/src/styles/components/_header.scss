@@ -1,0 +1,163 @@
+#header {
+
+  //Navbar
+  nav {
+    height: 58px;
+  }
+
+  #avatar__dropdown {
+    color: white;
+    border-right: 1px solid #f8b3b379;
+    padding-right: 20px;
+
+    a {
+      display: inline-block;
+      margin-left: 40px;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 100px;
+      position: absolute;
+      left: -40px;
+      top: 0;
+    }
+  }
+
+  .dropdown-menu {
+    border-top: 2px solid $primary;
+    min-width: 200px;
+    right: 0;
+
+    .dropdown-item {
+      color: white;
+      font-size: 15px;
+      font-weight: 300;
+      padding: 10px 16px;
+    }
+  }
+
+  .nav-link {
+    color: white;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &__register {
+      margin-left: 15px;
+      border: 1px solid white;
+      border-radius: 3px;
+
+      &:hover {
+        border: 1px solid $primary;
+      }
+    }
+  }
+}
+
+//Offcanvas
+.offcanvas-open {
+  padding-right: 0 !important;
+}
+
+#offcanvas {
+  background-color: $dark;
+  border-right: 5px solid $primary;
+
+  .offcanvas-header.logged {
+    margin-bottom: 50px;
+  }
+
+  .offcanvas__avatar {
+    color: white;
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    text-align: center;
+
+    img {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+  }
+
+  a {
+    color: white;
+    border: 1px solid transparent;
+
+    &:hover {
+      color: $primary;
+      border: 1px solid $primary;
+    }
+  }
+}
+
+//Login-form
+#login-form {
+  min-width: 280px;
+  position: fixed;
+  left: 50%;
+  top: 5vh;
+  transform: translateX(-50%);
+  background-color: white;
+  z-index: 1052;
+  padding: 60px 5vw;
+  border-radius: 5px;
+  box-shadow: 4px 4px 4px 2px #00000033;
+}
+
+//Notification
+#noti {
+  padding: 3px;
+  margin: 0;
+  max-width: 280px;
+  width: 100vw;
+  font-size: 12px;
+  .noti {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+    user-select: text;
+  }
+
+  .noti__avatar {
+    box-sizing: border-box;
+    width: 15%;
+    margin-right: 3px;
+    display: inline-block;
+
+    img {
+      width: 100%;
+      border-radius: 100px;
+    }
+  }
+
+  .noti__desc {
+    width: 85%;
+    display: inline-block;
+    p{
+      margin-bottom: 10px;
+      display: inline-block;
+    }    
+
+    &--tittle {
+      font-weight: 600;
+    }
+
+    &--content {}
+
+    &--time {
+      color: $text-muted;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.cursor--pointer{
+    cursor: pointer;
+}
+
+@for $i from 1 through 7{
+    .fs--#{$i}{
+        font-size: 26-$i*2;
+    }
+    .fw--#{$i}{
+        font-weight: $i*100;
+    }
+}
