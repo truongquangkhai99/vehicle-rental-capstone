@@ -14,12 +14,11 @@
 
 //components
 @import 
-'./components/header';
+'./components/header',
+'./components/layout/footer',
+'./components/layout/notfound';
 
 //pages
 @import 
 './pages/home';
 
-@import 
-'./pages/layout/footer',
-'./pages/layout/notfound';
