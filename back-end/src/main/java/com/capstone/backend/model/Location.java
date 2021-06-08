@@ -29,6 +29,8 @@ public class Location {
     private String strAddress;
     private String latitude;
     private String longitude;
+    private boolean defaultAddress;
+    private String name;
     @ManyToOne
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
