@@ -21,10 +21,11 @@ export function LoggedNav(props) {
             createTime: new Date().toISOString(),
             link:"google.com.vn"
         }]
+    const a ="Tài khoản1";
     return (
         <Nav className="text-white">
             <NavDropdown className="ms-5 d-none d-lg-block" menuVariant="dark" title={<span><img alt="avatar" draggable="false" src={logged.avatarLink}></img><span>{logged.fullName}</span></span>} id="avatar__dropdown">
-                <NavDropdown.Item href="/account">Tài khoản</NavDropdown.Item>
+                <NavDropdown.Item href="/account">${a}</NavDropdown.Item>
                 <NavDropdown.Item href="/myfavs">Xe yêu thích</NavDropdown.Item>
                 <NavDropdown.Item href="/mytrips">Chuyến của tôi</NavDropdown.Item>
                 <NavDropdown.Item href="/myaddress">Địa chỉ của tôi</NavDropdown.Item>

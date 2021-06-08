@@ -10,17 +10,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Notification {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY) 
-   private long id;   
-   private String link;
+   private long id;
    private String title;
    private String content;
+   private String contentDetail;
+   private String imgLink;
    private Date createTime= new Date();
+   private boolean readed;
    @OneToOne
    @JoinColumn(name = "sender_id")
    private User sender;

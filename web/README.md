@@ -46,3 +46,5 @@ web
 3. **Redux**
  - Nếu thêm 1 slice file ở thư mục app/slice thì phải thêm reducer vào biến rootReducer ở file app/store.js
  - Comment rõ slice đó quản lý state gì để làm gì
+
+**Các task front-end được chia trên Trello

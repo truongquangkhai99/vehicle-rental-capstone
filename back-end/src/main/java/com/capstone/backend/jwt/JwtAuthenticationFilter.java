@@ -28,23 +28,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private UserDetailServiceImpl userDetailService;
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
             // Lấy jwt từ request
-            String jwt = getJwtFromRequest(request);
+            Long userId = getUserIdFromRequest(request);
 
-            if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-                // Lấy id user từ chuỗi jwt
-                Long userId = tokenProvider.getUserIdFromJWT(jwt);
+            if (userId!=null) {
                 // Lấy thông tin người dùng từ id
                 UserDetails userDetails = userDetailService.loadUserById(userId);
-                if(userDetails != null) {
+                if (userDetails != null) {
                     // Nếu người dùng hợp lệ, set thông tin cho Seturity Context
-                    UsernamePasswordAuthenticationToken
-                            authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                            userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -62,6 +60,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Kiểm tra xem header Authorization có chứa thông tin jwt không
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+    public Long getUserIdFromRequest(HttpServletRequest request) {
+        String jwt = getJwtFromRequest(request);
+        if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+            Long userId = tokenProvider.getUserIdFromJWT(jwt);
+            return userId;
         }
         return null;
     }
