@@ -5,7 +5,7 @@ import com.capstone.backend.payload.ResponseData;
 
 public interface BlogService {
     ResponseData getAllBlogs();
-    ResponseData getBlogById();
+    ResponseData getBlogById(long id);
     ResponseData saveBlog(Blog blog);
-    ResponseData removeBlogById(long id);
+    void removeBlogById(long id);
 }

@@ -27,32 +27,32 @@ public class VehicleController {
     JwtAuthenticationFilter jwtAuth;
 
     @PostMapping("/register/car")//đăng ký  oto
-    public ResponseData saveVehicle(@RequestBody Car car){        
-        return new ResponseData("error", null);
+    public ResponseData saveVehicle(@RequestBody Car car){  
+        return new ResponseData("save car", vehicleService.saveCar(car));
     }
     @PostMapping("/register/bike")//đăng ký xe máy
     public ResponseData saveVehicle(@RequestBody Bike bike){        
-        return new ResponseData("error", null);
+        return new ResponseData("save bike", vehicleService.saveBike(bike));
     }
     @GetMapping("/getMyVehicles")// danh sách xe của mình
-    public ResponseData getMyVehicle(HttpServletRequest request){
-        return new ResponseData("error", null);
+    public ResponseData getMyVehicle(HttpServletRequest request){  
+        return new ResponseData("get my vehicles", vehicleService.getAllVehiclesByUserId(jwtAuth.getUserIdFromRequest(request)));
     }
     @GetMapping("/getVehicle")// Xem thông tin xe bất kì
     public ResponseData getMyVehicle(long id){
-        return new ResponseData("error", null);
+        return new ResponseData("get vehicle", vehicleService.getVehicleById(id));
     }
     @GetMapping("/findCarDriver")//Tìm xe có tài xế theo địa chỉ
     public ResponseData findCarDriver(@RequestParam String address){
-        return new ResponseData("error", null);
+        return new ResponseData("find Car Driver", vehicleService.findCarDriver(address));
     }
     @GetMapping("/findCarSelfDriver")//Tìm xe có tự lái theo địa chỉ
     public ResponseData findCarSelfDriver(@RequestParam String address){
-        return new ResponseData("error", null);
+        return new ResponseData("find Car Self Driver", vehicleService.findCarSelfDriver(address));
     }
     @GetMapping("/findBike")//Tìm xe máy theo địa chỉ
     public ResponseData findBike(@RequestParam String address){
-        return new ResponseData("error", null);
+        return new ResponseData("find Bike", vehicleService.findBike(address));
     }
 
 }

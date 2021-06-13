@@ -1,7 +1,15 @@
+// body .slick-next, .slick-prev{  
+//     background-color: green;   
+// }
+// body .slick-prev:hover,
+// .slick-prev:focus,
+// .slick-next:hover,
+// .slick-next:focus {
+//     background-color: greenyellow;
+// }
 body{
-    background-color: rgb(240, 245, 237);
+    background-color: #e5f6ea;
 }
-
 .banner{
     background-image: url("../../assets/images/banner-road-2.jpg");
     width:100%;
@@ -17,7 +25,7 @@ body{
 }
 .book-car{
     width:770px;
-    height:400px;
+    height:450px;
     margin: 0 auto;
     background-color: rgba(0,0,0,.15);
     border-radius:10px;
@@ -31,7 +39,7 @@ body{
 }
 .book-car .tab-left .service-box{
     width:100%;
-    height:50%;  
+    height:33%;  
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px ;
     color: black;
@@ -111,36 +119,221 @@ body{
     height:20%;
 }
 .main-feature .image-feature img{
-  border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  box-shadow: 10px 10px #b2b5b8;
 }
 
-.newspaper{
-    width: 100%;
-    height:450px;
-    margin-top: 100px;
-    background-image: url("../../assets/images/bg1.png");
-    position: relative;
+.slick-slide.slick-center img {
+    box-shadow:none; 
+    transform: scaleY(1.3) scaleX(1.4);
+    transition-duration: 1s;
 }
-.newspaper .title-newspaper{
-    position: absolute;
+.car-rental-guide{
+    width: 100%;
+    height:auto;
+    margin-top: 100px; 
+    background: #c7f3d4;
+    padding: 50px 0;
+    border-top: 1px solid #e8eaef;
+    border-bottom: 1px solid #e8eaef;
+}
+.car-rental-guide .title-guide{ 
     width:100%;
-    height:10%;
+    height:auto;
     padding-top: 20px;
     font-weight: bold;
     text-align: center;
     font-size:3rem;
 }
-.newspaper .image-newspaper{
-    position: absolute;
-    top: 20%;
-    left: 20%;
-    width: 1000px;
+.car-rental-guide .content-guide{   
+    width: 100%;
+    height:auto;
+    display:flex;
+    grid-template-columns: auto auto auto auto;
+    justify-content:space-around;
 }
+.car-rental-guide .content-guide .image-guide{
+    width:250px;
+    height:250px;
+}
+.car-rental-guide .content-guide .image-guide img{
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+.car-rental-guide .see-more{
+    width:100%;
+    height: 100px;
+    padding-top: 60px;
+}
+.car-rental-guide .see-more .see-link{  
+    float:right;
+    margin-right: 8%;
+    font-size:1.5rem;
+    position: relative;
+}
+.car-rental-guide .see-more .see-link::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background-color: #1e1e1f;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+.car-rental-guide .see-more .see-link:hover::before{
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+
+.local-self-driver{
+    width: 75%;
+    height: 250px;
+    margin: 50px auto;
+    margin-bottom: 0px;
+}
+.local-self-driver{
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.local-self-driver .slick-slide img {
+    border-radius: 10px;
+    width: 90%;
+    margin:0 auto;
+}
+.local-self-driver .slick-slide{
+    transition-property: width height;
+    transition-duration: 1s;
+}
+.local-self-driver .slick-slide:hover{
+    transform: scale(1.1);
+}
+.local-self-driver .slick-slide h4{
+    margin-top: -4.5rem;
+    margin-left: 2rem;
+    margin-bottom: 0;
+    color: #fff;
+}
+.local-self-driver .slick-slide p{
+    margin-left: 2rem;
+    color: #fff;
+}
+.banner2{
+    width: 100%;
+    height: 500px;
+    background-image: url('../../assets/images/bg3.jpg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-top: 50px;
+}
+.banner2 .content-banner{
+    position: absolute;
+    left: 60%;
+    width: 40%;
+    height: 100%;
+    padding-top: 140px;
+    padding-left: 30px;
+    padding-right: 160px;   
+}
+.banner2 .content-banner button{
+    margin-right: 16px;
+}
+.car-self-driver{
+    width: 75%;
+    height: 350px;
+    margin: 50px auto;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.car-self-driver .slick-slide img{
+    border-radius: 5px;
+    width: 90%;
+    height: 200px;
+    margin:0 auto ;
+}
+.car-self-driver .slick-slide h4{
+    padding-left: 1rem;
+    margin-top: -4rem;
+    transition: transform 1s;
+}
+.car-self-driver .slick-slide:hover h4{
+    transform: scale(0.5);
+}
+.car-self-driver .slick-slide p {
+    margin: 0;
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+.car-self-driver .slick-slide .num-rental{
+    margin-left: 2.5rem;
+}
+.car-self-driver .slick-slide .icon{
+    width: 26px;
+    height: 26px;
+}
+.blog{
+    width: 100%;
+    height:800px;
+    background-image: url("../../assets/images/bg-blog.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.blog .blog-title{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 1rem;
+}
+.blog .blog-content {
+    width: 80%;
+    height: 600px;
+    margin: 0 auto;
+}
+.blog .blog-content div{
+    padding-bottom: 15px;
+    position: relative;
+}
+.blog .blog-content .card{
+    width: 90% !important;
+    height:90% !important;
+    margin-left: 5%;
+    box-shadow: 10px 10px 10px #888888;
+    border-radius: 10px;
+    transition: all 250ms ease-in-out;
+}
+.blog .blog-content .card:hover{
+    box-shadow: 0 4px 1rem -4px #000;
+    transform: translateY(-3px);
+}
+.blog .blog-content .card .card-link{
+    position: relative;
+}
+.blog .blog-content .card .card-link::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background-color: #1e1e1f;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.blog .blog-content .card .card-link:hover::before{
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+.blog .blog-content .card .card-text{
+    font-weight: 300;
+}    
 .app-container{
     width:100%;
     height: 600px;
     background-image: url("../../assets/images/bg2.png");
-    background-size: 100% 100%;
+    background-size: 100% ;
     background-repeat: no-repeat;
 }
 .app-container .app-left{
