@@ -1,7 +1,7 @@
 package com.capstone.backend.model;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -65,11 +65,11 @@ public class Vehicle {
     @JoinColumn(name = "model_id")
     private Model model;
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Image> images;
+    private List<Image> images;
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Rating> rating;
+    private List<Rating> rating;
     @ManyToMany(mappedBy = "likedVehicles")
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<User> userLiked;
+    private List<User> userLiked;
 }

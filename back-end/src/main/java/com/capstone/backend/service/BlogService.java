@@ -7,5 +7,5 @@ public interface BlogService {
     ResponseData getAllBlogs();
     ResponseData getBlogById(long id);
     ResponseData saveBlog(Blog blog);
-    void removeBlogById(long id);
+    ResponseData removeBlogById(long id);
 }

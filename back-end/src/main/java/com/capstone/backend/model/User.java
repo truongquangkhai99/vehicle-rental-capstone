@@ -1,7 +1,8 @@
 package com.capstone.backend.model;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -51,28 +52,28 @@ public class User {
     @JoinColumn(name = "license_id")
     private DrivingLicense drivingLincense; // bằng lái xe
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Location> addresses;
+    private List<Location> addresses;
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
+    private List<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JoinTable(name = "favorite_vehicle",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "vehicle_id")
     )
-    private Set<Vehicle> likedVehicles;
+    private List<Vehicle> likedVehicles;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Vehicle> myVehicles;
+    private List<Vehicle> myVehicles;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JoinTable(name = "user_relative",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "relatives_id")
     )
-    private Set<RelativesVehicle>relativesVehicles;
+    private List<RelativesVehicle>relativesVehicles;
 
 }

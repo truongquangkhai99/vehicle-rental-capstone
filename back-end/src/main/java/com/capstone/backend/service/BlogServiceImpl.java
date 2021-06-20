@@ -22,7 +22,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public ResponseData getBlogById(long id) {
         // TODO Auto-generated method stub
-        return new ResponseData("get blog", blogRepository.findById(id));
+        return new ResponseData("get blog", blogRepository.findById(id).get());
     }
 
     @Override
@@ -32,10 +32,10 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void removeBlogById(long id) {
+    public ResponseData removeBlogById(long id) {
         // TODO Auto-generated method stub
         blogRepository.deleteById(id);
-       
+       return new ResponseData("delete blog has id="+ id ,blogRepository.findAll());
     }
 
 }

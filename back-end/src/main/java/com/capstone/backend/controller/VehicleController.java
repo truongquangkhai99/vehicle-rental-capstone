@@ -6,6 +6,7 @@ import com.capstone.backend.jwt.JwtAuthenticationFilter;
 import com.capstone.backend.model.Bike;
 import com.capstone.backend.model.Car;
 import com.capstone.backend.payload.ResponseData;
+import com.capstone.backend.repository.VehicleRepository;
 import com.capstone.backend.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class VehicleController {
     @Autowired
     JwtAuthenticationFilter jwtAuth;
 
+    @Autowired
+    VehicleRepository vcs;
     @PostMapping("/register/car")//đăng ký  oto
     public ResponseData saveVehicle(@RequestBody Car car){  
         return new ResponseData("save car", vehicleService.saveCar(car));
@@ -37,14 +40,15 @@ public class VehicleController {
     @GetMapping("/getMyVehicles")// danh sách xe của mình
     public ResponseData getMyVehicle(HttpServletRequest request){  
         return new ResponseData("get my vehicles", vehicleService.getAllVehiclesByUserId(jwtAuth.getUserIdFromRequest(request)));
+        // return new ResponseData("get all", vcs.findAll())
     }
-    @GetMapping("/getVehicle")// Xem thông tin xe bất kì
-    public ResponseData getMyVehicle(long id){
+    @GetMapping("/Vehicle")// Xem thông tin xe bất kì
+    public ResponseData getMyVehicle(@RequestParam long id){
         return new ResponseData("get vehicle", vehicleService.getVehicleById(id));
     }
     @GetMapping("/findCarDriver")//Tìm xe có tài xế theo địa chỉ
-    public ResponseData findCarDriver(@RequestParam String address){
-        return new ResponseData("find Car Driver", vehicleService.findCarDriver(address));
+    public ResponseData findCarDriver(@RequestParam String location){
+        return new ResponseData("find Car Driver", vehicleService.findCarDriver(location));
     }
     @GetMapping("/findCarSelfDriver")//Tìm xe có tự lái theo địa chỉ
     public ResponseData findCarSelfDriver(@RequestParam String address){

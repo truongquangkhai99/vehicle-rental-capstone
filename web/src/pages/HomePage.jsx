@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import {Link} from "react-router-dom";
 import {Form, Button, Container, Row, Col,Card } from 'react-bootstrap';
 import Rating from 'react-rating' 
@@ -69,7 +69,7 @@ import appgoogle from '../assets/images/ggplay.png'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
-import { CardSlide } from 'react-card-slide/dist';
+import blogApi from '../api/blogApi'
 
 
     const collection=[{ src: img1},{ src: img2},{ src: img3},{ src: img4},{ src: img5},{ src: img6},{ src: img7}];
@@ -122,19 +122,6 @@ import { CardSlide } from 'react-card-slide/dist';
         {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
         {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
     ]
-    // const cardSlide=[]
-    // for (const i of slideBlogs) {
-    //     cardSlide.push(
-    //         {
-    //             cardHeaderIcon:i.src,
-    //             cardName:i.thumnail,
-    //             cardDescription:i.content,
-    //             showBodyImage:true,
-    //             bodyImage:i.src,
-    //             cardTotal:false
-    //         }
-    //     )
-    // }
     const settings = {
         className: "center",
         centerMode: true,
@@ -163,7 +150,7 @@ import { CardSlide } from 'react-card-slide/dist';
       const settings3 = {
         infinite: true,
         speed: 1000,
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
         draggable: true,
         dots:true
@@ -174,8 +161,15 @@ import { CardSlide } from 'react-card-slide/dist';
         {src:step3, title:'Trải nghiệm chuyến đi'},
         {src:step4, title:'Kết thúc giao dịch'},
     ]
+   
+
 function HomePage(){
-    
+   const [getData,setData]=useState({list:[]});
+   useEffect(() => {
+    blogApi.getBlog().then((res) => {
+        setData({ list: res.data});
+    });
+  });
     return (
         <Container fluid>
             <Row>
@@ -532,11 +526,11 @@ function HomePage(){
                     <p className="blog-title">Blogs</p>
                     <div className="blog-content">
                         <Slider {...settings3}>
-                            {slideBlogs.map(slider =>
+                            {getData.list.map(slider =>
                                 <Card style={{width:'90%'}}>
                                     <Card.Img variant="top" src={slider.src} style={{height:'250px'}}/>
                                     <Card.Body>
-                                        <Card.Title>{slider.thumnail}</Card.Title>
+                                        <Card.Title>{slider.title}</Card.Title>
                                         <Card.Text>{slider.content}</Card.Text>
                                         <Card.Link style={{textDecoration:"none", color:"black"}}  href="/howitword">Xem thêm</Card.Link>
                                         <IoIosArrowForward/>
@@ -544,7 +538,8 @@ function HomePage(){
                                 </Card>
                                 )}
                         </Slider>
-                        {/* <CardSlide items={cardSlide}/> */}
+
+                       
             </div>
                 </div>               
            </Row>
