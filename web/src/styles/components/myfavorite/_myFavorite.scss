@@ -1,0 +1,17 @@
+.myfavs {
+    width: 80%;
+    margin: 0 auto;
+    ul {
+        li {
+            button {
+                font-weight: 600;
+                padding: 20px 80px;
+                border: none !important;
+            }
+        }
+    }
+    .tab-content {
+        margin: 80px 0;
+    }
+}
+

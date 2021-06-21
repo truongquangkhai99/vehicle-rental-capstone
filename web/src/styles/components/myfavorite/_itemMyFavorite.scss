@@ -1,0 +1,100 @@
+.item {
+    color: #000;
+    justify-items: flex-start;
+    a {
+        text-decoration: none;
+        .item__img {
+            .item__img-main {
+                width: 100%;
+                height: 300px;
+                position: relative;
+                img {
+                    width: 100%;
+                    height: 250px;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+            .item__img-infor {
+                position: relative;
+                .item__img-infor-price {
+                    width: 20%;
+                    height: 35px;
+                    background-color: #2a9757;
+                    text-align: center;
+                    line-height: 35px;
+                    color: #fff;
+                    border-radius: 5%;
+                    position: absolute;
+                    right: 0;
+                    top: -85px;
+                }
+                .item__img-infor-passport {
+                    width: 50%;
+                    height: 35px;
+                    background-color: rgba(244, 112, 55, 0.6);
+                    text-align: center;
+                    line-height: 35px;
+                    font-size: 12px;
+                    color: #fff;
+                    border-radius: 20px;
+                    position: absolute;
+                    right: 10px;
+                    top: -290px;
+                }
+            }
+        }
+        .item__decs {
+            position: relative;
+            margin-top: -30px;
+            h2 {
+                font-size: 20px;
+                color: #000;
+                margin-bottom: 0;
+            }
+            .item__decs-rating {
+                display: flex;
+                .item__decs-rating-star {
+                    font-size: 25px;
+                }
+                span {
+                    font-size: 15px;
+                    margin-left: 15px;
+                    text-align: center;
+                    line-height: 42px;
+                    color: #000;
+                }
+            }
+            .item__decs-auto {
+                width: 30%;
+                height: 25px;
+                background-color: #e7eaef;
+                color: #000;
+                line-height: 25px;
+                text-align: center;
+                font-size: 14px;
+                margin: 5px 0;
+            }
+            .item__decs-local {
+                display: flex;
+                span {
+                    font-size: 12px;
+                    line-height: 29px;
+                    color: #000;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    .item__footer {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 20px 0;
+        #btn {
+            width: 47%;
+            height: 50px;
+        }
+    }
+}
+
+

@@ -1,0 +1,279 @@
+*{ 
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
+.cover-profile {
+    background-image: url(https://www.w3schools.com/css/paris.jpg);
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.profile {
+    background-color: #E7EAEE;
+}
+
+.profile  {
+    .profile__content{
+        width: 80%;
+        margin: 0 auto;
+    }
+    
+}
+
+.profile__content__header {
+    display: flex;
+    margin-bottom: 50px;
+    .profile__content__header-avatar {
+        flex: 1;
+        margin-top: -6%;
+        z-index: 1;
+        .avatar {
+            width: 50%;
+            margin: 0 auto;
+            border-radius: 50%;
+            img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.profile__content__header-infor {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    .profile__content__header-infor-heading {
+        display: flex;
+        justify-content: space-between;
+        .item-points {
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 0 !important;
+            border-radius: 5px;
+            font-size: 20px;
+            .point{
+                line-height: 40px;
+                position: relative;
+                font-size: 24px;
+                .icon-star {
+                    position: absolute;
+                    right: 85px;
+                    top: -11px;
+                    color: #00A54F;
+                }
+                .icon-ques {
+                    position: absolute;
+                    right: -27px;
+                    top: -9px;
+                    font-size: 18px;
+                    opacity: .6;
+                }
+            }     
+        }
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            .item-content-name {
+                font-size: 50px;
+                font-weight: 700;
+                p{
+                    a{  
+                        position: relative;
+                        font-size: 30px;
+                        top: -5px;
+                        cursor: pointer;
+                        opacity: .6;
+                        margin-left: 10px;
+                    }
+                }
+            }
+            .item-content-status {
+                margin-top: -16px;
+                .date-john {
+                    font-size: 15px;
+                }
+                
+                .date-john::after {
+                    content: "-------";
+                    margin: 0 10px;
+                }
+                
+                .count-trip {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    .profile__content__header-infor-footing {
+        display: flex;
+        .date-of-birth {
+            display: flex;
+            flex-direction: column;
+        }
+        .gender {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.profile__content__header-infor-footing #box #lable {
+    color: #6E6E6E;
+}
+
+
+#box {
+    width: 160px;
+    height: 60px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    margin-right: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#icon {
+    position: absolute;
+    font-size: 20px;
+    opacity: .6;
+    top:-3px;
+    right: -30px;
+    cursor: pointer;
+    :hover {
+        color: palegreen;
+    }
+}
+
+.profile__content__body {
+    width: 100%;
+    height: 120px;
+    background-color: white;
+    border-radius: 5px;
+    .profile__content__body-infor{
+        .profile__content__body-infor-inside{
+            #ul {
+                display: flex;
+                justify-content: space-around;
+                padding: 10px;
+                list-style: none;
+                text-align: center;
+                #li{
+                    position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    #lable {
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+                    #ctn {
+                        line-height: 33px;
+                    }
+                }
+            }
+        }
+    }
+}
+.profile__footer {
+    height: 50px;
+    background-color: #E7EAEE;
+}
+@media (max-width: 996px) {
+
+    .profile__content__header {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        .profile__content__header-avatar{
+            .avatar {
+                width: 20%;
+                height: auto;
+                float: left;
+                margin-bottom: 7%;
+            }
+        }
+    }
+    .profile__content__body {
+        width: 100%;
+        height: 300px;
+        .profile__content__body-infor{
+            .profile__content__body-infor-inside{
+                #ul {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-around;
+                    flex-direction: column;
+                    float: left;
+                    #li{
+                        display: flex;
+                        flex-direction: row;
+                        padding: 10px;
+                        #lable{
+                            flex: 1;
+                            text-align: left;
+                        }
+                        #ctn {
+                            flex: 3;
+                            text-align: left;
+                            padding-left: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #icon {
+        right: 10px;
+        top: 5px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .profile .profile__content {
+        width: 96%;
+        .profile__content__header {
+            display: flex;
+            flex-direction: column;
+            .profile__content__header-avatar{
+                .avatar {
+                    width: 20%;
+                    height: auto;
+                    float: left;
+                    margin-bottom: 5%;
+                }
+            }
+            .profile__content__header-infor{
+                .profile__content__header-infor-heading {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .profile__content__header-infor-footing {
+                    display: flex;
+                    justify-content: space-between;
+                    .gender {
+                        margin-right: 0 !important;
+                    }
+                }
+            }
+        }
+    }
+    #box {
+        margin: 10px 0 0 0;
+        width: 48%;
+    }
+}
+
+
+

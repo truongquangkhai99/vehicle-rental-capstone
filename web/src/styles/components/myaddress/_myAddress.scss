@@ -1,0 +1,38 @@
+.address {
+    background-color: #e7eaee;
+    .address__header {
+        width: 100%;
+        height: 100px;
+        background-color: #00a54f;
+        .address__header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            h3 {
+                line-height: 100px;
+                color: #fff;
+                font-weight: 600;
+            }
+            Button {
+                color: #00a54f;
+                background-color: #fff;
+                width: 200px;
+                height: 50px;
+                #icon-plus {
+                    font-size: 26px;
+                    position: relative;
+                    top: -2px;
+                    margin-right: 5px;
+                }
+                .title {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+    .address__content {
+        height: 700px;
+    }
+}
