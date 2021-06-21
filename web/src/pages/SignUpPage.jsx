@@ -1,7 +1,7 @@
-import SignUpForm from 'components/sign-up/Form'
+import SignUpForm from 'components/SignUpForm'
 import React from 'react'
 
-function SignUp() {
+function SignUpPage() {
     return (
         <div>
             <SignUpForm/>
@@ -9,4 +9,4 @@ function SignUp() {
     )
 }
 
-export default SignUp
+export default SignUpPage

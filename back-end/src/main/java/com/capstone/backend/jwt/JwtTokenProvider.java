@@ -33,7 +33,7 @@ public class JwtTokenProvider {
         return Jwts.builder().setSubject(Long.toString(userDetails.getUser().getId())).setIssuedAt(now)
                 .setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, JWT_SECRET).compact();
     }
-
+    
     // Lấy thông tin user từ jwt
     public Long getUserIdFromJWT(String token) {
         Claims claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token).getBody();

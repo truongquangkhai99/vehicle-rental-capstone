@@ -11,16 +11,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int suggestPrice;
-    private boolean carProduction;
+    private boolean carProduction; //mẫu xe oto? (false là xe máy)
     @ManyToOne
     @JoinColumn(name ="brand_id")
     @JsonIgnore

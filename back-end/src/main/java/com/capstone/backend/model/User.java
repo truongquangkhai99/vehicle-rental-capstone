@@ -1,7 +1,8 @@
 package com.capstone.backend.model;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,15 +21,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonIgnore
     private String password;
     private String username;
     private String fullName;
@@ -36,25 +39,41 @@ public class User {
     private char gender;
     private String email;
     private String role;
+    private boolean banned;
     private Date dob; // ngày sinh
     private String avatarLink; // ảnh đại diện
+    @OneToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "response_id")
+    private ResponseRate responseRate; // tỉ lệ phản hồi
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "license_id")
-    private DrivingLicense drivingLincense;
+    private DrivingLicense drivingLincense; // bằng lái xe
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Location> addresses;
+    private List<Location> addresses;
     @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JsonIgnore
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
+    private List<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
     @JoinTable(name = "favorite_vehicle",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "vehicle_id")
     )
-    private Set<Vehicle> likedVehicles;
+    private List<Vehicle> likedVehicles;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Vehicle> myVehicles;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
+    @JoinTable(name = "user_relative",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "relatives_id")
+    )
+    private List<RelativesVehicle>relativesVehicles;
 
 }
