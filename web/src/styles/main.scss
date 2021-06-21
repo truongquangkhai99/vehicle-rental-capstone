@@ -16,9 +16,19 @@
 @import 
 './components/header',
 './components/layout/footer',
+'./components/formAdd',
+'./components/itemFind',
+'./components/itemMyFavorite',
 './components/layout/notfound';
 
 //pages
 @import 
-'./pages/home';
+'./pages/home',
+'./pages/account',
+'./pages/find',
+'./pages/myAddress',
+'./pages/myFavorite';
+
+
+
 

@@ -1,6 +1,5 @@
 import Header from 'components/header/Header';
 import Footer from 'components/layout/Footer';
-import MyFavoritePage from 'components/myfavorite/MyFavoritePage';
 import AboutUsPage from 'pages/AboutUsPage';
 import AccountPage from 'pages/AccountPage';
 import BlogPage from 'pages/BlogPage';
@@ -31,7 +30,7 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <Route path="/sign-up"><SignUpPage /></Route>
             <Route path="/account"><AccountPage /></Route>
-            <Route path="/myfavs"><MyFavoritePage /></Route>
+            <Route path="/myfavs"><MyFavsPage /></Route>
             <Route path="/myaddress"><MyAddressPage /></Route>
             <Route path="/find"><FindPage /></Route>
             <Route path="/signup" component={SignUpPage} />

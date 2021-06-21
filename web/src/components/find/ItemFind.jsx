@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../styles/components/find/_itemFind.scss'
 import { Col } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import { GrLocation } from 'react-icons/gr'

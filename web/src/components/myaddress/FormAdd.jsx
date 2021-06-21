@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, ModalTitle, ModalBody, ModalFooter, Button, FormGroup, FormLabel, FormControl, FormText } from 'react-bootstrap'
-import '../../styles/components/myaddress/_formAdd.scss'
 import ModalHeader from 'react-bootstrap/esm/ModalHeader'
 import { AiOutlineHome } from 'react-icons/ai'
 import { HiOutlineOfficeBuilding } from 'react-icons/hi'

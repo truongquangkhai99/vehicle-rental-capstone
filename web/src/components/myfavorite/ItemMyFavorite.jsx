@@ -1,5 +1,4 @@
 import React from 'react'
-import '../../styles/components/myfavorite/_itemMyFavorite.scss'
 import { Button, Col } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import { GrLocation } from 'react-icons/gr'
