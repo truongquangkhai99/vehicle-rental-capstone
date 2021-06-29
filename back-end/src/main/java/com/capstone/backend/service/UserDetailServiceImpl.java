@@ -19,10 +19,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) {
-        User user = userR.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) {
+        User user = userR.findByEmail(email).get();
         if (user == null) {
-            throw new UsernameNotFoundException("Not found: " + username);
+            throw new UsernameNotFoundException("Not found: " + email);
         }
         return new UserDetailImpl(user);
     }
