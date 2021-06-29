@@ -7,6 +7,7 @@ import com.capstone.backend.model.Bike;
 import com.capstone.backend.model.Car;
 import com.capstone.backend.payload.ResponseData;
 import com.capstone.backend.repository.VehicleRepository;
+import com.capstone.backend.service.DistancesService;
 import com.capstone.backend.service.VehicleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,37 +27,48 @@ public class VehicleController {
     VehicleService vehicleService;
     @Autowired
     JwtAuthenticationFilter jwtAuth;
-
-    @Autowired
-    VehicleRepository vcs;
+    @ Autowired
+    private DistancesService distances;
+    @GetMapping("/distance")
+    public ResponseData getdis(@RequestParam String source,@RequestParam String destination){
+        try {
+            //method of DistanceTime Class
+          String response=distances.calculate(source,destination);        
+      System.out.println(response);
+      return new ResponseData("ok", response);
+      }
+      catch(Exception e) {
+          System.out.println("Exception Occurred");
+      }
+      return new ResponseData("ok", null);
+    }
     @PostMapping("/register/car")//đăng ký  oto
     public ResponseData saveVehicle(@RequestBody Car car){  
-        return new ResponseData("save car", vehicleService.saveCar(car));
+        return vehicleService.saveCar(car);
     }
     @PostMapping("/register/bike")//đăng ký xe máy
     public ResponseData saveVehicle(@RequestBody Bike bike){        
-        return new ResponseData("save bike", vehicleService.saveBike(bike));
+        return vehicleService.saveBike(bike);
     }
-    @GetMapping("/getMyVehicles")// danh sách xe của mình
+    @GetMapping("/MyVehicles")// danh sách xe của mình
     public ResponseData getMyVehicle(HttpServletRequest request){  
-        return new ResponseData("get my vehicles", vehicleService.getAllVehiclesByUserId(jwtAuth.getUserIdFromRequest(request)));
-        // return new ResponseData("get all", vcs.findAll())
+        return vehicleService.getAllVehiclesByUserId(jwtAuth.getUserIdFromRequest(request));
     }
     @GetMapping("/Vehicle")// Xem thông tin xe bất kì
     public ResponseData getMyVehicle(@RequestParam long id){
-        return new ResponseData("get vehicle", vehicleService.getVehicleById(id));
+        return  vehicleService.getVehicleById(id);
     }
-    @GetMapping("/findCarDriver")//Tìm xe có tài xế theo địa chỉ
-    public ResponseData findCarDriver(@RequestParam String location){
-        return new ResponseData("find Car Driver", vehicleService.findCarDriver(location));
+    @GetMapping("/CarsDriver")//Tìm xe có tài xế theo địa chỉ
+    public ResponseData findCarDriver(){
+        return  vehicleService.findCarDriver();
     }
-    @GetMapping("/findCarSelfDriver")//Tìm xe có tự lái theo địa chỉ
-    public ResponseData findCarSelfDriver(@RequestParam String address){
-        return new ResponseData("find Car Self Driver", vehicleService.findCarSelfDriver(address));
+    @GetMapping("/CarSelfDriver")//Tìm xe có tự lái theo địa chỉ
+    public ResponseData findCarSelfDriver(){
+        return  vehicleService.findCarSelfDriver();
     }
-    @GetMapping("/findBike")//Tìm xe máy theo địa chỉ
-    public ResponseData findBike(@RequestParam String address){
-        return new ResponseData("find Bike", vehicleService.findBike(address));
+    @GetMapping("/Bikes")//Tìm xe máy theo địa chỉ
+    public ResponseData findBike(){
+        return  vehicleService.findBike();
     }
 
 }

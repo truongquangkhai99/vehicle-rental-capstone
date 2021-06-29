@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;  
 
@@ -31,14 +30,13 @@ public class BlogController {
     @GetMapping("/blog")
     public List<Blog> getBlog(){
         return blogRepository.findAll();
-        // return new ResponseData("all blog",blogService.getAllBlogs() );
     }
     @GetMapping("/blog/{id}")
     public ResponseData getBlogById(@PathVariable long id){
-        return new ResponseData("all blog",blogService.getBlogById(id));
+        return blogService.getBlogById(id);
     }
     @PostMapping("/blog") 
     public ResponseData saveBlog(@RequestBody Blog blog){
-        return new ResponseData("all blog",blogService.saveBlog(blog));
+        return blogService.saveBlog(blog);
     }
 }
