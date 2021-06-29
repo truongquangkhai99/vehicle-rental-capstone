@@ -1,12 +1,13 @@
-// body .slick-next, .slick-prev{  
-//     background-color: green;   
-// }
-// body .slick-prev:hover,
-// .slick-prev:focus,
-// .slick-next:hover,
-// .slick-next:focus {
-//     background-color: greenyellow;
-// }
+.slick-prev:before{
+    color: green;
+    font-size: 2rem;
+    margin-left: -2rem;
+}
+.slick-next:before{
+    color: green;
+    font-size: 2rem;
+    margin-left: 1rem;
+}
 body{
     background-color: #e5f6ea;
 }
@@ -26,24 +27,36 @@ body{
 .book-car{
     width:770px;
     height:450px;
-    margin: 0 auto;
-    background-color: rgba(0,0,0,.15);
-    border-radius:10px;
-    padding-top:15px;
+    margin-left: 50px;
+    background-color: rgba(0,0,0,.35);
+    border-radius:3px;
+    padding:25px;
     box-sizing: border-box;
+}
+.map{
+    position: relative;
+    width:600px;
+    height:450px;
+    background-color: rgba(0,0,0,.35);
+    border-radius:3px;
+    box-sizing: border-box;
+    padding:25px;
+
 }
 .book-car .tab-left{
     width:30%;
     height:100%;
     float:left;
+    padding: 0;
 }
 .book-car .tab-left .service-box{
     width:100%;
     height:33%;  
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px ;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px ;
     color: black;
     list-style-type: none;
+ 
     padding-top: 10%;
     border-right:2px solid black;
 }
@@ -60,13 +73,13 @@ body{
     margin:5% 10% ;
 }
 .book-car .tab-right{
-    margin-right: 32px;
+    margin-right: 31px;
     width:65.6%;
-    height:100%;
+    height:auto;
     float:right;
     background-color: #fff;
-    border-top-right-radius:10px ;
-    border-bottom-right-radius:10px ;   
+    border-top-right-radius:3px ;
+    border-bottom-right-radius:3px ;   
 }
 .advertise{
     width:600px;
@@ -257,11 +270,12 @@ body{
 }
 .car-self-driver .slick-slide h4{
     padding-left: 1rem;
-    margin-top: -4rem;
-    transition: transform 1s;
+    margin-top: -2rem;
+    color: green !important;
+    transition: color 0.5s;
 }
 .car-self-driver .slick-slide:hover h4{
-    transform: scale(0.5);
+   color: white !important;
 }
 .car-self-driver .slick-slide p {
     margin: 0;

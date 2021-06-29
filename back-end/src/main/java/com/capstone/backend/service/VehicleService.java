@@ -11,7 +11,7 @@ public interface VehicleService {
     ResponseData saveBike(Bike bike);
     ResponseData getVehicleById(long id);
     //Tìm xe dựa trên vị trí
-    ResponseData findCarDriver(String location);
-    ResponseData findCarSelfDriver(String location);
-    ResponseData findBike(String location);
+    ResponseData findCarDriver();
+    ResponseData findCarSelfDriver();
+    ResponseData findBike();
 }

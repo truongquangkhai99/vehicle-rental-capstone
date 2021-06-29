@@ -23,6 +23,7 @@ import NotFound from './components/layout/NotFound';
 function App() {
   return (
     <div className="App">
+    
       <Header />
       <Suspense fallback={<div>Loading ...</div>}>
         <BrowserRouter>
@@ -53,6 +54,7 @@ function App() {
         </BrowserRouter>
       </Suspense>
       <Footer />
+      
     </div>
   );
 }

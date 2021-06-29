@@ -24,6 +24,8 @@ public class VehicleServiceImpl implements VehicleService {
 
     @ Autowired
     private BikeRepository bikeRepository;
+
+   
     @Override
     public ResponseData getAllVehiclesByUserId(long id) {
         List<Vehicle> listVehicle =new ArrayList<>();
@@ -50,35 +52,44 @@ public class VehicleServiceImpl implements VehicleService {
         return new ResponseData("get vehicle", vehicleRepository.findById(id).get());
     }
     @Override
-    public ResponseData findCarDriver(String location) { 
+    public ResponseData findCarDriver() { 
         List<Car> lCars=new ArrayList<>();
-        for (Car car : carRepository.findAll()) {
-            if(car.getLocation().toString().contains(location) && car.isDriver()==true){
-                lCars.add(car);
-            }
-        }  
-        return new ResponseData("find car driver", lCars);
+        if(carRepository.findAll()!=null){
+            for (Car car : carRepository.findAll()) {
+                if(car.isDriver()){
+                    lCars.add(car);
+                }
+            }  
+            return new ResponseData("ok", lCars);
+        }else{
+            return new ResponseData("list car null", lCars);
+        }
+       
     }
 
     @Override
-    public ResponseData findCarSelfDriver(String location) {
+    public ResponseData findCarSelfDriver() {
         List<Car> lCars=new ArrayList<>();
-        for (Car car : carRepository.findAll()) {
-            if(car.getLocation().toString().contains(location) && car.isDriver()==false){
-                lCars.add(car);
-            }
-        }  
-        return new ResponseData("find car self driver", lCars);
+        if(carRepository.findAll()!=null){
+            for (Car car : carRepository.findAll()) {
+                if(car.isDriver()==false){
+                    lCars.add(car);
+                }
+            }  
+            return new ResponseData("ok", lCars);
+        }else{
+            return new ResponseData("list car null", lCars);
+        }
+       
     }
 
     @Override
-    public ResponseData findBike(String location) {
-        List<Bike> lBikes=new ArrayList<>();
-        for (Bike bike : bikeRepository.findAll() ) {
-            if(bike.getLocation().toString().contains(location)){
-                lBikes.add(bike);
-            }
-        }  
-        return new ResponseData("find bike", lBikes);
+    public ResponseData findBike() {
+       try{
+            return new ResponseData("ok", bikeRepository.findAll());
+       }catch(Exception ex){
+            return new ResponseData("error", null);
+       }
+       
     }
 }

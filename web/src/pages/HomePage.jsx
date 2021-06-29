@@ -69,9 +69,10 @@ import appgoogle from '../assets/images/ggplay.png'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
-import blogApi from '../api/blogApi'
-
-
+// import blogApi from '../api/blogApi'
+// import Cookies from 'universal-cookie';
+// import GGmap from '../components/layout/GGmap'
+// import Search from '../components/layout/Search'
     const collection=[{ src: img1},{ src: img2},{ src: img3},{ src: img4},{ src: img5},{ src: img6},{ src: img7}];
     const baohiemimg=[bh1,bh2,bh3]
     const slideImages=[ ft1,ft2,ft3,ft4,ft5,ft6]
@@ -111,16 +112,6 @@ import blogApi from '../api/blogApi'
         {src:xe15,title:'Mercedes-Benz S450',rate:4,price:'1000$',feature:['Số tự động','Giao xe tận nơi'],address:'Hải Châu-Đà Nẵng',quality:'50 chuyến'},
         {src:xe16,title:'Mercedes-Benz S450',rate:4.5,price:'1000$',feature:['Số tự động','Giao xe tận nơi'],address:'Hải Châu-Đà Nẵng',quality:'50 chuyến'}
 
-    ]
-    const slideBlogs=[
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
-        {src:xe5,thumnail:'Hạnh phúc trên mọi nẻo đường',content:'Đà Lạt luôn được mệnh danh là một trong những thành phố xinh đẹp nhất Việt Nam, bởi lẽ nơi đây có vô số phong cảnh, địa điểm tuyệt vời mà du khách có thể thoải mái check in cũng như lưu giữ những kỉ niệm tuyệt đẹp. Ngay bây giờ, hãy cùng Mioto điểm qua nhưng điểm dừng chân nổi tiếng của thành phố thơ mộng này nhé!'},
     ]
     const settings = {
         className: "center",
@@ -162,15 +153,26 @@ import blogApi from '../api/blogApi'
         {src:step4, title:'Kết thúc giao dịch'},
     ]
    
-
+    
 function HomePage(){
-   const [getData,setData]=useState({list:[]});
-   useEffect(() => {
-    blogApi.getBlog().then((res) => {
-        setData({ list: res.data});
-    });
-  });
+    //get list blog
+//    const [getDataBlog,setDataBlog]=useState({list:[]});
+//    useEffect(() => {
+//         blogApi.getBlog().then((res) => {
+//             setDataBlog({ list: res.data});
+//         });
+//     },[]);
+    //get user token
+    // const [getDataMyVehicles,setDataMyVehicles]=useState({list:[]});
+    // useEffect(() => {
+    //     vehicleApi.getMyVehicles(new Cookies().get('_token')).then((res) => {
+    //         setDataMyVehicles({ list: res.data});
+    //     });
+    //   },[]);
+    //get list car driver
+   
     return (
+    
         <Container fluid>
             <Row>
                 <Col className="banner">
@@ -185,7 +187,7 @@ function HomePage(){
                                 <TabList className="tab-left">
                                     <Tab className="service-box">                                                                               
                                         <div className="image-car">
-                                        <img src={xemay}/>
+                                        <img src={xemay} alt=''/>
                                         </div>
                                         <div className="title-car mt-3">
                                             <h3 className="text-center">Xe máy</h3>
@@ -193,7 +195,7 @@ function HomePage(){
                                     </Tab>  
                                     <Tab className="service-box">                                                                          
                                         <div className="image-car">
-                                            <img src={selfdriver}/>
+                                            <img src={selfdriver} alt=''/>
                                         </div>
                                         <div className="title-car mt-3">
                                             <h3 className="text-center">Xe tự lái</h3>
@@ -201,7 +203,7 @@ function HomePage(){
                                     </Tab>  
                                     <Tab className="service-box">                                                                               
                                         <div className="image-car">
-                                        <img src={withdriver}/>
+                                        <img src={withdriver} alt=''/>
                                         </div>
                                         <div className="title-car mt-3">
                                             <h3 className="text-center">Xe có tài xế</h3>
@@ -216,6 +218,7 @@ function HomePage(){
                                                <Col>
                                                     <IoLocation style={{marginLeft: "0.5rem",marginTop:"0.5rem",marginRight:"1rem", position: "absolute"}} color="green" size="1.5rem"/>
                                                     <Form.Control type="text"  placeholder="     Nhập địa chỉ của bạn....."/>
+                                                   
                                                </Col>
                                            </Row>
                                            <Form.Label className="text-primary">Bắt Đầu</Form.Label>
@@ -337,6 +340,12 @@ function HomePage(){
                                     </div>                                                                                
                             </Tabs>  
                         </Col>
+                        {/* <Col>
+                            <div className="map">
+                            <Search/>
+                                <GGmap/>
+                            </div>
+                        </Col> */}
                     </Row>
                     <Row>
                         <Col>
@@ -360,7 +369,7 @@ function HomePage(){
                                {baohiemimg.map(
                                    bhimg => 
                                    <div className="insurrance-image">
-                                         <img src={bhimg}/>
+                                         <img src={bhimg} alt=''/>
                                     </div>
                                )
                                }                                                          
@@ -378,7 +387,7 @@ function HomePage(){
                         <Slider {...settings}>
                                 { slideImages.map(slider =>
                                 <div>
-                                    <img src={slider}/>
+                                    <img src={slider} alt=''/>
                                 </div>
                                     )}
                         </Slider>
@@ -396,7 +405,7 @@ function HomePage(){
                             {imageGuide.map(guide =>
                                 <Link style={{textDecoration:"none", color:"black"}}  to="/howitword" >
                                     <div className="image-guide">
-                                        <img src={guide.src}/> 
+                                        <img src={guide.src} alt=''/> 
                                         <h5 className="text-center font-weight-bold">{guide.title}</h5>
                                     </div>   
                                 </Link>                        
@@ -421,7 +430,7 @@ function HomePage(){
                                     { slideLocal1.map(slider =>
                                     <div className="content-detail">  
                                         <Link style={{textDecoration: "none"}} to="/howitword">                                     
-                                            <img src={slider.src}/>
+                                            <img src={slider.src} alt=''/>
                                             <h4>{slider.title}</h4>
                                             <p>{slider.quality}</p>
                                         </Link>
@@ -441,7 +450,7 @@ function HomePage(){
                                     { slideLocal2.map(slider =>                                   
                                         <div className="content-detail">  
                                             <Link style={{textDecoration: "none"}} to="/howitword">                                     
-                                                <img src={slider.src}/>
+                                                <img src={slider.src} alt=''/>
                                                 <h4>{slider.title}</h4>
                                                 <p>{slider.quality}</p>
                                             </Link>
@@ -474,13 +483,13 @@ function HomePage(){
                                     { slideLocal3.map(slider =>
                                      <div className="content-detail"> 
                                         <Link style={{textDecoration: "none"}} to="/howitword">                                   
-                                            <img src={slider.src}/>                                           
+                                            <img src={slider.src} alt=''/>                                           
                                             <h4 className="text-light">{slider.title}</h4>
                                             <Rating 
                                                 style={{marginLeft:"1rem"}}
                                                 initialRating={slider.rate}
-                                                emptySymbol={<img src={starempty} className="icon"/>}
-                                                fullSymbol={<img src={starfull} className="icon" />}
+                                                emptySymbol={<img src={starempty} className="icon" alt=''/>}
+                                                fullSymbol={<img src={starfull} className="icon" alt=''/>}
                                                 readonly/>                              
                                             <p ><IoPricetagsSharp/> {slider.price}<span className="num-rental"><RiNumbersFill/> {slider.quality}</span></p>                                                                                                         
                                             <p><IoLocation/> {slider.address}</p>
@@ -507,8 +516,8 @@ function HomePage(){
                                                 <Rating 
                                                     style={{marginLeft:"1rem"}}
                                                     initialRating={slider.rate}
-                                                    emptySymbol={<img src={starempty} className="icon"/>}
-                                                    fullSymbol={<img src={starfull} className="icon" />}
+                                                    emptySymbol={<img src={starempty} className="icon" alt=''/>}
+                                                    fullSymbol={<img src={starfull} className="icon" alt='' />}
                                                     readonly/>                              
                                                 <p ><IoPricetagsSharp/> {slider.price}<span className="num-rental"><RiNumbersFill/> {slider.quality}</span></p>                                                                                                         
                                                 <p><IoLocation/> {slider.address}</p>
@@ -525,9 +534,9 @@ function HomePage(){
                 <div className="blog">
                     <p className="blog-title">Blogs</p>
                     <div className="blog-content">
-                        <Slider {...settings3}>
-                            {getData.list.map(slider =>
-                                <Card style={{width:'90%'}}>
+                        {/* <Slider {...settings3}>
+                            {getDataBlog.list.map(slider =>
+                                <Card style={{width:'90%'}} key={slider}>
                                     <Card.Img variant="top" src={slider.src} style={{height:'250px'}}/>
                                     <Card.Body>
                                         <Card.Title>{slider.title}</Card.Title>
@@ -537,7 +546,7 @@ function HomePage(){
                                     </Card.Body>
                                 </Card>
                                 )}
-                        </Slider>
+                        </Slider> */}
 
                        
             </div>
@@ -550,17 +559,18 @@ function HomePage(){
                         <h5 className="mb-4">Tải ngay ứng dụng tại App Store hoặc Google Play</h5>
                         <div className="app-image mb-3">
                             <div className="app-image-apple">
-                                <img src={appapple} />
+                                <img src={appapple} alt='' />
                             </div>
                             <div className="app-image-google">
-                                    <img src={appgoogle} />
+                                    <img src={appgoogle} alt=''/>
                             </div>
                         </div>
                     </div>
                     <div className="app-right">
-                        <img src={app}/>
+                        <img src={app} alt=''/>
                     </div>
-                </div>                
+                </div>     
+                           
             </Row>                    
         </Container>
     )
