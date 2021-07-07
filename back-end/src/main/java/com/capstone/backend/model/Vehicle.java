@@ -20,9 +20,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import org.hibernate.annotations.LazyToOneOption;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,6 +35,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String licensePlates;
+    private boolean actived;
     private Date yom; // năm sản xuất
     private char fuelType;
     private int fuelConsumption; // tiêu thụ nhiên liệu/100km
@@ -55,6 +53,7 @@ public class Vehicle {
     private int outLimitFee; // giá vượt giới hạn(*1000đ/km)
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
     @Transient
     private int distance; // Khoảng cách từ xe tới vị trí đặt xe

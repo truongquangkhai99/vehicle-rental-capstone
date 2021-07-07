@@ -3,9 +3,10 @@ package com.capstone.backend.model;
 import java.sql.Date;
 import java.util.List;
 
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,12 +34,14 @@ public class User {
     private Long id;
     @JsonIgnore
     private String password;
-    private String username;
     private String fullName;
     private String phone;
     private char gender;
     private String email;
     private String role;
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+    private String providerId;
     private boolean banned;
     private Date dob; // ngày sinh
     private String avatarLink; // ảnh đại diện

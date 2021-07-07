@@ -1,4 +1,4 @@
-import Header from 'components/header/Header';
+import Header from 'components/Header/Header';
 import Footer from 'components/layout/Footer';
 import AboutUsPage from 'pages/AboutUsPage';
 import AccountPage from 'pages/AccountPage';
