@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Qahiri');
 .slick-prev:before{
     color: green;
     font-size: 2rem;
@@ -9,14 +10,16 @@
     margin-left: 1rem;
 }
 body{
-    background-color: #e5f6ea;
+    background-color:#fff;
 }
+
 .banner{
     background-image: url("../../assets/images/banner-road-2.jpg");
     width:100%;
     height:auto;
     background-size: 100%;
     background-repeat: no-repeat;
+
 }
 .slogan{
     margin-top:70px;
@@ -24,62 +27,148 @@ body{
     text-align: center;
     text-transform: uppercase;
 }
-.book-car{
-    width:770px;
-    height:450px;
-    margin-left: 50px;
-    background-color: rgba(0,0,0,.35);
-    border-radius:3px;
-    padding:25px;
-    box-sizing: border-box;
-}
-.map{
+.slogan main {
     position: relative;
-    width:600px;
-    height:450px;
+    display: flex;
+   
+  }
+  
+  .slogan h1 { margin: 0; font-size: 4rem !important; }
+  .slogan .marker, .r, .e1, .s1, .s2, .e2 {
+    animation-timing-function: cubic-bezier(0.15,-0.01, 0.58, 1);
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    will-change: transform;
+  }
+  
+  .slogan .marker {
+    position: absolute; top: 4rem; left: -1rem;
+    height: 1rem; width: 12rem;
+    background-color: black;
+    animation-name: marker;
+  }
+  
+  .slogan .r { margin-left: 1rem;   animation-name: r; }
+  .slogan .e1 { margin-left: 1rem; animation-name: e1; }
+  .slogan .s1 { margin-left: 1rem; animation-name: s1; }
+  .slogan .s2 { margin-left: 1rem; animation-name: s2; }
+  .slogan .e2 { margin-left: 4rem; margin-right: 2rem; animation-name: e2; }
+  
+  @keyframes r { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(3rem); }
+  }
+  @keyframes e1 { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(4rem); }
+  }
+  @keyframes s1 { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(5rem); }
+  }
+  @keyframes s2 { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(6rem); }
+  }
+  @keyframes e2 { 
+    0%, 20% { transform: translateX(0); }
+    50%, 70% { transform: translateX(2rem); }
+  }
+  @keyframes marker { 
+    0%, 20% { transform: scaleX(1); }
+    50%, 70% { transform: scaleX(4.6); }
+  }
+.tab{
+    width: 100%;
+    height: 500px;
     background-color: rgba(0,0,0,.35);
-    border-radius:3px;
-    box-sizing: border-box;
-    padding:25px;
+    border-radius: 5px;
+}
+.tab .tabtitle{
+    color: white ;
+    width: 33.333%;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background-color: #50C878;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.tab marquee{
+    color: #f5e2d7;
+    font-size: 2rem;
+    font-weight: 900;
+    // background-color: #50C878;
+    background-image: linear-gradient(to right,#50C878,#996ce0);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.tab .tab-card1 , .tab-card2{
+    text-align: center;
+    text-shadow: 2px 2px #996ce0;
+    color: #000;
+    margin: 0 auto;
+    width: 300px;
+    height: 200px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+    padding-top: 0%;
+    animation: animate 2s linear infinite;
+    font-weight: 900;
+}
 
+.tab .hinh1{
+    background-image: url("https://i.redd.it/b3esnz5ra34y.jpg");
+    background-size: 100% 100%;
 }
-.book-car .tab-left{
-    width:30%;
-    height:100%;
-    float:left;
-    padding: 0;
+.tab .hinh2{
+    background-image: url("https://media.giphy.com/media/XH3jHyWBXOQBifW6Fe/giphy.gif");
+    background-size: 100% 100%;
 }
-.book-car .tab-left .service-box{
-    width:100%;
-    height:33%;  
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px ;
-    color: black;
-    list-style-type: none;
- 
-    padding-top: 10%;
-    border-right:2px solid black;
+.tab .hinh3{
+    background-image: url("https://media.giphy.com/media/l2Sq4T2MkQ1d3ViMg/giphy.gif");
+    background-size: 100% 100%;
 }
-.book-car .tab-left .service-box .image-car{
-    width:80%;
-    height:60%;  
-    border-radius: 50%; 
-    background-color: green;
-    margin-left: 10%;
+.tab .hinh4{
+    background-image: url("https://media.giphy.com/media/3oz8xwsGcaZWWB8KyY/giphy.gif");
+    background-size: 100% 100%;
 }
-.book-car .tab-left .service-box .image-car img{
-    width:80%;
-    height:80%;   
-    margin:5% 10% ;
+@keyframes animate {
+    0%,100%
+    {
+     text-shadow: -3px -3px 0 #0ff,3px 3px 0 #f00;
+    }
+    25%
+    {
+     text-shadow: 3px 3px 0 #0ff,-3px -3px 0 #f00;
+    }
+    50%
+    {
+     text-shadow: 3px 3px 0 #0ff,-3px 3px 0 #f00;
+    }
+    75%
+    {
+     text-shadow: -3px 3px 0 #0ff,3px -3px 0 #f00;
+    }
+   }
+.tab .tab-card1:hover , .tab-card2:hover{
+    box-shadow: 5px 5px 30px 7px #FFFEF7;
+    transform: scale(0.8);
+    padding-top: 25%;
 }
-.book-car .tab-right{
-    margin-right: 31px;
-    width:65.6%;
-    height:auto;
-    float:right;
-    background-color: #fff;
-    border-top-right-radius:3px ;
-    border-bottom-right-radius:3px ;   
+.tab1 .title-child{
+    color: white ;
+    width: 50%;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.tab1{
+    width :80%;
+    height: auto;
+    margin: 25px auto;
+    background-color: rgba(0,0,0,.7);
+    border-radius: 5px;
+    padding: 0 20px;
 }
 .advertise{
     width:600px;
@@ -146,7 +235,8 @@ body{
     width: 100%;
     height:auto;
     margin-top: 100px; 
-    background: #c7f3d4;
+    // background: #c7f3d4;
+    background-image: linear-gradient(to right,#50C878,#996ce0);
     padding: 50px 0;
     border-top: 1px solid #e8eaef;
     border-bottom: 1px solid #e8eaef;
@@ -292,7 +382,8 @@ body{
 .blog{
     width: 100%;
     height:800px;
-    background-image: url("../../assets/images/bg-blog.png");
+    // background-image: url("../../assets/images/bg-blog.png");
+    background-image: linear-gradient(to right,#00c8ffa2,#e66fe6c2),url("../../assets/images/rolroi.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -370,4 +461,4 @@ body{
     padding-top: 5rem;
 }
 
-  
+
