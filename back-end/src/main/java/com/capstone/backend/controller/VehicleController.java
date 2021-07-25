@@ -6,10 +6,7 @@ import com.capstone.backend.jwt.JwtAuthenticationFilter;
 import com.capstone.backend.model.Bike;
 import com.capstone.backend.model.Car;
 import com.capstone.backend.payload.ResponseData;
-import com.capstone.backend.repository.VehicleRepository;
-import com.capstone.backend.service.DistancesService;
 import com.capstone.backend.service.VehicleService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,21 +24,7 @@ public class VehicleController {
     VehicleService vehicleService;
     @Autowired
     JwtAuthenticationFilter jwtAuth;
-    @ Autowired
-    private DistancesService distances;
-    @GetMapping("/distance")
-    public ResponseData getdis(@RequestParam String source,@RequestParam String destination){
-        try {
-            //method of DistanceTime Class
-          String response=distances.calculate(source,destination);        
-      System.out.println(response);
-      return new ResponseData("ok", response);
-      }
-      catch(Exception e) {
-          System.out.println("Exception Occurred");
-      }
-      return new ResponseData("ok", null);
-    }
+   
     @PostMapping("/register/car")//đăng ký  oto
     public ResponseData saveVehicle(@RequestBody Car car){  
         return vehicleService.saveCar(car);
