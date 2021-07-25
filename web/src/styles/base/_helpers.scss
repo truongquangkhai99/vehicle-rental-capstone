@@ -3,7 +3,13 @@
 .cursor--pointer{
     cursor: pointer;
 }
-
+.element--center {
+    position: absolute;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 //.fs--1 đến .fs--7 để chỉnh font-size (bootstrap có fs-1 -> fs-6 tương đương với h1 -> h6 )
 @for $i from 1 through 7{
     .fs--#{$i}{

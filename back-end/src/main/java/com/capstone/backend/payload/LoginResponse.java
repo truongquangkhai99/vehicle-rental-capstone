@@ -9,4 +9,5 @@ public class LoginResponse {
     private String accessToken;
     private String fullName;
     private String avatarLink;
+    private String role;
 }

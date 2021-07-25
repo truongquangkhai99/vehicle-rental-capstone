@@ -1,12 +1,4 @@
-html,body{
-    overflow-x: hidden;
-}
-//kích thước form mặc định
-form{
-    max-width: 600px;
-    margin: auto;
-    padding: 30px 10px;
-}
+
 //Độ cao tối thiểu của phần content page (cho đẹp), dùng với các page components nếu nội dung trang quá ngắn
 .page-content{
     min-height: $page-min-height;

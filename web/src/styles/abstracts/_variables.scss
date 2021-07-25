@@ -6,5 +6,4 @@ $page-min-height:600px; //
 $primary: #008248;
 $danger: #F34A38;
 $danger: #F34A38;
-$success: #4267B2;
-@import "~bootstrap/scss/bootstrap";
+@import 'react-notifications-component/dist/scss/notification.scss', "~bootstrap/scss/bootstrap";

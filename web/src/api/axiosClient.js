@@ -9,10 +9,10 @@ export const getToken = () => {
     if (!token) {
         return null;
     }
-    return token;
+    return token.accessToken;
 }
 const axiosClient = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
+    baseURL: "http://localhost:8080/api",
     // @ts-ignore
     header: {
         'content-type': 'application/json',

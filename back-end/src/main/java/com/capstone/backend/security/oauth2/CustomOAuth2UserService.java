@@ -4,16 +4,17 @@ package com.capstone.backend.security.oauth2;
 import java.util.Optional;
 
 import com.capstone.backend.exception.OAuth2AuthenticationProcessingException;
-import com.capstone.backend.model.AuthProvider;
 import com.capstone.backend.model.User;
 import com.capstone.backend.model.UserDetailImpl;
 import com.capstone.backend.repository.UserRepository;
 import com.capstone.backend.security.oauth2.user.OAuth2UserInfo;
 import com.capstone.backend.security.oauth2.user.OAuth2UserInfoFactory;
+import com.capstone.backend.util.HelplerUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -26,6 +27,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private HelplerUtils helplerUtils;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public OAuth2User loadUser(final OAuth2UserRequest oAuth2UserRequest) throws OAuth2AuthenticationException {
@@ -36,7 +41,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         } catch (final AuthenticationException ex) {
             throw ex;
         } catch (final Exception ex) {
-            // Throwing an instance of AuthenticationException will trigger the OAuth2AuthenticationFailureHandler
             throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
         }
     }
@@ -51,11 +55,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         User user;
         if(userOptional.isPresent()) {
             user = userOptional.get();
-            if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-                throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-                        user.getProvider() + " account. Please use your " + user.getProvider() +
-                        " account to login.");
-            }
             user = updateExistingUser(user, oAuth2UserInfo);
         } else {
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
@@ -66,17 +65,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private User registerNewUser(final OAuth2UserRequest oAuth2UserRequest, final OAuth2UserInfo oAuth2UserInfo) {
         final User user = new User();
-
-        user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
-        user.setProviderId(oAuth2UserInfo.getId());
+        String email =oAuth2UserInfo.getEmail();
+        String subject = "Mật khẩu tài khoản";
+        String text = "Mật khẩu mặc định của tài khoản là: ";
+        user.setPassword(passwordEncoder.encode(helplerUtils.sendEmail(email, subject, text)));        
         user.setFullName(oAuth2UserInfo.getName());
-        user.setEmail(oAuth2UserInfo.getEmail());
+        user.setEmail(email);
         user.setAvatarLink(oAuth2UserInfo.getImageUrl());
         return userRepository.save(user);
     }
 
     private User updateExistingUser(final User existingUser, final OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setFullName(oAuth2UserInfo.getName());
         existingUser.setAvatarLink(oAuth2UserInfo.getImageUrl());
         return userRepository.save(existingUser);
     }

@@ -14,6 +14,8 @@ import com.capstone.backend.payload.ResponseData;
 import com.capstone.backend.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -44,24 +46,62 @@ public class UserController {
    @PostMapping("/login")
    public LoginResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
       // Xác thực từ username và password.
-      Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+      Authentication authentication = authenticationManager
+            .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
       // Set thông tin authentication vào Security Context
       SecurityContextHolder.getContext().setAuthentication(authentication);
       UserDetailImpl userDetail = (UserDetailImpl) authentication.getPrincipal();
       User u = userDetail.getUser();
 
       // Trả về jwt cho người dùng.
-      String jwt = tokenProvider.generateToken(userDetail);
-      return new LoginResponse(jwt, u.getFullName(), u.getAvatarLink());
+      String jwt = tokenProvider.generateToken(u);
+      return new LoginResponse(jwt, u.getFullName(), u.getAvatarLink(),u.getRole());
    }
 
    @PostMapping("/signup")
-   public ResponseData signup(User user) {
+    public ResponseEntity<?> registerUser(@RequestBody LoginRequest signupRequest) {
+        try {
+            User u = userService.signup(signupRequest);
+            String jwt = tokenProvider.generateToken(u);
+            LoginResponse lr = new LoginResponse(jwt, u.getFullName(), u.getAvatarLink(),
+                    u.getRole());
+            return new ResponseEntity<LoginResponse>(lr, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+   @GetMapping("/getInfo")
+   public ResponseEntity<?> getInfo(HttpServletRequest request) {
       try {
-         return userService.saveUser(user);
+         long id = jwtAuth.getUserIdFromRequest(request);
+         return new ResponseEntity<User>(userService.getInfo(id), HttpStatus.OK);
       } catch (Exception e) {
-         return new ResponseData(e.getMessage(), null);
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+   }
+   @GetMapping("/sendVerify")
+   public ResponseEntity<?> sendVerify(HttpServletRequest request) {
+      try {
+         long id = jwtAuth.getUserIdFromRequest(request);
+         return new ResponseEntity<String>(userService.sendVerify(id), HttpStatus.OK);
+      } catch (Exception e) {
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+   }
+
+   @GetMapping("/verify")
+   public ResponseEntity<?> verify(HttpServletRequest request, @RequestParam String code,
+         @RequestParam String jwtCode) {
+      try {
+         long id = jwtAuth.getUserIdFromRequest(request);
+         boolean isVerify = userService.verify(jwtCode, code, id);
+         if (isVerify)
+            return new ResponseEntity<>(HttpStatus.OK);
+         else
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      } catch (Exception e) {
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
    }
 
@@ -69,15 +109,6 @@ public class UserController {
    public ResponseData updateUser(User user) {
       try {
          return userService.saveUser(user);
-      } catch (Exception e) {
-         return new ResponseData(e.getMessage(), null);
-      }
-   }
-
-   @GetMapping("/banUser")
-   public ResponseData banUser(@RequestParam long id) {
-      try {
-         return userService.banUser(id);
       } catch (Exception e) {
          return new ResponseData(e.getMessage(), null);
       }

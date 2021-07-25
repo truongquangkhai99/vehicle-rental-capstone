@@ -3,6 +3,8 @@ package com.capstone.backend.security.oauth2;
 import static com.capstone.backend.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
@@ -53,22 +55,28 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
             Authentication authentication) {
         Optional<String> redirectUri = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
-                
+
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-        
-        UserDetailImpl ud = (UserDetailImpl)authentication.getPrincipal();
-        String token = tokenProvider.generateToken(ud);
+
+        UserDetailImpl ud = (UserDetailImpl) authentication.getPrincipal();
+        String token = tokenProvider.generateToken(ud.getUser());
         User u = ud.getUser();
-        return UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token)
-                                                            .queryParam("fullName", u.getFullName())
-                                                            .queryParam("avatarLink", u.getAvatarLink())
-                                                            .queryParam("role", "ROLE_USER")
-                                                            .build().toUriString();
+        try {
+            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token)
+                    .queryParam("fullName", URLEncoder.encode(u.getFullName(), "UTF-8"))
+                    .queryParam("avatarLink", u.getAvatarLink()).queryParam("emailVerify", true)
+                    .queryParam("role", "ROLE_USER").build().toUriString();
+        } catch (UnsupportedEncodingException e) {
+            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token)
+                    .queryParam("fullName", u.getFullName())
+                    .queryParam("avatarLink", u.getAvatarLink()).queryParam("emailVerify", true)
+                    .queryParam("role", "ROLE_USER").build().toUriString();
+        }
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
         super.clearAuthenticationAttributes(request);
         httpCookieOAuth2AuthorizationRequestRepository.removeAuthorizationRequestCookies(request, response);
     }
-    
+
 }

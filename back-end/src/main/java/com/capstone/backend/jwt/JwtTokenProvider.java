@@ -4,6 +4,7 @@ package com.capstone.backend.jwt;
 
 import java.util.Date;
 
+import com.capstone.backend.model.User;
 import com.capstone.backend.model.UserDetailImpl;
 
 import org.springframework.stereotype.Component;
@@ -26,11 +27,11 @@ public class JwtTokenProvider {
     private final long JWT_EXPIRATION = 3153600000000L;
 
     // Tạo ra jwt từ thông tin user
-    public String generateToken(UserDetailImpl userDetails) {
+    public String generateToken(User user) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
         // Tạo chuỗi json web token từ id của user.
-        return Jwts.builder().setSubject(Long.toString(userDetails.getUser().getId())).setIssuedAt(now)
+        return Jwts.builder().setSubject(Long.toString(user.getId())).setIssuedAt(now)
                 .setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, JWT_SECRET).compact();
     }
     

@@ -7,18 +7,26 @@ import javax.naming.NameAlreadyBoundException;
 
 import com.capstone.backend.model.Location;
 import com.capstone.backend.model.User;
+import com.capstone.backend.payload.LoginRequest;
 import com.capstone.backend.payload.ResponseData;
 import com.capstone.backend.repository.LocationRepository;
 import com.capstone.backend.repository.UserRepository;
+import com.capstone.backend.util.HelplerUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
     private LocationRepository locationRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private HelplerUtils helper;
 
     @Override
     public ResponseData saveUser(User user) throws NameAlreadyBoundException {
@@ -28,7 +36,34 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.save(user);
         return new ResponseData("ok", null);
-    }   
+    }
+
+    public User signup(LoginRequest signupRequest) throws Exception {
+        String email = signupRequest.getEmail();
+        Optional<User> u = userRepository.findByEmail(email);
+        if (u.isPresent()) {
+            throw new Exception("Email đã được sử dụng");
+        } else {
+            User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(), email);
+            return userRepository.save(user);
+        }
+    }
+
+    public String sendVerify(long id) {
+        User u = userRepository.getById(id);
+        String code = helper.sendEmail(u.getEmail(), "Xác Thực Tài Khoản", "Mã xác thực của bạn là: ");
+        return passwordEncoder.encode(code);
+    }
+
+    public boolean verify(String jwtCode, String code, long id) {
+        if (passwordEncoder.matches(code, jwtCode)) {
+            User u = userRepository.getById(id);
+            u.setEmailVerified(true);
+            userRepository.save(u);
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public ResponseData update(User user, long id) {
@@ -69,7 +104,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseData getAllLocationByUserId(long id) {
-        List<Location> locations= locationRepository.findAllByUserId(id);
+        List<Location> locations = locationRepository.findAllByUserId(id);
         return new ResponseData("ok", locations);
     }
+
+	public User getInfo(long id) {
+		return userRepository.findById(id).get();
+	}
 }

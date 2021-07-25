@@ -2,7 +2,7 @@
 
   //Navbar
   nav {
-    height: 58px;
+    height: 50px;
   }
 
   #avatar__dropdown {
@@ -99,19 +99,6 @@
   }
 }
 
-//Login-form
-#login-form {
-  min-width: 280px;
-  position: fixed;
-  left: 50%;
-  top: 5vh;
-  transform: translateX(-50%);
-  background-color: white;
-  z-index: 1052;
-  padding: 60px 5vw;
-  border-radius: 5px;
-  box-shadow: 4px 4px 4px 2px #00000033;
-}
 
 //Notification
 #noti {

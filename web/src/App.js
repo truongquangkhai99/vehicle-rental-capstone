@@ -1,5 +1,6 @@
 import Header from 'components/Header/Header';
 import Footer from 'components/layout/Footer';
+import Loading from 'components/layout/Loading';
 import AboutUsPage from 'pages/AboutUsPage';
 import AccountPage from 'pages/AccountPage';
 import BlogPage from 'pages/BlogPage';
@@ -14,47 +15,46 @@ import PromoPage from 'pages/PromoPage';
 import ShareCodePage from 'pages/ShareCodePage';
 import SignUpPage from 'pages/SignUpPage';
 import VehiclePage from 'pages/VehiclePage';
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import NotFound from './components/layout/NotFound';
+import ReactNotification from "react-notifications-component";
+import OAuth2RedirectHandler from 'pages/OAuth2RedirectHandlerPage';
+import { useSelector } from 'react-redux';
+import AdminRoute from 'components/AdminRoute';
+import UserRoute from 'components/UserRoute';
 
 
-function App() {
+function App(props) {
+  // @ts-ignore
+  const isAdmin = useSelector(state => state.isAdmin).status;
   return (
     <div className="App">
-    
-      <Header />
-      <Suspense fallback={<div>Loading ...</div>}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/sign-up"><SignUpPage /></Route>
-            <Route path="/account"><AccountPage /></Route>
-            <Route path="/myfavs"><MyFavsPage /></Route>
-            <Route path="/myaddress"><MyAddressPage /></Route>
-            <Route path="/find"><FindPage /></Route>
-            <Route path="/signup" component={SignUpPage} />
-            <Route path="/howitword" component={HowItWorkPage} />
-            <Route path="/account" component={AccountPage} />
-            <Route path="/myfavs" component={MyFavsPage} />
-            <Route path="/mytrips" component={MyTripsPage} />
-            <Route path="/myaddress" component={MyAddressPage} />
-            <Route path="/mycard" component={MyCardPage} />
-            <Route path="/promo" component={PromoPage} />
-            <Route path="/sharecode" component={ShareCodePage} />
-            <Route path="/aboutus" component={AboutUsPage} />
-
-            <Route path="/blog" component={BlogPage} />
-            <Route path="/find" component={FindPage} />
-            <Route path="/vehicle" component={VehiclePage} />
-
-            <Route component={NotFound} />
-          </Switch>
-        </BrowserRouter>
+      {isAdmin ? null : <Header />}
+      <ReactNotification className="fs--1" />
+      <Suspense fallback={<Loading />}>
+        <Switch>
+          <UserRoute exact path="/" component={HomePage} />
+          <UserRoute path="/find" component={FindPage} />
+          <UserRoute path="/signup" component={SignUpPage} />
+          <UserRoute path="/howitword" component={HowItWorkPage} />
+          <UserRoute role={true} path="/account" component={AccountPage} />
+          <UserRoute role={true} path="/myfavs" component={MyFavsPage} />
+          <UserRoute role={true} path="/mytrips" component={MyTripsPage} />
+          <UserRoute role={true} path="/myaddress" component={MyAddressPage} />
+          <UserRoute role={true} path="/mycard" component={MyCardPage} />
+          <UserRoute role={true} path="/promo" component={PromoPage} />
+          <UserRoute path="/aboutus" component={AboutUsPage} />
+          <UserRoute path="/oauth2/redirect" component={OAuth2RedirectHandler}></UserRoute>
+          <UserRoute path="/blog" component={BlogPage} />
+          <UserRoute path="/find" component={FindPage} />
+          <UserRoute path="/vehicle" component={VehiclePage} />
+          <AdminRoute exact path="/admin" role="admin" component={MyFavsPage} />
+          <UserRoute component={NotFound} />
+        </Switch>
       </Suspense>
-      <Footer />
-      
+      {isAdmin ? null : <Footer />}
     </div>
   );
 }
