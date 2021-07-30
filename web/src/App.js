@@ -1,4 +1,4 @@
-import Header from 'components/Header/Header';
+import Header from 'components/header/Header';
 import Footer from 'components/layout/Footer';
 import Loading from 'components/layout/Loading';
 import AboutUsPage from 'pages/AboutUsPage';
@@ -12,11 +12,11 @@ import MyCardPage from 'pages/MyCardPage';
 import MyFavsPage from 'pages/MyFavsPage';
 import MyTripsPage from 'pages/MyTripsPage';
 import PromoPage from 'pages/PromoPage';
-import ShareCodePage from 'pages/ShareCodePage';
+// import ShareCodePage from 'pages/ShareCodePage';
 import SignUpPage from 'pages/SignUpPage';
 import VehiclePage from 'pages/VehiclePage';
-import React, { Suspense, useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { Switch } from 'react-router-dom';
 import './App.scss';
 import NotFound from './components/layout/NotFound';
 import ReactNotification from "react-notifications-component";
@@ -48,7 +48,7 @@ function App(props) {
           <UserRoute path="/aboutus" component={AboutUsPage} />
           <UserRoute path="/oauth2/redirect" component={OAuth2RedirectHandler}></UserRoute>
           <UserRoute path="/blog" component={BlogPage} />
-          <UserRoute path="/find" component={FindPage} />
+          {/* <UserRoute path="/find" component={FindPage} /> */}
           <UserRoute path="/vehicle" component={VehiclePage} />
           <AdminRoute exact path="/admin" role="admin" component={MyFavsPage} />
           <UserRoute component={NotFound} />

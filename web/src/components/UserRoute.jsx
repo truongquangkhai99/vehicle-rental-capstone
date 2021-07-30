@@ -1,6 +1,6 @@
 import { setUserPage } from "app/slice/pageSlice";
 import store from "app/store";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router-dom";
 const UserRoute = ({ component, ...rest }) => {
@@ -8,7 +8,7 @@ const UserRoute = ({ component, ...rest }) => {
   const token = useSelector((state) => state.logged);
   // @ts-ignore
   const isAdmin = useSelector((state) => state.isAdmin).status;
-  if(isAdmin){
+  if (isAdmin) {
     store.dispatch(setUserPage());
   }
   return (

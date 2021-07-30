@@ -1,243 +1,115 @@
 // @ts-nocheck
 import React, { useState } from 'react';
 import { Col, Row, Form, Button } from 'react-bootstrap'
-import { IoLocation, BsSearch, RiMapPinRangeFill, RiMapPinFill } from 'react-icons/all';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@reach/tabs";
-import "@reach/tabs/styles.css";
+import { BsSearch } from 'react-icons/all';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss';
-import {
-	Combobox,
-	ComboboxInput,
-	ComboboxPopover,
-	ComboboxList,
-	ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
-import UseAddressSearch from 'api/fetchApiMap/placesApi';
-// import UseDistance from 'api/fetchApiMap/distanceApi';
+import GoogleMaps from './AutoComplete/AutoComplete'
+import { useDispatch } from 'react-redux';
+import { search } from 'app/slice/userSlice';
+import { useHistory } from 'react-router-dom';
+
 export default function Findcar() {
-	const reflocation = React.createRef();
-	const [search, setsearch] = useState("")
-	const listlocation = UseAddressSearch(search);
-	// const listdistance=UseDistance(search,"XTL");
-	const getLocation = function (position) {
-		fetch('https://locationiq.com/v1/reverse.php?key=pk.5a27d5b7fe2c1fcef10a3410df539422&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&format=json')
-			.then(response => response.json())
-			.then(data => { reflocation.current.value = data.display_name; console.log(reflocation.current.value) }).catch(console.log("loi roi 1"));
+	const [SearchCar, setSearchCar] = useState({
+		startLocal: "",
+		startDate: "",
+		startTime: "",
+		endLocal: "",
+		endDate: "",
+		endTime: "",
+		selfDrive: false,
+		withDrive: false,
+		intercityCar: false
+	})
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const handleSubmit = () => {
+		// if (SearchCar.startLocal !== "") {
+		// 	console.log(SearchCar);
+		// 	dispatch(search(SearchCar));
+		// 	history.push("/find");
+		// } else {
+		// 	alert("Vui lòng nhập địa chỉ tìm kiếm!");
+		// }
+		console.log(SearchCar);
+		dispatch(search(SearchCar));
+		history.push("/find");
 	}
-	const handleclick = () => {
-		navigator.geolocation.getCurrentPosition(getLocation)
+	const getLocalStart = (data) => {
+		setSearchCar(state => ({ ...state, startLocal: data }))
 	}
-	const handleSearchInput = (event) => {
-		setsearch(event.target.value)
+	const getLocalEnd = (data) => {
+		setSearchCar(state => ({ ...state, endLocal: data }))
 	}
-	const handleSelected = (item) => {
-		if (item.target.value === "Sử dụng vị trí của bạn") {
-			navigator.geolocation.getCurrentPosition(getLocation)
-		}
-	}
-	
-	// const handleSubmit=()=>{
-
-	// }
-
 	return (
 		<Row>
-			<Col>
-				<div className="tab">
-					<Tabs>
-						<TabList>
-							<Tab className="tabtitle">Xe máy </Tab>
-							<Tab className="tabtitle">Xe tự lái </Tab>
-							<Tab className="tabtitle">Xe có tài xế</Tab>
-						</TabList>
-						<TabPanels>
-							<TabPanel>
-								<Row>
-									<Col>
-										<div className="tab1">
-											<Form>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Địa điểm</Form.Label>
-												<Combobox openOnFocus={true}>
-													<IoLocation style={{ marginLeft: "0.5rem", marginTop: "0.5rem", marginRight: "1rem", position: "absolute" }} color="green" size="1.5rem" />
-													<ComboboxInput
-														className="form-control"
-														// autocomplete={true}
-														onChange={handleSearchInput}
-														onSelect={(item) => handleSelected(item)}
-														placeholder="Nhập địa chỉ mà bạn muốn...."
-														style={{ paddingLeft: '2rem' }}
-														ref={reflocation}
-													/>
-													{listlocation && (
-														<ComboboxPopover>
-															<ComboboxList>
-																<ComboboxOption value='Sử dụng vị trí của bạn' key={0} onClick={handleclick} />
-																{listlocation.length > 0 ?
-																	listlocation.map((item, index) => (
-																		<ComboboxOption value={item.display_address} key={index} />
-																	))
-																	: <ComboboxOption value='Không tìm thấy kết quả vị trí!' key={1} />
-																}
-															</ComboboxList>
-														</ComboboxPopover>
-													)}
-												</Combobox>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem', marginTop: '1rem' }}>Bắt đầu</Form.Label>
-												<Row>
-													<Col>
-														<Form.Control type="date" />
-													</Col>
-													<Col>
-														<Form.Control type="time" />
-													</Col>
-												</Row>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem', marginTop: '1rem' }}>Kết thúc</Form.Label>
-												<Row>
-													<Col>
-														<Form.Control type="date" />
-													</Col>
-													<Col>
-														<Form.Control type="time" />
-													</Col>
-												</Row>
-												<Button variant="primary" className="btn form-control mt-3 text-primary" ><BsSearch />  Tìm Kiếm Ngay</Button>
-											</Form>
-										</div>
-									</Col>
-								</Row>
-							</TabPanel>
-							<TabPanel>
-								<Row>
-									<Col>
-										<div className="tab1">
-											<Form>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Địa điểm</Form.Label>
-												<Combobox openOnFocus={true}>
-													<IoLocation style={{ marginLeft: "0.5rem", marginTop: "0.5rem", marginRight: "1rem", position: "absolute" }} color="green" size="1.5rem" />
-													<ComboboxInput
-														className="form-control"
-														autocomplete={true}
-														// onChange={handleSearchInput1}
-														// onSelect={(item) => handleSelected1(item)}
-														placeholder="Nhập địa chỉ mà bạn muốn...."
-														style={{ paddingLeft: '2rem' }}
-														// ref={reflocation}
-													/>
-													{listlocation && (
-														<ComboboxPopover>
-															<ComboboxList>
-																{/* <ComboboxOption value='Sử dụng vị trí của bạn' key={0} onClick={handleclick1} /> */}
-																{listlocation.length > 0 ?
-																	listlocation.map((item, index) => (
-																		<ComboboxOption value={item.display_address} key={index} />
-																	))
-																	: <ComboboxOption value='Không tìm thấy kết quả vị trí!' key={1} />
-																}
-															</ComboboxList>
-														</ComboboxPopover>
-													)}
-												</Combobox>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem', marginTop: '1rem' }}>Bắt đầu</Form.Label>
-												<Row>
-													<Col>
-														<Form.Control type="date" />
-													</Col>
-													<Col>
-														<Form.Control type="time" />
-													</Col>
-												</Row>
-												<Form.Label style={{ color: 'green', fontSize: '1.5rem', marginTop: '1rem' }}>Kết thúc</Form.Label>
-												<Row>
-													<Col>
-														<Form.Control type="date" />
-													</Col>
-													<Col>
-														<Form.Control type="time" />
-													</Col>
-												</Row>
-												<Button variant="primary" className="btn form-control mt-3 text-primary" ><BsSearch />  Tìm Kiếm Ngay</Button>
-											</Form>
-										</div>
-									</Col>
-								</Row>
-							</TabPanel>
-							<TabPanel>
-								<Row>
-									<Col>
-										<div className="tab1">
-											<Tabs>
-												<TabList>
-													<Tab className="title-child">Nội tỉnh</Tab>
-													<Tab className="title-child">Liên tỉnh</Tab>
-												</TabList>
-												<TabPanels>
-													<TabPanel>
-														<Form>
-															<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Điểm đón</Form.Label>
-															<Row>
-																<Col>
-																	<IoLocation style={{ marginLeft: "0.5rem", marginTop: "0.5rem", marginRight: "1rem", position: "absolute" }} color="green" size="1.5rem" />
-																	<Form.Control type="text" style={{ paddingLeft: '2rem' }} placeholder="Bạn muốn đón tại....." />
-																</Col>
-															</Row>
-															<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Thời gian</Form.Label>
-															<Row>
-																<Col>
-																	<Form.Control type="date" />
-																</Col>
-																<Col>
-																	<Form.Control type="time" />
-																</Col>
-															</Row>
-															<Button variant="primary" className="btn form-control mt-3 text-primary"><BsSearch />  Tìm Kiếm Ngay</Button>
-														</Form>
-													</TabPanel>
-													<TabPanel>
-														<Form>
-															<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Lộ trình</Form.Label>
-															<Row>
-																<Col>
-																	<RiMapPinRangeFill style={{ marginLeft: "0.5rem", marginTop: "0.5rem", marginRight: "1rem", position: "absolute" }} color="green" size="1.5rem" />
-																	<Form.Control type="text" style={{ paddingLeft: '2rem' }} placeholder="Bạn muốn đón tại..." />
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<RiMapPinFill style={{ marginLeft: "0.5rem", marginTop: "1.5rem", marginRight: "1rem", position: "absolute" }} color="green" size="1.5rem" />
-																	<Form.Control type="text" style={{ paddingLeft: '2rem' }} placeholder="Bạn muốn đến tại..." className="mt-3" />
-																</Col>
-															</Row>
-															<Row>
-																<Col>
-																	<Form.Check type="checkbox" label="Tôi muốn đi một chiều" className="mt-3 text-primary" />
-																</Col>
-																<Col>
-																	<Form.Check type="checkbox" label="Tôi muốn đi hai chiều" className="mt-3 text-primary" />
-																</Col>
-															</Row>
-
-															<Form.Label style={{ color: 'green', fontSize: '1.5rem' }}>Thời gian</Form.Label>
-															<Row>
-																<Col>
-																	<Form.Control type="date" />
-																</Col>
-																<Col>
-																	<Form.Control type="time" />
-																</Col>
-															</Row>
-															<Button variant="primary" className="btn form-control mt-3 text-primary"><BsSearch />  Tìm Kiếm Ngay</Button>
-														</Form>
-													</TabPanel>
-												</TabPanels>
-											</Tabs>
-										</div>
-									</Col>
-								</Row>
-							</TabPanel>
-						</TabPanels>
-					</Tabs>
+			<Col xs={9} style={{ margin: '50px auto' }}>
+				<div className="findCar">
+					<h1 className="findCarTitle">
+						<span className="red">-</span>
+						Sự lựa chọn tốt nhất cho mọi chuyến đi
+						<span className="red">-</span>
+					</h1>
+					<Form className="findCarForm">
+						<Row>
+							<Col xs={6} style={{ padding: '0rem 3rem' }}>
+								<Form.Label className="findCarFormLabel">Điểm đi</Form.Label>
+								<GoogleMaps getLocal={getLocalStart} />
+							</Col>
+							<Col xs={3}>
+								<Form.Label className="findCarFormLabel">Ngày đi</Form.Label>
+								<Form.Control className="findCarFormInput" type="date" name="startDate" value={SearchCar.startDate}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, startDate: target.value }))} />
+							</Col>
+							<Col xs={3} style={{ padding: '0rem 3rem' }}>
+								<Form.Label className="findCarFormLabel">Thời gian đi</Form.Label>
+								<Form.Control className="findCarFormInput" type="time" name="startTime" value={SearchCar.startTime}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, startTime: target.value }))} />
+							</Col>
+						</Row>
+						<Row style={{ marginTop: '2rem' }}>
+							<Col xs={6} style={{ padding: '0rem 3rem' }}>
+								<Form.Label className="findCarFormLabel">Điểm đến</Form.Label>
+								<GoogleMaps getLocal={getLocalEnd} />
+							</Col>
+							<Col xs={3}>
+								<Form.Label className="findCarFormLabel">Ngày đến</Form.Label>
+								<Form.Control className="findCarFormInput" type="date" name="endDate" value={SearchCar.endDate}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, endDate: target.value }))} />
+							</Col>
+							<Col xs={3} style={{ padding: '0rem 3rem' }}>
+								<Form.Label className="findCarFormLabel">Thời gian đến</Form.Label>
+								<Form.Control className="findCarFormInput" type="time" name="endTime" value={SearchCar.endTime}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, endTime: target.value }))} />
+							</Col>
+						</Row>
+						<Row>
+							<Col style={{ padding: '0rem 3rem' }}>
+								<div style={{ width: '100%', height: '2px', backgroundColor: 'gray', margin: '2rem 0rem' }}></div>
+							</Col>
+						</Row>
+						<Row>
+							<Col xs={6} style={{ padding: '0rem 3rem', display: 'flex' }}>
+								<Form.Check type="checkbox" label="Xe tự lái" className="findCarFormCheck me-5"
+									value={SearchCar.selfDrive}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, selfDrive: target.checked }))}
+								/>
+								<Form.Check type="checkbox" label="Xe có tài xế" className="findCarFormCheck ms-5"
+									value={SearchCar.withDrive}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, withDrive: target.checked }))}
+								/>
+							</Col>
+							<Col xs={3} >
+								<Form.Check type="checkbox" label="Xe liên tỉnh" className="findCarFormCheck"
+									value={SearchCar.intercityCar}
+									onChange={({ target }) => setSearchCar(state => ({ ...state, intercityCar: target.checked }))}
+								/>
+							</Col>
+							<Col xs={3} style={{ padding: '0rem 3rem' }}>
+								<Button className="findCarFormButton" type="button" onClick={handleSubmit}><BsSearch /> Tìm xe</Button>
+							</Col>
+						</Row>
+					</Form>
 				</div>
 			</Col>
 		</Row>

@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, FormGroup, FormLabel, Row, Col, Button } from 'react-bootstrap'
 import FormRange from 'react-bootstrap/esm/FormRange'
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput'
 import FormCheckLabel from 'react-bootstrap/esm/FormCheckLabel'
 import { AiFillStar, AiOutlineQuestionCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import ItemFind from 'components/find/ItemFind'
-
+import { useSelector } from 'react-redux'
+import { DistanceMatrixService } from '@react-google-maps/api';
+import vehicleApi from 'api/vehicleApi'
 export default function FindPage() {
-    const [isShowExtra, setIsShowExtra] = React.useState(true)
-    const [styleExtra, setStyleExtra] = React.useState({
-        display: 'none'
-    })
+    const [isShowExtra, setIsShowExtra] = useState(true)
+    const [styleExtra, setStyleExtra] = useState({ display: 'none' })
+    const [resultSreach, setResultSreach] = useState([]);
+    const [isFresh, setIsFresh] = useState(true);
     const handleClick = function () {
         if (!isShowExtra) {
             setStyleExtra({ display: 'none' })
@@ -22,43 +23,53 @@ export default function FindPage() {
         }
         return setIsShowExtra(!isShowExtra)
     }
+    // @ts-ignore
+    const searchInput = useSelector(state => state.logged.data);
+    console.log(searchInput);
+    const url = '#';
     return (
         <>
+            {isFresh && searchInput?.startLocal !== "" && (
+                <DistanceMatrixService
+                    options={{
+                        destinations: getListLocation(getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar)),
+                        origins: [searchInput.startLocal],
+                        travelMode: "DRIVING",
+                    }}
+                    callback={(response) => {
+                        if (response) {
+                            var listVehicles = getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar);
+                            var rs = getListDistanceVehicles(response, listVehicles);
+                            setResultSreach(rs);
+                            setIsFresh(false);
+                        }
+                    }}
+                />
+            )
+            }
             <div id="find-page">
                 <div className="find">
                     <Row className="find__header">
                         <Col className="find__header-location" lg={4} id="heading">
-                            <label htmlFor="">Địa điểm</label>
-                            <input type="text" placeholder="Nhập nơi bạn muốn tìm kiếm" />
+                            <label htmlFor="">Địa điểm:</label>
+                            <h5>{searchInput.startLocal}</h5>
                         </Col>
                         <Col className="find__header-start" lg={4} id="heading">
-                            <label htmlFor="">Bắt đầu</label>
+                            <label htmlFor="">Bắt đầu:</label>
                             <div className="date-start" id="date">
-                                <DatePicker
-                                    // @ts-ignore
-                                    selected={Date.now()} />
+                                <h5>{searchInput.startDate}</h5>
                             </div>
-                            <div className="time-start">
-                                <select defaultValue="00:00">
-                                    <option value="">00:00</option>
-                                    <option value="">01:00</option>
-                                    <option value="">02:00</option>
-                                </select>
+                            <div className="time-start ms-3">
+                                <h5>{searchInput.startTime}</h5>
                             </div>
                         </Col>
                         <Col className="find__header-end" lg={4} id="heading">
-                            <label htmlFor="">Kết thúc</label>
+                            <label htmlFor="">Kết thúc:</label>
                             <div className="date-end" id="date">
-                                <DatePicker
-                                    // @ts-ignore
-                                    selected={Date.now()} />
+                                <h5>{searchInput.startDate}</h5>
                             </div>
-                            <div className="time-end">
-                                <select defaultValue="00:00">
-                                    <option value="">00:00</option>
-                                    <option value="">01:00</option>
-                                    <option value="">02:00</option>
-                                </select>
+                            <div className="time-end ms-3">
+                                <h5>{searchInput.startTime}</h5>
                             </div>
                         </Col>
                     </Row>
@@ -91,7 +102,7 @@ export default function FindPage() {
                                     <FormLabel id="lable">Loại xe</FormLabel>
                                     <Row>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png" alt="" />
                                                 </div>
@@ -100,7 +111,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-sedan.png" alt="" />
                                                 </div>
@@ -109,7 +120,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-hatchback.png" alt="" />
                                                 </div>
@@ -120,7 +131,7 @@ export default function FindPage() {
                                     </Row>
                                     <Row>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-5-suv.png" alt="" />
                                                 </div>
@@ -129,7 +140,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-7-suv.png" alt="" />
                                                 </div>
@@ -138,7 +149,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-7-mpv.png" alt="" />
                                                 </div>
@@ -149,7 +160,7 @@ export default function FindPage() {
                                     </Row>
                                     <Row>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-pickup.png" alt="" />
                                                 </div>
@@ -158,7 +169,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png" alt="" />
                                                 </div>
@@ -167,7 +178,7 @@ export default function FindPage() {
                                             </a>
                                         </Col>
                                         <Col lg={4}>
-                                            <a className="element-a">
+                                            <a className="element-a" href={url}>
                                                 <div className="find__content-options-img">
                                                     <img src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png" alt="" />
                                                 </div>
@@ -273,7 +284,14 @@ export default function FindPage() {
                         </Col>
                         <Col className="find__content-items" lg={8}>
                             <Row className="items">
-                                <ItemFind />
+                                {
+                                    resultSreach.length > 0 ?
+                                        resultSreach.map((item, index) => (
+                                            <ItemFind key={index} props={item} />
+                                        ))
+                                        :
+                                        <h1 className="text-center mt-5 text-danger">Không tìm thấy kết quả!</h1>
+                                }
                             </Row>
                         </Col>
                     </Row>
@@ -281,4 +299,48 @@ export default function FindPage() {
             </div>
         </>
     )
+}
+
+function getListVehicles(selfCar, withCar, intercityCar) {
+    var l1 = vehicleApi.getCarSelfDriver().then((res) => { return res });
+    var l2 = vehicleApi.getCarDriver().then((res) => { return res });
+    var l3 = vehicleApi.getBikes().then((res) => { return res });
+    var rs = [];
+    if (selfCar) { rs.concat(l1); }
+    if (withCar) { rs.concat(l2); }
+    if (intercityCar) { rs.concat(l3); }
+    if (selfCar === false && withCar === false && intercityCar === false) { rs.concat(l1, l2, l3); }
+    return rs;
+}
+function getListLocation(list) {
+    var rsLatLng = [];
+    if (list.length > 0) {
+        list.forEach(e => {
+            var item = {
+                lat: parseFloat(e.getLocation().getLatitude()),
+                lng: parseFloat(e.getLocation().getLongitude())
+            }
+            rsLatLng.push(item);
+        });
+    }
+    return rsLatLng;
+}
+function getListDistanceVehicles(response, listVehicles) {
+    var list = [];
+    var desList = response.destinationAddresses;
+    var oriList = response.originAddresses;
+    var num = desList.length;
+    var rowList = response.rows[0].elements;
+    for (var i = 0; i < num; i++) {
+        var item = {
+            id: i,
+            des: desList[0],
+            ori: oriList[i],
+            dis: rowList[i].distance.text,
+            dur: rowList[i].duration.text,
+            vehicle: listVehicles[i]
+        }
+        list.push(item);
+    }
+    return list
 }

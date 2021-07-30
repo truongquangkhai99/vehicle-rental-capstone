@@ -8,8 +8,8 @@ import React, { useState } from "react";
 import { Button, Form as BForm, Modal } from "react-bootstrap";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
-import { useDispatch } from "react-redux";
-import Cookies from "universal-cookie";
+// import { useDispatch } from "react-redux";
+// import Cookies from "universal-cookie";
 import * as Yup from "yup";
 
 const LoginForm = (props) => {

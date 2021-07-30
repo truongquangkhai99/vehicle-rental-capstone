@@ -1,19 +1,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import {
-  FaPinterestP,
-  FaYoutube,
-  FaFacebookF,
-  FaGooglePlusG,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-} from "react-icons/fa";
-import {
-  HiOutlineMail,
-  HiPhone,
-  HiOutlineLocationMarker,
-} from "react-icons/hi";
+import { FaYoutube, FaFacebookF, FaTwitter, FaLinkedin, FaInstagram, } from "react-icons/fa";
+import { HiOutlineMail, HiPhone, HiOutlineLocationMarker, } from "react-icons/hi";
 import logofull from "assets/images/logofull.png";
 
 function Footer() {

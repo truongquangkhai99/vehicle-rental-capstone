@@ -1,21 +1,14 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
 import React, { useState } from "react";
-import {
-  Modal,
-  Button,
-  FormGroup,
-  FormControl,
-  FormLabel,
-  FormText,
-} from "react-bootstrap";
+import { Modal, Button, FormGroup, FormControl, FormLabel, FormText } from "react-bootstrap";
 
 export default function GPLX(props) {
   const [file, setFile] = useState(null);
-  const handleChangeFile= (evt)=>{
+  const handleChangeFile = (evt) => {
     setFile(URL.createObjectURL(evt.target.files[0]));
   }
-  const gplx = props.gplx;
+  // const gplx = props.gplx;
   return (
     <Formik
       initialValues={{
@@ -54,7 +47,7 @@ export default function GPLX(props) {
             <FormText muted>Hình ảnh GPLX mặt trước</FormText>
             <FormControl type="file" onChange={handleChangeFile}></FormControl>
           </FormGroup>
-          <img width="100%" src={file}/>
+          <img width="100%" src={file} alt="" />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" className="w-100 my-3" type="submit">

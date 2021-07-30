@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
-import { BsLink45Deg } from "react-icons/bs";
-import { AiOutlineCloseCircle, AiOutlineQuestionCircle,AiFillCheckCircle,AiFillWarning } from "react-icons/ai";
+import { AiOutlineQuestionCircle, AiFillCheckCircle, AiFillWarning } from "react-icons/ai";
 import { GiAlliedStar } from "react-icons/gi";
 import EditName from "components/account/EditName";
 import EditTelephone from "components/account/EditTelephone";
@@ -36,11 +35,13 @@ export default function AccountPage() {
   const [isShowGoogle, setIsShowGoogle] = React.useState(false);
   useEffect(() => {
     userApi.getInfo().then((res) => {
-    // @ts-ignore
-    console.log(res);
+      // @ts-ignore
+      console.log(res);
+      // @ts-ignore
       setUser(res);
     });
   }, []);
+  const url = "#";
   return (
     <>
       <div className="account">
@@ -50,7 +51,7 @@ export default function AccountPage() {
             <div className="profile__content__header">
               <div className="profile__content__header-avatar">
                 <div className="avatar">
-                  <img src={user.avatarLink}></img>
+                  <img src={user.avatarLink} alt=""></img>
                 </div>
               </div>
               <div className="profile__content__header-infor">
@@ -62,7 +63,7 @@ export default function AccountPage() {
                         <a
                           id="icon-name"
                           onClick={() => setIsShowEditName(true)}
-                        >
+                          href={url} >
                           <BiEdit />
                         </a>
                       </p>
@@ -90,7 +91,7 @@ export default function AccountPage() {
                       Ngày sinh
                     </span>
                     <span className="" id="ctn">
-                     {formatDateTime(user.dob,false)}
+                      {formatDateTime(user.dob, false)}
                     </span>
                   </div>
                   <div className="gender" id="box">
@@ -98,7 +99,7 @@ export default function AccountPage() {
                       Giới tính
                     </span>
                     <span className="" id="ctn">
-                      {user.gender==="M"?"Nam":user.gender==="F"?"Nữ":null}
+                      {user.gender === "M" ? "Nam" : user.gender === "F" ? "Nữ" : null}
                     </span>
                   </div>
                 </div>
@@ -117,7 +118,7 @@ export default function AccountPage() {
                         <a
                           id="icon"
                           onClick={() => setIsShowEditTelephone(true)}
-                        >
+                          href={url} >
                           <BiEdit />
                         </a>
                       </span>
@@ -128,11 +129,11 @@ export default function AccountPage() {
                       </span>
                       <span className="" id="ctn">
                         {user.drivingLincense.confirmed ? (
-                          <span className="text-primary">Đã xác thực <AiFillCheckCircle/></span>
+                          <span className="text-primary">Đã xác thực <AiFillCheckCircle /></span>
                         ) : (
-                          <span className="text-primary">Chưa xác thực <AiFillWarning/></span>
+                          <span className="text-primary">Chưa xác thực <AiFillWarning /></span>
                         )}
-                        <a id="icon" onClick={() => setIsShowGPLX(true)}>
+                        <a id="icon" onClick={() => setIsShowGPLX(true)} href={url}>
                           <BiEdit />
                         </a>
                       </span>
@@ -143,7 +144,7 @@ export default function AccountPage() {
                       </span>
                       <span className="" id="ctn">
                         {user.email}
-                        <a id="icon" onClick={() => setIsShowEditEmail(true)}>
+                        <a id="icon" onClick={() => setIsShowEditEmail(true)} href={url}>
                           <BiEdit />
                         </a>
                       </span>

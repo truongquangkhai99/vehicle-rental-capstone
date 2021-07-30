@@ -3,13 +3,13 @@ import store from "app/store";
 import React from "react";
 import { Dropdown, Nav, NavDropdown, Offcanvas } from "react-bootstrap";
 import { IoMdNotifications } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Notification from "./Notification";
 
 const handleLogoutClick = () => {
-    store.dispatch(logout());
-  };
+  store.dispatch(logout());
+};
 export function LoggedNav(props) {
   // @ts-ignore
   const logged = useSelector((state) => state.logged);
@@ -84,7 +84,7 @@ export function LoggedNav(props) {
 export function LoggedOffcanvas(props) {
   // @ts-ignore
   const logged = useSelector((state) => state.logged);
-  
+
   return (
     <>
       <Offcanvas.Header className="logged" closeVariant="white" closeButton>

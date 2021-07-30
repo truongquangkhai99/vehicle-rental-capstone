@@ -15,7 +15,7 @@ function Timer(props) {
       setTimeLeft(timeLeft - 1);
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [timeLeft]);
+  }, [handleTimeOut, timeLeft]);
 
   return <span>{timeLeft}</span>;
 }

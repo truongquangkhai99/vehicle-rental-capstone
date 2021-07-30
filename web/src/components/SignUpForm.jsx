@@ -13,10 +13,10 @@ import {
 } from "react-bootstrap";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import VerifyForm from "./Header/VerifyForm";
+import VerifyForm from "./header/VerifyForm";
 import Loading from "./layout/Loading";
 
 const SignUpForm = (props) => {
@@ -52,7 +52,7 @@ const SignUpForm = (props) => {
           password: values.password,
           fullName: values.fullName,
         })
-          .then((res) => {            
+          .then((res) => {
             store.dispatch(login(res));
             setStatus("verify");
             UserApi.sendVerify().then((jwtCode) => {

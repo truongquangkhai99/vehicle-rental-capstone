@@ -6,13 +6,13 @@ import { HiOutlineOfficeBuilding } from 'react-icons/hi'
 import { BiMapPin } from 'react-icons/bi'
 
 export default function FormAdd(props) {
-    const handleClick = function(e) {
+    const handleClick = function (e) {
         const types = document.querySelectorAll('.type')
-        types.forEach((tab,index) => {
+        types.forEach((tab, index) => {
             tab.classList.remove('active')
-            if(types[index] == e.target) {
+            if (types[index] === e.target) {
                 e.target.classList.add('active')
-            }else {
+            } else {
                 e.target.parentElement.classList.add('active')
             }
 
@@ -28,15 +28,15 @@ export default function FormAdd(props) {
                     <FormLabel>Loại địa chỉ</FormLabel>
                     <div className="address-type">
                         <div className="type active" onClick={handleClick}>
-                            <AiOutlineHome id="icon-type"/>
+                            <AiOutlineHome id="icon-type" />
                             <span>Nhà riêng</span>
                         </div>
                         <div className="type" onClick={handleClick}>
-                            <HiOutlineOfficeBuilding id="icon-type"/>
+                            <HiOutlineOfficeBuilding id="icon-type" />
                             <span>Công ty</span>
                         </div>
                         <div className="type" onClick={handleClick}>
-                            <BiMapPin id="icon-type"/>
+                            <BiMapPin id="icon-type" />
                             <span>Khác</span>
                         </div>
                     </div>
