@@ -24,25 +24,62 @@ export default function FindPage() {
         return setIsShowExtra(!isShowExtra)
     }
     // @ts-ignore
-    const searchInput = useSelector(state => state.logged.data);
-    console.log(searchInput);
+    const searchInput = useSelector(state => state.searched);
+    var listVehicle = getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar);
+    var listLocationVehicle = getListLocation(listVehicle);
+    // var listVehicle = [
+    //     {
+    //         id: 1,
+    //         name: "xe A",
+    //         location: {
+    //             latitude: "16.04765299496521",
+    //             longitude: "108.21890939151176",
+    //         }
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "xe B",
+    //         location: {
+    //             latitude: "16.070087935507395",
+    //             longitude: "108.221484312158",
+    //         }
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "xe C",
+    //         location: {
+    //             latitude: "16.033134921877576",
+    //             longitude: "108.22800744446177",
+    //         }
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "xe D",
+    //         location: {
+    //             latitude: "16.075366377435078",
+    //             longitude: "108.17530740190229",
+    //         }
+    //     }
+    // ]
+    // var listLocationVehicle = getListLocation(listVehicle);
     const url = '#';
+    console.log(searchInput);
     return (
         <>
             {isFresh && searchInput?.startLocal !== "" && (
                 <DistanceMatrixService
                     options={{
-                        destinations: getListLocation(getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar)),
+                        destinations: listLocationVehicle,
                         origins: [searchInput.startLocal],
                         travelMode: "DRIVING",
                     }}
                     callback={(response) => {
                         if (response) {
-                            var listVehicles = getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar);
-                            var rs = getListDistanceVehicles(response, listVehicles);
+                            var rs = getListDistanceVehicles(response, listVehicle);
                             setResultSreach(rs);
                             setIsFresh(false);
                         }
+
                     }}
                 />
             )
@@ -317,8 +354,8 @@ function getListLocation(list) {
     if (list.length > 0) {
         list.forEach(e => {
             var item = {
-                lat: parseFloat(e.getLocation().getLatitude()),
-                lng: parseFloat(e.getLocation().getLongitude())
+                lat: parseFloat(e.location.latitude),
+                lng: parseFloat(e.location.longitude)
             }
             rsLatLng.push(item);
         });
@@ -334,8 +371,8 @@ function getListDistanceVehicles(response, listVehicles) {
     for (var i = 0; i < num; i++) {
         var item = {
             id: i,
-            des: desList[0],
-            ori: oriList[i],
+            des: desList[i],
+            ori: oriList[0],
             dis: rowList[i].distance.text,
             dur: rowList[i].duration.text,
             vehicle: listVehicles[i]

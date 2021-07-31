@@ -24,6 +24,8 @@ import OAuth2RedirectHandler from 'pages/OAuth2RedirectHandlerPage';
 import { useSelector } from 'react-redux';
 import AdminRoute from 'components/AdminRoute';
 import UserRoute from 'components/UserRoute';
+import AdminPage from 'pages/AdminPage';
+import { Route } from 'react-router-dom';
 
 
 function App(props) {
@@ -48,10 +50,11 @@ function App(props) {
           <UserRoute path="/aboutus" component={AboutUsPage} />
           <UserRoute path="/oauth2/redirect" component={OAuth2RedirectHandler}></UserRoute>
           <UserRoute path="/blog" component={BlogPage} />
-          {/* <UserRoute path="/find" component={FindPage} /> */}
+          <UserRoute path="/find" component={FindPage} />
           <UserRoute path="/vehicle" component={VehiclePage} />
-          <AdminRoute exact path="/admin" role="admin" component={MyFavsPage} />
+          <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
           <UserRoute component={NotFound} />
+          {/* <Route path="/admin" exact component={AdminPage} /> */}
         </Switch>
       </Suspense>
       {isAdmin ? null : <Footer />}

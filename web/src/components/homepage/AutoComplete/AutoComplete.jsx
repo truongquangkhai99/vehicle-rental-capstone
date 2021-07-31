@@ -30,27 +30,16 @@ export default function GoogleMaps(props) {
     const [inputValue, setInputValue] = React.useState('');
     const [options, setOptions] = React.useState([]);
     const loaded = React.useRef(false);
-    // const getLocation = function (position) {
-    //     fetch('https://locationiq.com/v1/reverse.php?key=pk.5a27d5b7fe2c1fcef10a3410df539422&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude + '&format=json')
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             setValue(data.display_name);
-    //         }).catch(console.log("loi roi 1"));
+    // if (typeof window !== 'undefined' && !loaded.current) {
+    //     if (!document.querySelector('#google-maps')) {
+    //         loadScript(
+    //             'https://maps.googleapis.com/maps/api/js?key=AIzaSyC3yjNKNr78G99Fq6nR23IYD-umpdx2TI0&libraries=places',
+    //             document.querySelector('head'),
+    //             'google-maps',
+    //         );
+    //     }
+    //     loaded.current = true;
     // }
-    // const handle_click = () => {
-    //     navigator.geolocation.getCurrentPosition(getLocation)
-    // }
-
-    if (typeof window !== 'undefined' && !loaded.current) {
-        if (!document.querySelector('#google-maps')) {
-            loadScript(
-                'https://maps.googleapis.com/maps/api/js?key=AIzaSyC3yjNKNr78G99Fq6nR23IYD-umpdx2TI0&libraries=places',
-                document.querySelector('head'),
-                'google-maps',
-            );
-        }
-        loaded.current = true;
-    }
     const fetch = React.useMemo(
         () =>
             throttle((request, callback) => {

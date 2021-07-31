@@ -5,10 +5,7 @@ import { BsSearch } from 'react-icons/all';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss';
 import GoogleMaps from './AutoComplete/AutoComplete'
-import { useDispatch } from 'react-redux';
-import { search } from 'app/slice/userSlice';
 import { useHistory } from 'react-router-dom';
-
 export default function Findcar() {
 	const [SearchCar, setSearchCar] = useState({
 		startLocal: "",
@@ -21,7 +18,6 @@ export default function Findcar() {
 		withDrive: false,
 		intercityCar: false
 	})
-	const dispatch = useDispatch();
 	const history = useHistory();
 	const handleSubmit = () => {
 		// if (SearchCar.startLocal !== "") {
@@ -32,7 +28,7 @@ export default function Findcar() {
 		// 	alert("Vui lòng nhập địa chỉ tìm kiếm!");
 		// }
 		console.log(SearchCar);
-		dispatch(search(SearchCar));
+		localStorage.setItem("searchInput", JSON.stringify(SearchCar));
 		history.push("/find");
 	}
 	const getLocalStart = (data) => {
