@@ -22,7 +22,7 @@ export default function Blogs() {
             blogApi.getBlog().then((res) => {
                 setDataBlog({ list: res.data});
             });
-        },[getDataBlog]);
+        },[]);
     return (
         <Row>
             <div className="blog">

@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Container, Row, Col, } from "react-bootstrap";
+import Bandroll from 'components/homepage/Bandroll';
+import Mainfeature from 'components/homepage/MainFeature';
+import Guidecarrental from 'components/homepage/GuideCarRental';
+import Prominentplace from 'components/homepage/ProminentPlace';
+import Featuredcar from 'components/homepage/FeaturedCar';
+import Blogs from 'components/homepage/Blogs';
+import Appinstall from 'components/homepage/AppInstall';
 import Findcar from "components/homepage/FindCar";
-import Bandroll from '../components/homepage/Bandroll';
-import Mainfeature from '../components/homepage/MainFeature';
-import Guidecarrental from '../components/homepage/GuideCarRental';
-import Prominentplace from '../components/homepage/ProminentPlace';
-import Featuredcar from '../components/homepage/FeaturedCar';
-import Blogs from '../components/homepage/Blogs';
-import Appinstall from '../components/homepage/AppInstall';
 function HomePage() {
   return (
     <Container fluid>

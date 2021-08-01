@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss';
 import GoogleMaps from './AutoComplete/AutoComplete'
 import { useHistory } from 'react-router-dom';
+import store from 'app/store';
+import { search } from 'app/slice/userSlice';
 export default function Findcar() {
 	const [SearchCar, setSearchCar] = useState({
 		startLocal: "",
@@ -22,7 +24,7 @@ export default function Findcar() {
 	const handleSubmit = () => {
 		// if (SearchCar.startLocal !== "") {
 		// 	console.log(SearchCar);
-		// 	dispatch(search(SearchCar));
+		// 	store.dispatch(search(SearchCar));
 		// 	history.push("/find");
 		// } else {
 		// 	alert("Vui lòng nhập địa chỉ tìm kiếm!");

@@ -1,4 +1,4 @@
-import Header from 'components/header/Header';
+
 import Footer from 'components/layout/Footer';
 import Loading from 'components/layout/Loading';
 import AboutUsPage from 'pages/AboutUsPage';
@@ -26,6 +26,7 @@ import AdminRoute from 'components/AdminRoute';
 import UserRoute from 'components/UserRoute';
 import AdminPage from 'pages/AdminPage';
 import { Route } from 'react-router-dom';
+import Header from 'components/header/Header';
 
 
 function App(props) {
