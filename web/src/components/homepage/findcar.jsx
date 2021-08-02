@@ -8,7 +8,7 @@ import GoogleMaps from './AutoComplete/AutoComplete'
 import { useHistory } from 'react-router-dom';
 import store from 'app/store';
 import { search } from 'app/slice/userSlice';
-export default function Findcar() {
+export default function FindCar() {
 	const [SearchCar, setSearchCar] = useState({
 		startLocal: "",
 		startDate: "",

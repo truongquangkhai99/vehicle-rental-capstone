@@ -14,7 +14,6 @@ import MyTripsPage from 'pages/MyTripsPage';
 import PromoPage from 'pages/PromoPage';
 // import ShareCodePage from 'pages/ShareCodePage';
 import SignUpPage from 'pages/SignUpPage';
-import VehiclePage from 'pages/VehiclePage';
 import React, { Suspense } from 'react';
 import { Switch } from 'react-router-dom';
 import './App.scss';
@@ -27,6 +26,12 @@ import UserRoute from 'components/UserRoute';
 import AdminPage from 'pages/AdminPage';
 import { Route } from 'react-router-dom';
 import Header from 'components/header/Header';
+import CarPage from 'pages/CarPage';
+import BikePage from 'pages/BikePage';
+import WithDriverPage from 'pages/WithDriverPage';
+import MyVehiclesPage from 'pages/MyVehiclesPage';
+import RegisterVehiclePage from 'pages/RegisterVehiclePage';
+import MyWalltePage from 'pages/MyWalltePage';
 
 
 function App(props) {
@@ -52,7 +57,12 @@ function App(props) {
           <UserRoute path="/oauth2/redirect" component={OAuth2RedirectHandler}></UserRoute>
           <UserRoute path="/blog" component={BlogPage} />
           <UserRoute path="/find" component={FindPage} />
-          <UserRoute path="/vehicle" component={VehiclePage} />
+          <UserRoute path="/car" component={CarPage} />
+          <UserRoute path="/bike" component={BikePage} />
+          <UserRoute path="/withdriver" component={WithDriverPage} />
+          <UserRoute path="/myvehicles" component={MyVehiclesPage} />
+          <UserRoute path="/registermode" component={RegisterVehiclePage} />
+          <UserRoute path="/mywallet" component={MyWalltePage} />
           <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
           <UserRoute component={NotFound} />
           {/* <Route path="/admin" exact component={AdminPage} /> */}

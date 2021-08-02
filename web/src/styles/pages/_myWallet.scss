@@ -1,0 +1,90 @@
+.my-wallet {
+    background-color: #e7eaee;
+    padding: 80px 0;
+    .my-wallet-heading {
+        width: 60%;
+        margin: 0 auto;
+        background-color: #000;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 20px;
+        h4 {
+            margin: 0;
+            font-size: 20px;
+        }
+        select {
+            background: #000;
+            color: #fff;
+        }
+    }
+    .my-wallet-form {
+        width: 60%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 50px 20px 20px;
+        .my-wallet-body {
+            text-align: center;
+            h1 {
+                color: #00a54f;
+                font-weight: 600;
+                font-size: 70px;
+                margin: 0;
+            }
+            .info-display {
+                border-right: 2px solid #e7eaee;
+                h2 {
+                    font-size: 30px;
+                    margin: 0;
+                }
+                p {
+                    font-size: 14px;
+                    color: #66747f;
+                    margin: 0;
+                }
+            }
+            .info-display-items {
+                justify-content: space-around;
+                .info-display-item {
+                    height: 100%;
+                    margin: 0 auto;
+                    background-color: #f7f8fb;
+                    h2 {
+                        font-size: 30px;
+                    }
+                    p {
+                        font-size: 14px;
+                        color: #66747f;
+                    }
+                }
+            }
+            .desc-wallet {
+                margin-bottom: 10px;
+                p {
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+            .summary-change {
+                display: flex;
+                justify-content: space-between;
+                background-color: #eff2f6;
+                p {
+                    margin: 0;
+                    padding: 10px;
+                    font-weight: 600;
+                }
+            }
+            .group-summary {
+                background-color: #eff2f6;
+            }
+        }
+    }
+    .my-wallet-footing {
+        width: 60%;
+        margin: 0 auto;
+        .right-btn {
+            background-color: #000;
+        }
+    }
+}
