@@ -54,6 +54,6 @@ const vehicleApi = {
     getBikes: function (params) {
         const url = '/Bikes';
         return axiosClient.get(url, { params });
-    }
+    },
 }
 export default vehicleApi;

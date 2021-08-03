@@ -22,12 +22,12 @@ export function noComma(number) {
     }
     return parseInt(number);
 }
-export function formatDateTime(date, isTime=true) {
+export function formatDateTime(date, isTime = true) {
     let d = new Date(date);
     if (isTime) {
         return new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(d)
-    }else{
-        return new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit'}).format(d)
+    } else {
+        return new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(d)
     }
 }
 export function sortJSON(arr = [], prop = "", asc = true) {
@@ -43,4 +43,22 @@ export function sortJSON(arr = [], prop = "", asc = true) {
 export function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+}
+export function roundStartTime(time) {
+    const startTime = new Date(time);
+    startTime.setMinutes(time.getMinutes() + 15);
+    const mins = time.getMinutes();   
+    if (mins / 30 > 0) {
+        time.setHours(time.getHours() + 1);
+        time.setMinutes(0);
+    }
+    else {
+        time.setMinutes(30);
+    }
+    return time;
+}
+export function roundEndTime(time) {
+    const endTime = new Date(time);
+    endTime.setHours(endTime.getHours() + 23);
+    return endTime;
 }

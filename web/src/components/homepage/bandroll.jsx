@@ -7,18 +7,16 @@ import banner2 from "../../assets/images/banner2.jpg"
 import banner3 from "../../assets/images/banner3.jpg"
 export default function Bandroll() {
     return (
-        <Row style={{ marginTop: '100px' }}>
-            <Col xs={5}>
+        <div className="d-flex justify-content-around">
+            <div>
                 <div className="bandrollContent">
                     <h1>OURDRIVE</h1>
                     <h2>Dịch vụ thuê xe chất lượng hàng đầu</h2>
-                    <h2 style={{ color: '#008248' }}>20% OFF </h2>
-                    <h2> Cho lần đặt xe đầu tiên</h2>
                 </div>
-            </Col>
-            <Col xs={7}>
+            </div>
+            <div className="d-none d-lg-block mt-3">
                 <div className="bandrollImage">
-                    <div className="bandrollImageShort  ">
+                    <div className="bandrollImageShort">
                         <img src={banner1} alt="" />
                         <div className="overlayLeft"></div>
                     </div>
@@ -26,13 +24,13 @@ export default function Bandroll() {
                         <img src={banner2} alt="" />
                         <div className="overlayCenter"></div>
                     </div>
-                    <div className="bandrollImageShort">
+                    <div className="bandrollImageShort me-5">
                         <img src={banner3} alt="" />
                         <div className="overlayRight"></div>
                     </div>
                 </div>
-            </Col>
-        </Row>
+            </div>
+        </div>
 
     )
 }

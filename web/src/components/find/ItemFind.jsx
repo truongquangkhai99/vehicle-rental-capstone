@@ -2,13 +2,14 @@ import React from 'react'
 import { Col } from 'react-bootstrap'
 import { AiFillStar } from 'react-icons/ai'
 import { GrLocation } from 'react-icons/gr'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-export default function ItemFind({ props }) {
-    const url = "#";
+export default function ItemFind(props) {
+    const data = props.data
     return (
         <>
             <Col className="item" lg={6}>
-                <a href={url}>
+                <Link to="/">
                     <div className="item__img">
                         <div className="item__img-main">
                             <img src="https://autopro8.mediacdn.vn/2018/6/27/dsc01740-15301058484271845673952.jpg" alt=""></img>
@@ -40,7 +41,7 @@ export default function ItemFind({ props }) {
                             <span>Q. Hải Châu, Đà Nẵng</span>
                         </div>
                     </div>
-                </a>
+                </Link>
             </Col>
         </>
     )

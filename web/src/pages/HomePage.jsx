@@ -17,7 +17,7 @@ function HomePage() {
           <Findcar />
         </Col>
       </Row>
-      <Mainfeature />
+      {/* <Mainfeature />
       <Guidecarrental />
       <Prominentplace />
       <Row>
@@ -37,7 +37,7 @@ function HomePage() {
       </Row>
       <Featuredcar />
       <Blogs />
-      <Appinstall />
+      <Appinstall /> */}
     </Container>
   );
 }
