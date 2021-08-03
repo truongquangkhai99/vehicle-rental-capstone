@@ -1,25 +1,25 @@
 import React from "react";
 import { Button, Container, Row, Col, } from "react-bootstrap";
-import Bandroll from 'components/homepage/Bandroll';
-import Mainfeature from 'components/homepage/MainFeature';
-import Guidecarrental from 'components/homepage/GuideCarRental';
-import Prominentplace from 'components/homepage/ProminentPlace';
-import Featuredcar from 'components/homepage/FeaturedCar';
+import BandRoll from 'components/homepage/BandRoll';
+import MainFeature from 'components/homepage/MainFeature';
+import GuideCarRental from 'components/homepage/GuideCarRental';
+import ProminentPlace from 'components/homepage/ProminentPlace';
+import FeaturedCar from 'components/homepage/FeaturedCar';
 import Blogs from 'components/homepage/Blogs';
-import Appinstall from 'components/homepage/AppInstall';
-import Findcar from "components/homepage/FindCar";
+import AppInstall from 'components/homepage/AppInstall';
+import FindCar from "components/homepage/FindCar";
 function HomePage() {
   return (
     <Container fluid>
       <Row>
         <Col className="banners" xs={12}>
-          <Bandroll />
-          <Findcar />
+          <BandRoll />
+          <FindCar />
         </Col>
       </Row>
-      {/* <Mainfeature />
-      <Guidecarrental />
-      <Prominentplace />
+      <MainFeature />
+      <GuideCarRental />
+      <ProminentPlace />
       <Row>
         <div className="banner2">
           <div className="content-banner text-light">
@@ -35,9 +35,9 @@ function HomePage() {
           </div>
         </div>
       </Row>
-      <Featuredcar />
+      <FeaturedCar />
       <Blogs />
-      <Appinstall /> */}
+      <AppInstall />
     </Container>
   );
 }

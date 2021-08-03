@@ -14,7 +14,7 @@ const imageGuide = [
     { src: step3, title: 'Trải nghiệm chuyến đi' },
     { src: step4, title: 'Kết thúc giao dịch' },
 ]
-export default function Guidecarrental() {
+export default function GuideCarRental() {
     return (
         <Row>
             <div className="car-rental-guide">
@@ -23,8 +23,8 @@ export default function Guidecarrental() {
                 </div>
                 <div className="content-guide">
                     {imageGuide.map(guide =>
-                        <Link style={{ textDecoration: "none", color: "black" }} to="/howitword" 
-                        key={guide.src}
+                        <Link style={{ textDecoration: "none", color: "black" }} to="/howitword"
+                            key={guide.src}
                         >
                             <div className="image-guide">
                                 <img src={guide.src} alt='' />

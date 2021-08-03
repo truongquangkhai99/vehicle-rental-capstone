@@ -21,7 +21,7 @@ const settings = {
     speed: 1000,
     draggable: true
 };
-export default function Mainfeature() {
+export default function MainFeature() {
     return (
         <Row>
             <Col>
@@ -32,7 +32,7 @@ export default function Mainfeature() {
                     <div className="image-feature">
                         <Slider {...settings} >
                             {slideImages.map(slider =>
-                                <div  key={slider}>
+                                <div key={slider}>
                                     <img src={slider} alt='' />
                                 </div>
                             )}

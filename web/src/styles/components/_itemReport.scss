@@ -1,0 +1,34 @@
+.item-report {
+    border-bottom: 1px solid #b2b2b2;
+    margin-bottom: 20px;
+    .avatar-user {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+    .name-user {
+        text-decoration: none;
+        color: #56a8ff;
+    }
+    .report-user {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        .time-report {
+            font-size: 14px;
+        }
+    }
+    .status-user {
+        float: right;
+        font-size: 14px;
+        background-color: #81ca97;
+        padding: 0 5px;
+        margin-bottom: 5px;
+        border-radius: 9px;
+    }
+}

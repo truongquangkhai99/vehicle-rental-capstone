@@ -5,7 +5,7 @@ import '../../styles/pages/_home.scss';
 import app from '../../assets/images/app-4.png'
 import appapple from '../../assets/images/appstore.png'
 import appgoogle from '../../assets/images/ggplay.png'
-export default function Appinstall() {
+export default function AppInstall() {
     return (
         <Row>
             <div className="app-container">

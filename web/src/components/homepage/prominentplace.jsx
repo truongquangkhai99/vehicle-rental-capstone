@@ -52,49 +52,45 @@ const slideLocal2 = [
     { src: lc16, title: 'Hồ Chí Minh', quality: '2000+' },
     { src: lc16, title: 'Hồ Chí Minh', quality: '2000+' }
 ]
-export default function Prominentplace() {
+export default function ProminentPlace() {
     return (
-        <div>
+        <>
             <Row>
-                <Col>
-                    <div className="local-self-driver">
-                        <p>ĐỊA ĐIỂM NỔI BẬT-XE TỰ LÁI</p>
-                        <div className="content-self-driver">
-                            <Slider {...settings1}>
-                                {slideLocal1.map(slider =>
-                                    <div className="content-detail" key={slider.src}>
-                                        <Link style={{ textDecoration: "none" }} to="/howitword">
-                                            <img src={slider.src} alt='' />
-                                            <h4>{slider.title}</h4>
-                                            <p>{slider.quality}</p>
-                                        </Link>
-                                    </div>
-                                )}
-                            </Slider>
-                        </div>
+                <div className="local-self-driver">
+                    <p>ĐỊA ĐIỂM NỔI BẬT-XE TỰ LÁI</p>
+                    <div className="content-self-driver">
+                        <Slider {...settings1}>
+                            {slideLocal1.map(slider =>
+                                <Col className="content-detail" key={slider.src}>
+                                    <Link style={{ textDecoration: "none" }} to="/howitword">
+                                        <img src={slider.src} alt='' />
+                                        <h4>{slider.title}</h4>
+                                        <p>{slider.quality}</p>
+                                    </Link>
+                                </Col>
+                            )}
+                        </Slider>
                     </div>
-                </Col>
+                </div>
             </Row>
             <Row>
-                <Col>
-                    <div className="local-self-driver">
-                        <p>ĐỊA ĐIỂM NỔI BẬT-XE CÓ TÀI XẾ</p>
-                        <div className="content-self-driver">
-                            <Slider {...settings1}>
-                                {slideLocal2.map(slider =>
-                                    <div className="content-detail"  key={slider.src}>
-                                        <Link style={{ textDecoration: "none" }} to="/howitword">
-                                            <img src={slider.src} alt='' />
-                                            <h4>{slider.title}</h4>
-                                            <p>{slider.quality}</p>
-                                        </Link>
-                                    </div>
-                                )}
-                            </Slider>
-                        </div>
+                <div className="local-self-driver">
+                    <p>ĐỊA ĐIỂM NỔI BẬT-XE CÓ TÀI XẾ</p>
+                    <div className="content-self-driver">
+                        <Slider {...settings1}>
+                            {slideLocal2.map(slider =>
+                                <Col className="content-detail" key={slider.src}>
+                                    <Link style={{ textDecoration: "none" }} to="/howitword">
+                                        <img src={slider.src} alt='' />
+                                        <h4>{slider.title}</h4>
+                                        <p>{slider.quality}</p>
+                                    </Link>
+                                </Col>
+                            )}
+                        </Slider>
                     </div>
-                </Col>
+                </div>
             </Row>
-        </div>
+        </>
     )
 }

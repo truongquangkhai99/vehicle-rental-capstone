@@ -1,0 +1,48 @@
+#nav-control {
+    background-color: #fff;
+    line-height: 50px;
+    ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        margin: 0;
+        li {
+            a {
+                text-decoration: none;
+                color: #000;
+                padding: 5px 60px;
+                #line-bold {
+                    font-weight: 700;
+                }
+                i {
+                    margin-right: 5px;
+                    font-size: 30px;
+                }
+            }
+        }
+    }
+}
+.my-vehicles {
+    background-color: #e7eaee;
+    .my-vehicles-content {
+        width: 80%;
+        margin: 0 auto;
+        .my-vehicles-status {
+            width: 90%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px 20px 20px 15px;
+            .form-label {
+                font-weight: 600;
+                font-size: 20px;
+            }
+        }
+        .my-vehicles-items {
+            width: 90%;
+            margin: 0 auto;
+        }
+    }
+}
+.border-left {
+    border-left: 1px solid #e8e8e8;
+}

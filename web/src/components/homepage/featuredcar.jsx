@@ -3,7 +3,7 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { Link } from "react-router-dom";
 import Rating from 'react-rating'
-import { IoLocation ,IoPricetagsSharp,AiFillSetting,RiNumbersFill} from 'react-icons/all';
+import { IoLocation, IoPricetagsSharp, AiFillSetting, RiNumbersFill } from 'react-icons/all';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss';
 import Slider from "react-slick";
@@ -24,18 +24,18 @@ import xe16 from '../../assets/images/xe16.jpg'
 import starempty from '../../assets/images/star-empty.png'
 import starfull from '../../assets/images/star-full.png'
 const slideLocal3 = [
-    { src: xe5, title: 'Mercedes-Benz S450', rate: 5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe6, title: 'Mercedes-Benz S450', rate: 3.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe7, title: 'Mercedes-Benz S450', rate: 4, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe8, title: 'Mercedes-Benz S450', rate: 4.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe9, title: 'Mercedes-Benz S450', rate: 4.7, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe10, title: 'Mercedes-Benz S450', rate: 3.9, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe11, title: 'Mercedes-Benz S450', rate: 4.3, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe12, title: 'Mercedes-Benz S450', rate: 4.8, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe13, title: 'Mercedes-Benz S450', rate: 4.9, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe14, title: 'Mercedes-Benz S450', rate: 5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe15, title: 'Mercedes-Benz S450', rate: 4, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' },
-    { src: xe16, title: 'Mercedes-Benz S450', rate: 4.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu-Đà Nẵng', quality: '50 chuyến' }
+    { src: xe5, title: 'Mercedes-Benz S450', rate: 5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe6, title: 'Mercedes-Benz S450', rate: 3.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe7, title: 'Mercedes-Benz S450', rate: 4, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe8, title: 'Mercedes-Benz S450', rate: 4.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe9, title: 'Mercedes-Benz S450', rate: 4.7, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe10, title: 'Mercedes-Benz S450', rate: 3.9, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe11, title: 'Mercedes-Benz S450', rate: 4.3, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe12, title: 'Mercedes-Benz S450', rate: 4.8, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe13, title: 'Mercedes-Benz S450', rate: 4.9, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe14, title: 'Mercedes-Benz S450', rate: 5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe15, title: 'Mercedes-Benz S450', rate: 4, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' },
+    { src: xe16, title: 'Mercedes-Benz S450', rate: 4.5, price: '1000$', feature: ['Số tự động', 'Giao xe tận nơi'], address: 'Hải Châu - Đà Nẵng', quality: '50 chuyến' }
 
 ]
 const settings2 = {
@@ -46,36 +46,34 @@ const settings2 = {
     draggable: true,
     dots: true
 };
-export default function Featuredcar() {
+export default function FeaturedCar() {
     return (
-        <div>
+        <>
             <Row>
-                <Col>
-                    <div className="car-self-driver">
-                        <p>XE NỔI BẬT-XE TỰ LÁI</p>
-                        <div className="content-self-driver">
-                            <Slider {...settings2}>
-                                {slideLocal3.map(slider =>
-                                    <div className="content-detail" key={slider.src}>
-                                        <Link style={{ textDecoration: "none" }} to="/howitword">
-                                            <img src={slider.src} alt='' />
-                                            <h4 className="text-light">{slider.title}</h4>
-                                            <Rating
-                                                style={{ marginLeft: "1rem" }}
-                                                initialRating={slider.rate}
-                                                emptySymbol={<img src={starempty} className="icon" alt='' />}
-                                                fullSymbol={<img src={starfull} className="icon" alt='' />}
-                                                readonly />
-                                            <p ><IoPricetagsSharp /> {slider.price}<span className="num-rental"><RiNumbersFill /> {slider.quality}</span></p>
-                                            <p><IoLocation /> {slider.address}</p>
-                                            <p><AiFillSetting /> {slider.feature[0]}-{slider.feature[1]}</p>
-                                        </Link>
-                                    </div>
-                                )}
-                            </Slider>
-                        </div>
+                <div className="car-self-driver">
+                    <p>XE NỔI BẬT-XE TỰ LÁI</p>
+                    <div className="content-self-driver">
+                        <Slider {...settings2}>
+                            {slideLocal3.map(slider =>
+                                <Col className="content-detail" key={slider.src}>
+                                    <Link style={{ textDecoration: "none" }} to="/howitword">
+                                        <img src={slider.src} alt='' />
+                                        <h4 className="text-light">{slider.title}</h4>
+                                        <Rating
+                                            style={{ marginLeft: "1rem" }}
+                                            initialRating={slider.rate}
+                                            emptySymbol={<img src={starempty} className="icon" alt='' />}
+                                            fullSymbol={<img src={starfull} className="icon" alt='' />}
+                                            readonly />
+                                        <p ><IoPricetagsSharp /> {slider.price}<span className="num-rental"><RiNumbersFill /> {slider.quality}</span></p>
+                                        <p><IoLocation /> {slider.address}</p>
+                                        <p><AiFillSetting /> {slider.feature[0]}-{slider.feature[1]}</p>
+                                    </Link>
+                                </Col>
+                            )}
+                        </Slider>
                     </div>
-                </Col>
+                </div>
             </Row>
             <Row>
                 <Col>
@@ -84,7 +82,7 @@ export default function Featuredcar() {
                         <div className="content-self-driver">
                             <Slider {...settings2}>
                                 {slideLocal3.map(slider =>
-                                    <div className="content-detail" key={slider.src}>
+                                    <Col className="content-detail" key={slider.src}>
                                         <Link style={{ textDecoration: "none" }} to="/howitword">
                                             <img src={slider.src} alt={slider.title} />
                                             <h4 className="text-light">{slider.title}</h4>
@@ -98,13 +96,13 @@ export default function Featuredcar() {
                                             <p><IoLocation /> {slider.address}</p>
                                             <p><AiFillSetting /> {slider.feature[0]}-{slider.feature[1]}</p>
                                         </Link>
-                                    </div>
+                                    </Col>
                                 )}
                             </Slider>
                         </div>
                     </div>
                 </Col>
             </Row>
-        </div>
+        </>
     )
 }

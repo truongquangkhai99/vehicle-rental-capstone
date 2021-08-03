@@ -1,35 +1,14 @@
 @charset "UTF-8";
 //Không thay đổi thứ tự các import!!! Chỉ thêm import cở components và pages
-@import 
-'abstracts/variables',
-'abstracts/functions',
-'abstracts/mixins';
+@import "abstracts/variables", "abstracts/functions", "abstracts/mixins";
 
-
-@import 
-'./base/fonts',
-'./base/base',
-'./base/animation',
-'./base/typography',
-'./base/helpers';
+@import "./base/fonts", "./base/base", "./base/animation", "./base/typography", "./base/helpers";
 
 //components
-@import 
-'./components/header',
-'./components/layout/footer',
-'./components/formAdd',
-'./components/itemFind',
-'./components/itemMyFavorite',
-'./components/layout/notfound';
+@import "./components/header", "./components/layout/footer", "./components/formAdd", "./components/itemFind",
+    "./components/itemMyVehicle", "./components/itemReport", "./components/registerVehicleTab",
+    "./components/itemMyFavorite", "./components/prominentPlace", "./components/layout/notfound";
 
 //pages
-@import 
-'./pages/home',
-'./pages/account',
-'./pages/find',
-'./pages/myAddress',
-'./pages/myFavorite';
-
-
-
-
+@import "./pages/home", "./pages/account", "./pages/find", "./pages/myAddress", "./pages/myVehicles", "./pages/myWallet",
+    "./pages/registerVehicle", "./pages/vehicle", "./pages/withDriver", "./pages/myFavorite";

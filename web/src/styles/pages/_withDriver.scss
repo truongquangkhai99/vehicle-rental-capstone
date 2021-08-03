@@ -1,0 +1,57 @@
+#sidebar {
+    .tab-with-driver {
+        .nav {
+            display: flex;
+            justify-content: space-around;
+            border: none;
+            border-bottom: 1px solid #cccccc;
+            margin-bottom: 20px;
+            .nav-item {
+                border: none;
+                .nav-link {
+                    border: none;
+                    color: rgba($color: #000000, $alpha: 0.6);
+                }
+                .active {
+                    border-bottom: 2px solid #008247;
+                    color: rgba($color: #000000, $alpha: 1);
+                }
+            }
+        }
+        .tab-content {
+            .tab-pane {
+                .lable-form {
+                    color: #00a54e;
+                }
+                #tab-location {
+                    text-decoration: none;
+                    color: #000;
+                    position: relative;
+                    #icon-tab-driver {
+                        color: #00a54e;
+                        position: relative;
+                        top: -3px;
+                        font-size: 20px;
+                        margin-right: 5px;
+                    }
+                    input:focus {
+                        outline: none;
+                    }
+                }
+                #flexCheckDefault {
+                    margin: 3px 5px 0 0;
+                }
+                p {
+                    font-size: 12px;
+                    margin-top: 5px;
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+hr {
+    margin: 5px 0;
+}
