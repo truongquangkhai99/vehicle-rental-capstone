@@ -1,8 +1,8 @@
-
 //Đổi cursor thành pointer (đánh dấu có thể bấm)
-.cursor--pointer{
+.cursor--pointer {
     cursor: pointer;
 }
+
 .element--center {
     position: absolute;
     width: fit-content;
@@ -10,12 +10,46 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 //.fs--1 đến .fs--7 để chỉnh font-size (bootstrap có fs-1 -> fs-6 tương đương với h1 -> h6 )
-@for $i from 1 through 7{
-    .fs--#{$i}{
+@for $i from 1 through 7 {
+    .fs--#{$i} {
         font-size: 26-$i*2;
     }
-    .fw--#{$i}{
+
+    .fw--#{$i} {
         font-weight: $i*100;
     }
+}
+
+.bg-dark--20 {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.ict {
+    display: inline-block;
+    background-image: url(/assets/images/icon-mioto.png);
+    background-repeat: no-repeat;
+    background-size: 500px 250px;
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+    text-indent: -9999px;
+}
+
+.ict.ict-bike {
+    background-position: -341px -171px;
+    width: 75px;
+    height: 76px;
+}
+.ict.ict-selfdrive {
+    background-position: -202px -171px;
+    width: 75px;
+    height: 76px;
+}
+
+.ict.ict-withdriver {
+    background-position: -425px -87px;
+    width: 75px;
+    height: 76px;
 }

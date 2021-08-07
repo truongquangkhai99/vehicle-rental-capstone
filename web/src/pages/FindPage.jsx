@@ -10,11 +10,14 @@ import ItemFind from "components/find/ItemFind";
 import { useSelector } from "react-redux";
 import { DistanceMatrixService } from "@react-google-maps/api";
 import vehicleApi from "api/vehicleApi";
+import Loading from "components/layout/Loading";
+import { formatDateTime } from "lib/Helper";
 export default function FindPage() {
   const [isShowExtra, setIsShowExtra] = useState(true);
   const [styleExtra, setStyleExtra] = useState({ display: "none" });
-  const [resultSreach, setResultSreach] = useState([]);
+  const [resultSearch, setResultSearch] = useState([]);
   const [isFresh, setIsFresh] = useState(true);
+  const [status, setStatus] = useState("loading");
   const [listLocationVehicle, setListLocationVehicle] = useState([]);
   const [listVehicle, setListVehicle] = useState([]);
   const handleClick = function () {
@@ -26,58 +29,16 @@ export default function FindPage() {
     return setIsShowExtra(!isShowExtra);
   };
   // @ts-ignore
-  const searchInput = useSelector((state) => state.searched);
-
+  const searchInput = useSelector((state) => state.searched).data;
   useEffect(() => {
     const runEffect = async () => {
-      const list = await getListVehicles(
-        searchInput.selfDrive,
-        searchInput.withDrive,
-        searchInput.intercityCar
-      );
+      const list = await getListVehicles(searchInput.type);
       setListVehicle(list);
       setListLocationVehicle(getListLocation(list));
-      console.log(12312, resultSreach);
     };
     runEffect();
   }, []);
-  // var listVehicle = [
-  //     {
-  //         id: 1,
-  //         name: "xe A",
-  //         location: {
-  //             latitude: "16.04765299496521",
-  //             longitude: "108.21890939151176",
-  //         }
-  //     },
-  //     {
-  //         id: 2,
-  //         name: "xe B",
-  //         location: {
-  //             latitude: "16.070087935507395",
-  //             longitude: "108.221484312158",
-  //         }
-  //     },
-  //     {
-  //         id: 3,
-  //         name: "xe C",
-  //         location: {
-  //             latitude: "16.033134921877576",
-  //             longitude: "108.22800744446177",
-  //         }
-  //     },
-  //     {
-  //         id: 4,
-  //         name: "xe D",
-  //         location: {
-  //             latitude: "16.075366377435078",
-  //             longitude: "108.17530740190229",
-  //         }
-  //     }
-  // ]
-  // var listLocationVehicle = getListLocation(listVehicle);
   const url = "#";
-  console.log(1, listLocationVehicle);
   return (
     <>
       {isFresh && searchInput?.startLocal !== "" && (
@@ -89,9 +50,10 @@ export default function FindPage() {
           }}
           callback={(response) => {
             if (response) {
-              var rs = getListDistanceVehicles(response, listVehicle);
-              setResultSreach(rs);
+              let rs = getListDistanceVehicles(response, listVehicle);
+              setResultSearch(rs);
               setIsFresh(false);
+              setStatus("idle");
             }
           }}
         />
@@ -99,26 +61,26 @@ export default function FindPage() {
       <div id="find-page">
         <div className="find">
           <Row className="find__header">
-            <Col className="find__header-location" lg={4} id="heading">
+            <Col className="find__header-location" lg={6} id="heading">
               <label htmlFor="">Địa điểm:</label>
-              <h5>{searchInput.startLocal}</h5>
+              <p>{searchInput.startLocal}</p>
             </Col>
-            <Col className="find__header-start" lg={4} id="heading">
+            <Col className="find__header-start" lg={3} id="heading">
               <label htmlFor="">Bắt đầu:</label>
               <div className="date-start" id="date">
-                <h5>{searchInput.startDate}</h5>
+                <p>{formatDateTime(searchInput.startDate,false)}</p>
               </div>
               <div className="time-start ms-3">
-                <h5>{searchInput.startTime}</h5>
+                <p>{searchInput.startTime}</p>
               </div>
             </Col>
-            <Col className="find__header-end" lg={4} id="heading">
+            <Col className="find__header-end" lg={3} id="heading">
               <label htmlFor="">Kết thúc:</label>
               <div className="date-end" id="date">
-                <h5>{searchInput.startDate}</h5>
+                <p>{searchInput.startDate}</p>
               </div>
               <div className="time-end ms-3">
-                <h5>{searchInput.startTime}</h5>
+                <p>{searchInput.startTime}</p>
               </div>
             </Col>
           </Row>
@@ -447,15 +409,17 @@ export default function FindPage() {
               </Form>
             </Col>
             <Col className="find__content-items" lg={8}>
-              <Row className="items">
-                {resultSreach.length > 0 ? (
-                  resultSreach.map((item, index) => (
-                    <ItemFind key={index} props={item} />
-                  ))
+              <Row className="items position-relative">
+                {status === "loading" ? (
+                  <Loading type="inline" />
+                ) : resultSearch.length > 0 ? (
+                  resultSearch.map((item, index) => {
+                    return <ItemFind key={index} data={item} />;
+                  })
                 ) : (
-                  <h1 className="text-center mt-5 text-danger">
+                  <p className="text-center mt-5 text-danger">
                     Không tìm thấy kết quả!
-                  </h1>
+                  </p>
                 )}
               </Row>
             </Col>
@@ -466,32 +430,29 @@ export default function FindPage() {
   );
 }
 
-async function getListVehicles(selfCar, withCar, intercityCar) {
-  var l1 = await vehicleApi.getCarSelfDriver();
-  var l2 = await vehicleApi.getCarDriver();
-  var l3 = await vehicleApi.getBikes();
-
-  var rs = [];
-  if (selfCar) {
-    rs.concat(l1.data);
-    console.log(5656, typeof l1.data);
+async function getListVehicles(type) {
+  let listVehicle = [];
+  switch (type) {
+    case "driver":
+      // @ts-ignore
+      listVehicle = await vehicleApi.getCarSelfDriver();
+      break;
+    case "car":
+      // @ts-ignore
+      listVehicle = await vehicleApi.getCarDriver();
+      break;
+    case "bike":
+      // @ts-ignore
+      listVehicle = await vehicleApi.getBikes();
+      break;
   }
-    if (withCar) {
-      rs.concat(l2.data);
-    }
-    if (intercityCar) {
-      rs.concat(l3.data);
-    }
-    if (selfCar === false && withCar === false && intercityCar === false) {
-      rs.concat(l1.data, l2.data, l3.data);
-    }
-  return l1.data;
+  return listVehicle;
 }
 function getListLocation(list) {
-  var rsLatLng = [];
+  let rsLatLng = [];
   if (list.length > 0) {
     list.forEach((e) => {
-      var item = {
+      let item = {
         lat: parseFloat(e.location.latitude),
         lng: parseFloat(e.location.longitude),
       };
@@ -501,21 +462,24 @@ function getListLocation(list) {
   return rsLatLng;
 }
 function getListDistanceVehicles(response, listVehicles) {
-  var list = [];
-  var desList = response.destinationAddresses;
-  var oriList = response.originAddresses;
-  var num = desList.length;
-  var rowList = response.rows[0].elements;
-  for (var i = 0; i < num; i++) {
-    var item = {
-      id: i,
-      des: desList[i],
-      ori: oriList[0],
-      dis: rowList[i].distance.text,
-      dur: rowList[i].duration.text,
-      vehicle: listVehicles[i],
-    };
-    list.push(item);
+  let list = [];
+  let desList = response.destinationAddresses;
+  let oriList = response.originAddresses;
+  let num = desList.length;
+  let rowList = response.rows[0].elements;
+  for (let i = 0; i < num; i++) {
+    console.log(response,rowList[i].distance.text );
+    if (rowList[i].distance.value < 20000) {
+      let item = {
+        id: i,
+        des: desList[i],
+        ori: oriList[0],
+        dis: rowList[i].distance.text,
+        dur: rowList[i].duration.text,
+        vehicle: listVehicles[i],
+      };
+      list.push(item);
+    }
   }
   return list;
 }

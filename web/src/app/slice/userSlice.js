@@ -31,23 +31,8 @@ const userSlice = createSlice({
             token.emailVerify = true;
             cookies.set("token", token, { path: "/", maxAge: 3153600000 });
         },
-        search: (state, action) => {
-            const res = action.payload;
-            const searchInput = {
-                startLocal: res.startLocal,
-                startDate: res.startDate,
-                startTime: res.startTime,
-                endLocal: res.endLocal,
-                endDate: res.endDate,
-                endTime: res.endTime,
-                selfDrive: res.selfDrive,
-                withDrive: res.withDrive,
-                intercityCar: res.intercityCar
-            }
-            state.data = searchInput;
-        }
     },
 })
 const { reducer, actions } = userSlice;
-export const { logout, login, verifySuccess, search } = actions;
+export const { logout, login, verifySuccess } = actions;
 export default reducer;
