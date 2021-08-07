@@ -49,10 +49,6 @@ const settings1 = {
                 slidesToShow: 2,
                 slidesToScroll: 1
             }
-        },
-        {
-            breakpoint: 538,
-            settings: "unslick"
         }
 
     ]

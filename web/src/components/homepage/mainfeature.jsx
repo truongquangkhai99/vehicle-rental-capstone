@@ -32,12 +32,7 @@ const settings2 = {
                 slidesToShow: 2,
                 slidesToScroll: 1
             }
-        },
-        {
-            breakpoint: 538,
-            settings: "unslick"
         }
-
     ]
 };
 export default function MainFeature() {
