@@ -12,25 +12,46 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 const slideImages = [ft1, ft2, ft3, ft4, ft5, ft6];
-const settings = {
-    className: "center",
-    centerMode: true,
+const settings2 = {
     infinite: true,
-    centerPadding: "100px",
-    slidesToShow: 3,
     speed: 1000,
-    draggable: true
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    draggable: true,
+    responsive: [
+        {
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 876,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 538,
+            settings: "unslick"
+        }
+
+    ]
 };
 export default function MainFeature() {
     return (
         <Row>
-            <Col>
+            <Col className="mt-5">
                 <div className="main-feature">
                     <div className="title-feature">
                         <h4>Tính Năng Nổi Bật</h4>
                     </div>
                     <div className="image-feature">
-                        <Slider {...settings} >
+                        <Slider
+                            // @ts-ignore
+                            Slider {...settings2} >
                             {slideImages.map(slider =>
                                 <div key={slider}>
                                     <img src={slider} alt='' />

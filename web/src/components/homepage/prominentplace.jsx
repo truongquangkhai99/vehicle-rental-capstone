@@ -27,8 +27,35 @@ const settings1 = {
     speed: 1000,
     slidesToShow: 5,
     slidesToScroll: 1,
-    draggable: true
+    draggable: true,
+    responsive: [
+        {
+            breakpoint: 1400,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 1100,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 876,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 538,
+            settings: "unslick"
+        }
 
+    ]
 };
 const slideLocal1 = [
     { src: lc1, title: 'Hồ Chí Minh', quality: '2000+' },
@@ -55,42 +82,42 @@ const slideLocal2 = [
 export default function ProminentPlace() {
     return (
         <>
-            <Row>
-                <div className="local-self-driver">
-                    <p>ĐỊA ĐIỂM NỔI BẬT-XE TỰ LÁI</p>
-                    <div className="content-self-driver">
-                        <Slider {...settings1}>
-                            {slideLocal1.map(slider =>
-                                <Col className="content-detail" key={slider.src}>
-                                    <Link style={{ textDecoration: "none" }} to="/howitword">
-                                        <img src={slider.src} alt='' />
-                                        <h4>{slider.title}</h4>
-                                        <p>{slider.quality}</p>
-                                    </Link>
-                                </Col>
-                            )}
-                        </Slider>
-                    </div>
-                </div>
-            </Row>
-            <Row>
-                <div className="local-self-driver">
-                    <p>ĐỊA ĐIỂM NỔI BẬT-XE CÓ TÀI XẾ</p>
-                    <div className="content-self-driver">
-                        <Slider {...settings1}>
-                            {slideLocal2.map(slider =>
-                                <Col className="content-detail" key={slider.src}>
-                                    <Link style={{ textDecoration: "none" }} to="/howitword">
-                                        <img src={slider.src} alt='' />
-                                        <h4>{slider.title}</h4>
-                                        <p>{slider.quality}</p>
-                                    </Link>
-                                </Col>
-                            )}
-                        </Slider>
-                    </div>
-                </div>
-            </Row>
+            <div className="local-self-driver">
+                <p>ĐỊA ĐIỂM NỔI BẬT-XE TỰ LÁI</p>
+                <Row className="content-self-driver">
+                    <Slider
+                        // @ts-ignore
+                        Slider {...settings1}>
+                        {slideLocal1.map(slider =>
+                            <Col className="content-detail" key={slider.src}>
+                                <Link style={{ textDecoration: "none" }} to="/howitword">
+                                    <img src={slider.src} alt='' />
+                                    <h4>{slider.title}</h4>
+                                    <p>{slider.quality}</p>
+                                </Link>
+                            </Col>
+                        )}
+                    </Slider>
+                </Row>
+            </div>
+            <div className="local-self-driver">
+                <p>ĐỊA ĐIỂM NỔI BẬT-XE CÓ TÀI XẾ</p>
+                <Row className="content-self-driver">
+                    <
+                        // @ts-ignore
+                        Slider {...settings1}>
+                        {slideLocal2.map(slider =>
+                            <Col className="content-detail" key={slider.src}>
+                                <Link style={{ textDecoration: "none" }} to="/howitword">
+                                    <img src={slider.src} alt='' />
+                                    <h4>{slider.title}</h4>
+                                    <p>{slider.quality}</p>
+                                </Link>
+                            </Col>
+                        )}
+                    </Slider>
+                </Row>
+            </div>
         </>
     )
 }
