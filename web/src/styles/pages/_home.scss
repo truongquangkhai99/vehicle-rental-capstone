@@ -1,3 +1,7 @@
+// @import url('https://fonts.googleapis.com/css?family=Goldman');
+// body{
+//     font-family: "Goldman", cursive;
+// }
 .slick-prev:before {
     color: green;
     font-size: 2rem;
@@ -9,9 +13,31 @@
     font-size: 2rem;
     margin-left: 1rem;
 }
+.local-self-driver {
+    .content-self-driver {
+        .slick-slider {
+            .slick-list {
+                padding: 10px 0;
+            }
+        }
+    }
+}
+
+body {
+    background-color: #fff;
+}
+.banners {
+    background-image: linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)),
+        url("../../assets/images/banner.jpg");
+    width: 100%;
+    height: auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
 
 .banners {
-    background-image: linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)), url("../../assets/images/banner.jpg");
+    background-image: linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)),
+        url("../../assets/images/banner.jpg");
     width: 100%;
     height: 877px;
     background-size: 100% 100%;
@@ -48,7 +74,10 @@
         height: 100%;
     }
 }
-
+.bandrollImageShort {
+    height: 350px;
+    width: 240px;
+}
 .bandrollImageShort {
     height: 206px;
     width: 150px;
@@ -75,7 +104,7 @@
     width: 100%;
     height: 100%;
     mix-blend-mode: multiply;
-    background-color: rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .overlayCenter {
@@ -86,6 +115,17 @@
     height: 100%;
     mix-blend-mode: multiply;
     background-color: #e40000;
+}
+.bandrollImageTall {
+    height: 400px;
+    width: 240px;
+    position: relative;
+    transform: skew(-25deg);
+    margin-left: 15px;
+}
+.findCar {
+    width: 100%;
+    height: 500px;
 }
 
 .bandrollImageTall {
@@ -100,13 +140,51 @@
     font-size: 3rem;
     color: #008248;
     font-weight: 800;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.findCarTitle {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+.findCarFormLabel {
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+}
+.findCarFormInput {
+    height: 56px;
+}
+.findCarFormCheck {
+    input {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }
+    label {
+        font-size: 20px;
+        font-weight: 500;
+        color: white;
+    }
+}
+.findCarFormButton {
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008248;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .main-feature {
-    width: 1300px;
-    height: 250px;
+    width: 70%;
     margin: 0 auto;
-    margin-top: 50px;
+    padding-top: 50px;
     font-weight: bold;
 }
 
@@ -114,11 +192,11 @@
     width: 100%;
     height: 20%;
 }
-
 .main-feature .image-feature img {
-    width: 80%;
-    height: 80%;
-    box-shadow: 10px 10px #b2b5b8;
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
 }
 
 .slick-slide.slick-center img {
@@ -131,7 +209,9 @@
     width: 100%;
     height: auto;
     margin-top: 100px;
-    background-image: linear-gradient(to right, #50C878, #996ce0);
+    // background: #c7f3d4;
+    background-image: linear-gradient(to right, #50c878, #996ce0);
+    background-image: linear-gradient(to right, #50c878, #996ce0);
     padding: 50px 0;
     border-top: 1px solid #e8eaef;
     border-bottom: 1px solid #e8eaef;
@@ -177,9 +257,12 @@
     font-size: 1.5rem;
     position: relative;
 }
+.car-rental-guide .see-more .see-link::before {
+    content: "";
+}
 
 .car-rental-guide .see-more .see-link::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     right: 0;
@@ -217,6 +300,9 @@
     transition-property: width height;
     transition-duration: 1s;
 }
+.local-self-driver .slick-slide:hover {
+    transform: scale(1.1);
+}
 
 .local-self-driver .slick-slide:hover {
     transform: scale(1.1);
@@ -237,68 +323,59 @@
 .banner2 {
     width: 100%;
     height: 500px;
-    background-image: url('../../assets/images/bg3.jpg');
+    background-image: url("../../assets/images/bg3.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     position: relative;
     margin-top: 50px;
 }
-
 .banner2 .content-banner {
-    position: absolute;
+    position: relative;
     left: 60%;
-    width: 40%;
-    height: 100%;
-    padding-top: 140px;
-    padding-left: 30px;
-    padding-right: 160px;
+    top: 10%;
+    width: 35%;
 }
 
 .banner2 .content-banner button {
     margin-right: 16px;
+    width: 90%;
 }
 
 .car-self-driver {
     width: 75%;
-    height: 350px;
     margin: 50px auto;
-    font-size: 1.5rem;
-    font-weight: 900;
+    .item {
+        width: 90% !important;
+        margin-left: 5%;
+    }
 }
-
-.car-self-driver .slick-slide img {
-    border-radius: 5px;
-    width: 90%;
-    height: 200px;
-    margin: 0 auto;
-}
-
-.car-self-driver .slick-slide h4 {
-    padding-left: 1rem;
-    margin-top: -4rem;
-    color: green !important;
-    transition: color 0.5s;
-}
-
-.car-self-driver .slick-slide:hover h4 {
-    color: white !important;
-}
-
-.car-self-driver .slick-slide p {
-    margin: 0;
-    font-size: 1rem;
-    padding-left: 1rem;
-}
-
-.car-self-driver .slick-slide .num-rental {
-    margin-left: 2.5rem;
-}
-
-.car-self-driver .slick-slide .icon {
-    width: 26px;
-    height: 26px;
-}
-
+// .car-self-driver .slick-slide img {
+//     border-radius: 5px;
+//     width: 90%;
+//     height: 200px;
+//     margin: 0 auto;
+// }
+// .car-self-driver .slick-slide h4 {
+//     padding-left: 1rem;
+//     margin-top: -4rem;
+//     color: green !important;
+//     transition: color 0.5s;
+// }
+// .car-self-driver .slick-slide:hover h4 {
+//     color: white !important;
+// }
+// .car-self-driver .slick-slide p {
+//     margin: 0;
+//     font-size: 1rem;
+//     padding-left: 1rem;
+// }
+// .car-self-driver .slick-slide .num-rental {
+//     margin-left: 2.5rem;
+// }
+// .car-self-driver .slick-slide .icon {
+//     width: 26px;
+//     height: 26px;
+// }
 .blog {
     width: 100%;
     height: 800px;
@@ -338,13 +415,15 @@
     box-shadow: 0 4px 1rem -4px #000;
     transform: translateY(-3px);
 }
-
+.blog .blog-content .card .card-link {
+    position: relative;
+}
 .blog .blog-content .card .card-link {
     position: relative;
 }
 
 .blog .blog-content .card .card-link::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     right: 0;
@@ -359,42 +438,58 @@
     right: auto;
     width: 100%;
 }
-
+.blog .blog-content .card .card-text {
+    font-weight: 300;
+}
+.app-container {
+    margin: 0;
+    width: 100%;
+}
 .blog .blog-content .card .card-text {
     font-weight: 300;
 }
 
 .app-container {
     width: 100%;
-    height: 600px;
     background-image: url("../../assets/images/bg2.png");
     background-size: 100%;
     background-repeat: no-repeat;
+    padding: 50px 0;
 }
-
+.app-image {
+    float: left;
+}
 .app-container .app-left {
-    width: 50%;
-    height: 100%;
-    float: left;
-    padding-top: 10rem;
-    padding-left: 8rem;
+    padding-top: 50px;
 }
 
-.app-container .app-left .app-image-apple {
-    float: left;
-    margin-right: 1rem;
+.app-left,
+.app-right {
+    padding-left: 100px;
+}
+@media (max-width: 1080px) {
+    .app-container {
+        background-size: auto;
+    }
+    .app-left,
+    .app-right {
+        padding-left: 40px;
+    }
 }
 
-.app-container .app-right {
-    width: 50%;
-    height: 100%;
-    float: right;
-    padding-left: 8rem;
-    padding-top: 5rem;
+@media (max-width: 876px) {
+    .banner2 {
+        height: 400px;
+        background-size: auto;
+        .content-banner {
+            width: 70%;
+            left: 50px;
+        }
+    }
 }
 
 .MuiInputBase-root {
-    font-family: 'Josefin Sans' !important;
+    font-family: "Josefin Sans" !important;
     height: 38px !important;
     padding: 6px 12px !important;
     border-radius: 5px !important;
@@ -425,7 +520,6 @@
             border-left: 1px solid white;
             border-right: 1px solid white;
             border-bottom: none;
-
         }
     }
 }

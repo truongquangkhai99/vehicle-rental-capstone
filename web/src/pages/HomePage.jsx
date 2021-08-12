@@ -1,16 +1,16 @@
 import React from "react";
 import { Button, Container, Row, Col, } from "react-bootstrap";
-import BandRoll from 'components/homepage/BandRoll';
+import BandRoll from 'components/homepage/bandroll';
 import MainFeature from 'components/homepage/MainFeature';
 import GuideCarRental from 'components/homepage/GuideCarrental';
 import ProminentPlace from 'components/homepage/ProminentPlace';
 import FeaturedCar from 'components/homepage/FeaturedCar';
 import Blogs from 'components/homepage/Blogs';
 import AppInstall from 'components/homepage/AppInstall';
-import FindCar from "components/homepage/FindCar";
+import FindCar from "components/homepage/findcar";
 function HomePage() {
   return (
-    <Container fluid>
+    <>
       <Row>
         <Col className="banners" xs={12}>
           <BandRoll />
@@ -28,17 +28,21 @@ function HomePage() {
               Trở thành đối tác của chúng tôi để có cơ hội kiếm thêm thu nhập
               hàng tháng.
             </p>
-            <div className="content-but">
-              <Button variant="dark">Tìm hiểu ngay</Button>
-              <Button variant="primary">Đăng ký xe</Button>
-            </div>
+            <Row className="content-but">
+              <Col lg={6} md={12}>
+                <Button variant="dark">Tìm hiểu ngay</Button>
+              </Col>
+              <Col lg={6} md={12}>
+                <Button variant="primary">Đăng ký xe</Button>
+              </Col>
+            </Row>
           </div>
         </div>
       </Row>
       <FeaturedCar />
       <Blogs />
       <AppInstall />
-    </Container>
+    </>
   );
 }
 export default HomePage;

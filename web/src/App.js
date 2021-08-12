@@ -6,7 +6,6 @@ import AccountPage from 'pages/AccountPage';
 import BlogPage from 'pages/BlogPage';
 import FindPage from 'pages/FindPage';
 import HomePage from 'pages/HomePage';
-import HowItWorkPage from 'pages/HowItWorkPage';
 import MyAddressPage from 'pages/MyAddressPage';
 import MyCardPage from 'pages/MyCardPage';
 import MyFavsPage from 'pages/MyFavsPage';
@@ -32,6 +31,7 @@ import WithDriverPage from 'pages/WithDriverPage';
 import MyVehiclesPage from 'pages/MyVehiclesPage';
 import RegisterVehiclePage from 'pages/RegisterVehiclePage';
 import MyWalltePage from 'pages/MyWalltePage';
+import HowItWorkPage from 'pages/HowItWorkPage';
 
 
 function App(props) {
@@ -46,7 +46,7 @@ function App(props) {
           <UserRoute exact path="/" component={HomePage} />
           <UserRoute path="/find" component={FindPage} />
           <UserRoute path="/signup" component={SignUpPage} />
-          <UserRoute path="/howitword" component={HowItWorkPage} />
+          <UserRoute path="/howitwork" component={HowItWorkPage} />
           <UserRoute role={true} path="/account" component={AccountPage} />
           <UserRoute role={true} path="/myfavs" component={MyFavsPage} />
           <UserRoute role={true} path="/mytrips" component={MyTripsPage} />

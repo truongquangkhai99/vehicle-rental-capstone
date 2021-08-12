@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss';
 import { IoIosArrowForward } from 'react-icons/io';
@@ -16,23 +16,25 @@ const imageGuide = [
 ]
 export default function GuideCarRental() {
     return (
-        <Row>
+        <>
             <div className="car-rental-guide">
                 <div className="title-guide">
                     <p>Hướng dẫn thuê xe</p>
                 </div>
-                <div className="content-guide">
+                <Row className="content-guide" style={{ justifyItems: "center" }}>
                     {imageGuide.map(guide =>
-                        <Link style={{ textDecoration: "none", color: "black" }} to="/howitword"
-                            key={guide.src}
-                        >
-                            <div className="image-guide">
-                                <img src={guide.src} alt='' />
-                                <h5 className="text-center font-weight-bold">{guide.title}</h5>
-                            </div>
-                        </Link>
+                        <Col lg={3} md={6} sm={12}>
+                            <Link style={{ textDecoration: "none", color: "black" }} to="/howitword"
+                                key={guide.src}
+                            >
+                                <div className="image-guide" style={{ margin: "0 auto", marginBottom: "50px" }}>
+                                    <img src={guide.src} alt='' />
+                                    <h5 className="text-center font-weight-bold mt-2">{guide.title}</h5>
+                                </div>
+                            </Link>
+                        </Col>
                     )}
-                </div>
+                </Row>
                 <div className="see-more">
                     <div className="see-link">
                         <Link style={{ textDecoration: "none", color: "black" }} to="/howitword" >Xem Thêm</Link>
@@ -40,6 +42,6 @@ export default function GuideCarRental() {
                     </div>
                 </div>
             </div>
-        </Row>
+        </>
     )
 }
