@@ -28,7 +28,7 @@ public class Booking {
     @OneToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
-    private char status; // {pending:p,reject:r,accept:a,cancel:c,finish:f}
+    private String status; // {pending:p,reject:r,accept:a,cancel:c,finish:f}
     @OneToOne
     @JoinColumn(name = "deposit_id")
     private Deposit deposit;

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // import { ErrorMessage, Field, Form, Formik } from "formik";
 import Loading from "components/layout/Loading";
 import React, { useState } from "react";
-import { Button, Form as BForm, } from "react-bootstrap";
+import { Button, Form as BForm } from "react-bootstrap";
 import Timer from "components/Timer";
 import UserApi from "api/userApi";
 //@ts-ignore
@@ -23,7 +23,6 @@ function VerifyForm(props) {
   const handleReSend = () => {
     setTimeOut(false);
     UserApi.sendVerify().then((jwtCode) => {
-      console.log(typeof jwtCode, jwtCode);
       //@ts-ignore
       sessionStorage.setItem("jwtCode", jwtCode);
     });

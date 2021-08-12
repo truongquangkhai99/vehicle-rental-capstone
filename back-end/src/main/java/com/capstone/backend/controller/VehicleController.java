@@ -1,16 +1,15 @@
 package com.capstone.backend.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.capstone.backend.jwt.JwtAuthenticationFilter;
 import com.capstone.backend.model.Bike;
+import com.capstone.backend.model.Brand;
 import com.capstone.backend.model.Car;
 import com.capstone.backend.model.Vehicle;
 import com.capstone.backend.payload.ResponseData;
-import com.capstone.backend.service.VehicleService;
 import com.capstone.backend.service.VehicleServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin
@@ -34,18 +34,21 @@ public class VehicleController {
     JwtAuthenticationFilter jwtAuth;
 
     @PostMapping("/register/car") // đăng ký oto
-    public ResponseData saveVehicle(@RequestBody Car car) {
-        return vehicleService.saveCar(car);
+    public ResponseData saveVehicle(HttpServletRequest request,@RequestBody Car car) {
+        long userId = jwtAuth.getUserIdFromRequest(request);
+        return vehicleService.saveCar(car,userId);
     }
 
     @PostMapping("/register/bike") // đăng ký xe máy
-    public ResponseData saveVehicle(@RequestBody Bike bike) {
-        return vehicleService.saveBike(bike);
+    public ResponseData saveVehicle(HttpServletRequest request,@RequestBody Bike bike) {
+        long userId = jwtAuth.getUserIdFromRequest(request);
+        return vehicleService.saveBike(bike,userId);
     }
 
     @GetMapping("/MyVehicles") // danh sách xe của mình
-    public ResponseData getMyVehicle(HttpServletRequest request) {
-        return vehicleService.getAllVehiclesByUserId(jwtAuth.getUserIdFromRequest(request));
+    public ResponseEntity<?> getMyVehicle(HttpServletRequest request) {
+        long userId = jwtAuth.getUserIdFromRequest(request);
+        return new ResponseEntity<List<Vehicle>>(vehicleService.getAllVehiclesByUserId(userId), HttpStatus.OK);
     }
 
     @GetMapping("/Vehicle") // Xem thông tin xe bất kì
@@ -68,4 +71,42 @@ public class VehicleController {
         return vehicleService.findBike();
     }
 
+    @GetMapping("/getMyFavs") // danh sách xe Yêu thích
+    public List<Vehicle> getMyFavs(HttpServletRequest request) {
+        return vehicleService.getMyFavs(jwtAuth.getUserIdFromRequest(request));
+    }
+
+    @GetMapping("/checkLiked")
+    public ResponseEntity<?> checkLiked(@RequestParam long id, HttpServletRequest request) {
+        try {
+            long userId = jwtAuth.getUserIdFromRequest(request);
+            return new ResponseEntity<>(vehicleService.checkLiked(id, userId), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/updateLike")
+    public ResponseEntity<?> updateLike(@RequestParam long id, @RequestParam boolean status,
+            HttpServletRequest request) {
+        try {
+            long userId = jwtAuth.getUserIdFromRequest(request);
+            vehicleService.updateLike(id, status, userId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/getBrands")
+    public ResponseEntity<?> getBrands() {
+        try {
+            return new ResponseEntity<List<Brand>>(vehicleService.getBrands(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

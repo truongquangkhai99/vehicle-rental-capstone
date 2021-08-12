@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -34,7 +33,7 @@ public class User {
         private String password;
         private String fullName;
         private String phone;
-        private char gender;
+        private String gender;
         private String email;
         private boolean emailVerified;
         private String role;
@@ -53,19 +52,18 @@ public class User {
         @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
         private List<Location> addresses;
         @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
         @JsonIgnore
         private List<Rating> ratings;
-        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)        
         private List<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
         @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
         @JoinTable(name = "favorite_vehicle", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+        @JsonIgnore
         private List<Vehicle> likedVehicles;
         @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @JsonIgnore
         private List<Vehicle> myVehicles;
         @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
         @JoinTable(name = "user_relative", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "relatives_id"))
         private List<RelativesVehicle> relativesVehicles;
 

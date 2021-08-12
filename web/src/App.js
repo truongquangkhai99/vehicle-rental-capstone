@@ -60,9 +60,10 @@ function App(props) {
           <UserRoute path="/car" component={CarPage} />
           <UserRoute path="/bike" component={BikePage} />
           <UserRoute path="/withdriver" component={WithDriverPage} />
-          <UserRoute path="/myvehicles" component={MyVehiclesPage} />
-          <UserRoute path="/registermode" component={RegisterVehiclePage} />
-          <UserRoute path="/mywallet" component={MyWalltePage} />
+          <UserRoute role={true} path="/myvehicles" component={MyVehiclesPage} />
+          <UserRoute role={true} path="/registermode" component={RegisterVehiclePage} />
+          <UserRoute role={true} path="/mywallet" component={MyWalltePage} />
+          {/* <UserRoute role={true} path="/carsetting" component={} /> */}
           <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
           <UserRoute component={NotFound} />
           {/* <Route path="/admin" exact component={AdminPage} /> */}

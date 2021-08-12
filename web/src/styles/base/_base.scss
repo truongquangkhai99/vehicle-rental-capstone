@@ -24,3 +24,16 @@
     display: inline-block;
     margin-bottom: 4px;
 }
+.image-wrapper {
+    @include ratioImage(75);
+}
+
+.image-wrapper img {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+}

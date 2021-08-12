@@ -1,4 +1,4 @@
-import axiosClient from "./axiosClient";
+import axiosClient, { getToken } from "./axiosClient";
 
 const userApi = {
     login: function (data) {
@@ -24,6 +24,40 @@ const userApi = {
     verify: function (params) {
         const url = '/verify';
         return axiosClient.get(url, { params });
-    }
+    },
+    updatePhone: function (params) {
+        const url = '/updatePhone';
+        return axiosClient.get(url, { params });
+    },
+    updateUser: function (data) {
+        const url = '/updateUser';
+        return axiosClient.post(url, data);
+    },
+    updateDrivingLicense: function (data) {
+        const url = '/updateDrivingLicense';
+        return axiosClient.post(url, data);
+    },
+    changeEmail: function (params) {
+        const url = '/changeEmail';
+        return axiosClient.get(url, {params});
+    },
+    updateGPLX: function (data) {
+        let formData = new FormData();
+        formData.append("file", data);
+        return axiosClient.post("/updateGPLX", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        });
+    },
+    updateAvatar: function (data) {
+        let formData = new FormData();
+        formData.append("file", data);
+        return axiosClient.post("/updateAvatar", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            }
+        });
+    },
 }
 export default userApi;

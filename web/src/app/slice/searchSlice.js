@@ -5,10 +5,26 @@ const searchSlice = createSlice({
     reducers: {
         search: (state, action) => {
             state.data = action.payload;
-            sessionStorage.setItem("searchInput", JSON.stringify(state.data));
-        }
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
+        changeEndDate: (state, action) => {
+            state.data.endDate = action.payload;
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
+        changeEndTime: (state, action) => {
+            state.data.endTime = action.payload;
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
+        changeStartDate: (state, action) => {
+            state.data.startDate = action.payload;
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
+        changeStartTime: (state, action) => {
+            state.data.startTime = action.payload;
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
     },
 })
 const { reducer, actions } = searchSlice;
-export const { search } = actions;
+export const { search,changeEndDate,changeEndTime,changeStartDate,changeStartTime} = actions;
 export default reducer;

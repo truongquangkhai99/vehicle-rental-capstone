@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.naming.NameAlreadyBoundException;
 
+import com.capstone.backend.model.DrivingLicense;
 import com.capstone.backend.model.Location;
 import com.capstone.backend.model.User;
 import com.capstone.backend.payload.LoginRequest;
@@ -44,7 +45,8 @@ public class UserServiceImpl implements UserService {
         if (u.isPresent()) {
             throw new Exception("Email đã được sử dụng");
         } else {
-            User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(), email);
+            User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(),
+                    email);
             return userRepository.save(user);
         }
     }
@@ -108,7 +110,60 @@ public class UserServiceImpl implements UserService {
         return new ResponseData("ok", locations);
     }
 
-	public User getInfo(long id) {
-		return userRepository.findById(id).get();
+    public User getInfo(long id) {
+        return userRepository.findById(id).get();
+    }
+
+    public ResponseData updatePhone(Long id, String phone) {
+        User u = userRepository.findById(id).get();
+        u.setPhone(phone);
+        userRepository.save(u);
+        return new ResponseData("ok", true);
+    }
+
+    public ResponseData updateUser(User user, long userId) {
+        User u = userRepository.findById(userId).get();
+        u.setFullName(user.getFullName());
+        u.setDob(user.getDob());
+        u.setGender(user.getGender());
+        userRepository.save(u);
+        return new ResponseData("ok", null);
+    }
+
+    public String updateAvatar(long id) {
+        User u = userRepository.findById(id).get();
+        u.setAvatarLink("http://localhost:8080/api/images/avatar" + id);
+        userRepository.save(u);
+        return "avatar" + id;
+    }
+
+    public void updateDrivingLincense(long userId, DrivingLicense drivingLicense) {
+        User u = userRepository.findById(userId).get();
+        DrivingLicense dl = u.getDrivingLincense();
+        dl.setNumber(drivingLicense.getNumber());
+        dl.setDob(drivingLicense.getDob());
+        dl.setConfirmed(false);
+        u.setDrivingLincense(dl);
+        userRepository.save(u);
+    }
+
+	public String updateGPLX(long userId) {
+		User u = userRepository.findById(userId).get();
+        DrivingLicense dl = u.getDrivingLincense();
+        dl.setImageLink("http://localhost:8080/api/images/drivingLicense" + userId);
+        u.setDrivingLincense(dl);
+        userRepository.save(u);
+        return "drivingLicense" + userId;
+	}
+
+	public void changeEmail(long id, String email) throws Exception {
+        User u = userRepository.findById(id).get();
+        Optional<User> u2 = userRepository.findByEmail(email);
+        if(u2.isPresent()){
+            throw new Exception("Email đã có người sử dụng");
+        }
+        u.setEmail(email);
+        u.setEmailVerified(false);   
+        userRepository.save(u);
 	}
 }

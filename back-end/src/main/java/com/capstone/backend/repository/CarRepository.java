@@ -10,5 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface CarRepository extends JpaRepository<Car, Long> {
 
 	List<Car> findByDriver(boolean driver);
+
+	List<Car> findByDriverAndActived(boolean b, boolean c);
     
 }

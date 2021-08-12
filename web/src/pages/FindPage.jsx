@@ -1,35 +1,94 @@
-import React, { useEffect, useState } from "react";
-import { Form, FormGroup, FormLabel, Row, Col, Button } from "react-bootstrap";
-import FormRange from "react-bootstrap/esm/FormRange";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
-import FormCheckLabel from "react-bootstrap/esm/FormCheckLabel";
-import { AiFillStar, AiOutlineQuestionCircle } from "react-icons/ai";
-import { GrPowerReset } from "react-icons/gr";
-import "react-datepicker/dist/react-datepicker.css";
-import ItemFind from "components/find/ItemFind";
-import { useSelector } from "react-redux";
 import { DistanceMatrixService } from "@react-google-maps/api";
 import vehicleApi from "api/vehicleApi";
+import ItemFind from "components/find/ItemFind";
 import Loading from "components/layout/Loading";
-import { formatDateTime } from "lib/Helper";
+import {
+  formatDateTime,
+  formatMoneyK,
+  sortJSON,
+  sortVehicle,
+  sortVehicleRating,
+} from "lib/Helper";
+import React, { useEffect, useState } from "react";
+import { Button, Col, Form, FormGroup, FormLabel, Row } from "react-bootstrap";
+import FormRange from "react-bootstrap/esm/FormRange";
+import "react-datepicker/dist/react-datepicker.css";
+import { GrPowerReset } from "react-icons/gr";
+import { useSelector } from "react-redux";
+
 export default function FindPage() {
   const [isShowExtra, setIsShowExtra] = useState(true);
   const [styleExtra, setStyleExtra] = useState({ display: "none" });
   const [resultSearch, setResultSearch] = useState([]);
+  const [afterFilter, setAfterFilter] = useState([]);
   const [isFresh, setIsFresh] = useState(true);
   const [status, setStatus] = useState("loading");
   const [listLocationVehicle, setListLocationVehicle] = useState([]);
   const [listVehicle, setListVehicle] = useState([]);
-  const handleClick = function () {
-    if (!isShowExtra) {
-      setStyleExtra({ display: "none" });
-    } else {
-      setStyleExtra({ display: "block" });
-    }
-    return setIsShowExtra(!isShowExtra);
+  const [range, setRange] = useState(1000000);
+  const handleRange = (evt) => {
+    const value = evt.target.value;
+    setRange(value);
+    let list = [...resultSearch];
+    list = list.filter((item) => {
+      return item.vehicle.originPrice < value;
+    });
+    setAfterFilter(list);
   };
+  const handleBikeType = (evt) => {
+    const value = evt.target.value;
+    let list = [...resultSearch];
+    if (value !== "all") {
+      list = list.filter((item) => {
+        return item.vehicle.bikeType === value;
+      });
+    }
+    setAfterFilter(list);
+  };
+  const handleCarType = (evt) => {
+    const value = evt.target.value;
+    let list = [...resultSearch];
+    if (value !== "all") {
+      list = list.filter((item) => {
+        return item.vehicle.carType === +value;
+      });
+    }
+    setAfterFilter(list);
+  };
+  const handleTransmission = (evt) => {
+    const value = evt.target.value;
+    let list = [...resultSearch];
+    if (value !== "all") {
+      list = list.filter((item) => {
+        return item.vehicle.transmission === value;
+      });
+    }
+    setAfterFilter(list);
+  };
+
   // @ts-ignore
   const searchInput = useSelector((state) => state.searched).data;
+  const handleSort = (evt) => {
+    const type = evt.target.value;
+    let list = [...afterFilter];
+    switch (type) {
+      case "1":
+        list = sortJSON(list, "dis", true);
+        break;
+      case "2":
+        list = sortVehicle(list, "originPrice", true);
+        break;
+      case "3":
+        list = sortVehicle(list, "originPrice", false);
+        break;
+      case "4":
+        list = sortVehicleRating(list, false);
+      default:
+        list = sortVehicle(list, "id", true);
+        break;
+    }
+    setAfterFilter(list);
+  };
   useEffect(() => {
     const runEffect = async () => {
       const list = await getListVehicles(searchInput.type);
@@ -52,6 +111,7 @@ export default function FindPage() {
             if (response) {
               let rs = getListDistanceVehicles(response, listVehicle);
               setResultSearch(rs);
+              setAfterFilter(rs);
               setIsFresh(false);
               setStatus("idle");
             }
@@ -68,7 +128,7 @@ export default function FindPage() {
             <Col className="find__header-start" lg={3} id="heading">
               <label htmlFor="">Bắt đầu:</label>
               <div className="date-start" id="date">
-                <p>{formatDateTime(searchInput.startDate,false)}</p>
+                <p>{formatDateTime(searchInput.startDate, false)}</p>
               </div>
               <div className="time-start ms-3">
                 <p>{searchInput.startTime}</p>
@@ -92,223 +152,81 @@ export default function FindPage() {
                   <select
                     className="form-select form-select-md mb-3"
                     defaultValue="Tối ưu"
+                    onChange={handleSort}
                   >
-                    <option>Tối ưu</option>
-                    <option>Ưu tiên khoảng cách</option>
-                    <option>Ưu tiên giá thấp</option>
-                    <option>Ưu tiên giá cao</option>
-                    <option>Ưu tiên đánh giá</option>
+                    <option value="0">Tối ưu</option>
+                    <option value="1">Ưu tiên khoảng cách</option>
+                    <option value="2">Ưu tiên giá thấp</option>
+                    <option value="3">Ưu tiên giá cao</option>
+                    <option value="4">Ưu tiên đánh giá</option>
                   </select>
                 </FormGroup>
                 <FormGroup id="group" className="mb-4">
                   <FormLabel id="lable">Mức giá</FormLabel>
-                  <FormRange></FormRange>
+                  <Form.Range
+                    min="100000"
+                    max="1500000"
+                    step="100000"
+                    onChange={handleRange}
+                    defaultValue={range}
+                    id="price-range"
+                  />
+                  <Form.Label className="form-label fw--3 fs--6 justify-content-end d-flex">
+                    <span id="max-price">Dưới {formatMoneyK(range)}</span>
+                  </Form.Label>
                 </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormCheckInput></FormCheckInput>
-                  <FormCheckLabel className="check-lable">
-                    <span>Chủ xe 5</span>
-                    <span id="icon-star">
-                      <AiFillStar />
-                    </span>
-                    <span id="icon-ques">
-                      <AiOutlineQuestionCircle />
-                    </span>
-                  </FormCheckLabel>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormLabel id="lable">Loại xe</FormLabel>
-                  <Row>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          4 chỗ
-                          <br />
-                          (Mini)
-                        </span>
-                        <span className="having-number">(155 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-sedan.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          4 chỗ <br />
-                          (Sedan)
-                        </span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-hatchback.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          4 chỗ
-                          <br />
-                          (Hatchback)
-                        </span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-5-suv.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          5 chỗ
-                          <br />
-                          (Gầm cao)
-                        </span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-7-suv.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          7 chỗ
-                          <br />
-                          (Gầm cao)
-                        </span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-7-mpv.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">
-                          7 chỗ
-                          <br />
-                          (Gầm thấp)
-                        </span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-pickup.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">Bán tải</span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">Xe máy</span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                    <Col lg={4}>
-                      <a className="element-a" href={url}>
-                        <div className="find__content-options-img">
-                          <img
-                            src="https://n1-cstg.mioto.vn/m/vehicle-types/mf-4-mini.png"
-                            alt=""
-                          />
-                        </div>
-                        <span className="seat-number">Moto</span>
-                        <span className="having-number">(100 xe)</span>
-                      </a>
-                    </Col>
-                  </Row>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormLabel id="lable">Hãng xe</FormLabel>
-                  <select
-                    className="form-select form-select-md mb-3"
-                    defaultValue="all"
-                  >
-                    <option value="all">Tất cả</option>
-                    <option value="">BMW</option>
-                    <option value="">Honda</option>
-                  </select>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormLabel id="lable">Truyền động</FormLabel>
-                  <select
-                    className="form-select form-select-md mb-3"
-                    defaultValue="all"
-                  >
-                    <option value="all">Tất cả</option>
-                    <option value="">Số sàn</option>
-                    <option value="">Số tự động</option>
-                  </select>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormCheckInput></FormCheckInput>
-                  <FormCheckLabel className="check-lable">
-                    Đặt xe nhanh
-                  </FormCheckLabel>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormCheckInput></FormCheckInput>
-                  <FormCheckLabel className="check-lable">
-                    Chấp nhận passport
-                  </FormCheckLabel>
-                </FormGroup>
-                <FormGroup id="group" className="mb-4">
-                  <FormCheckInput></FormCheckInput>
-                  <FormCheckLabel className="check-lable">
-                    Hỗ trợ bảo hiểm
-                  </FormCheckLabel>
-                </FormGroup>
+                {searchInput.type === "bike" ? (
+                  <FormGroup id="group" className="mb-4">
+                    <FormLabel id="lable">Loại xe máy</FormLabel>
+                    <select
+                      className="form-select form-select-md mb-3"
+                      defaultValue="all"
+                      onChange={handleBikeType}
+                    >
+                      <option value="all">Tất cả</option>
+                      <option value="Xe số">Xe số</option>
+                      <option value="Xe ga">Xe ga</option>
+                      <option value="Xe côn">Xe côn</option>
+                    </select>
+                  </FormGroup>
+                ) : (
+                  <FormGroup id="group" className="mb-4">
+                    <FormLabel id="lable">Loại xe ô tô</FormLabel>
+                    <select
+                      className="form-select form-select-md mb-3"
+                      defaultValue="all"
+                      onChange={handleCarType}
+                    >
+                      <option value="all">Tất cả</option>
+                      <option value="1">Mini (4 chỗ)</option>
+                      <option value="2">Sedan (4 chỗ)</option>
+                      <option value="3">Hatchback (4 chỗ)</option>
+                      <option value="4">Gầm cao (5 chỗ)</option>
+                      <option value="5">Gầm cao (7 chỗ)</option>
+                      <option value="6">Gầm thấp (7 chỗ)</option>
+                      <option value="7">Bán tải</option>
+                    </select>
+                  </FormGroup>
+                )}
+                {searchInput.type === "bike" ? null : (
+                  <FormGroup id="group" className="mb-4">
+                    <FormLabel id="lable">Truyền động</FormLabel>
+                    <select
+                      className="form-select form-select-md mb-3"
+                      defaultValue="all"
+                      onChange={handleTransmission}
+                    >
+                      <option value="all">Tất cả</option>
+                      <option value="Số sàn">Số sàn</option>
+                      <option value="Tự động">Số tự động</option>
+                    </select>
+                  </FormGroup>
+                )}
                 <FormGroup
                   id="group"
                   className="mb-4"
                   style={{ textAlign: "right", color: "#00a54f" }}
-                >
-                  <FormLabel
-                    id="lable"
-                    className="option-extra"
-                    onClick={handleClick}
-                  >
-                    Nâng cao
-                  </FormLabel>
-                </FormGroup>
+                ></FormGroup>
                 <div className="find__content-options-extra" style={styleExtra}>
                   <FormGroup id="group" className="mb-4">
                     <FormLabel id="lable">Số chỗ</FormLabel>
@@ -318,88 +236,14 @@ export default function FindPage() {
                     <FormLabel id="lable">Năm sản xuất</FormLabel>
                     <FormRange></FormRange>
                   </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Giao xe tận nơi
-                    </FormCheckLabel>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Nhiên liệu</FormLabel>
-                    <select
-                      className="form-select form-select-md mb-3"
-                      defaultValue="all"
-                    >
-                      <option value="all">Tất cả</option>
-                      <option value="">Xăng</option>
-                      <option value="">Dầu</option>
-                    </select>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Mức tiêu thụ nhiên liệu</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Tính năng</FormLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Cửa sổ trời
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Bluetooth
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Định vị GPS
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Khe căm USB
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Ghế trẻ em
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Bản đồ
-                    </FormCheckLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Camera lùi
-                    </FormCheckLabel>
-                    <br />
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Giới hạng số KM</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Phí vượt giới hạn</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Khoảng cách</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Hình ảnh</FormLabel>
-                    <br />
-                    <FormCheckInput></FormCheckInput>
-                    <FormCheckLabel className="check-lable">
-                      Đã xác thực
-                    </FormCheckLabel>
-                  </FormGroup>
                 </div>
-                <Button type="reset" className="w-100">
+                <Button
+                  type="reset"
+                  className="w-100"
+                  onClick={() => {
+                    setAfterFilter(resultSearch);
+                  }}
+                >
                   {" "}
                   <span id="icon-reset">
                     <GrPowerReset style={{ color: "#00a54f" }} />
@@ -412,9 +256,15 @@ export default function FindPage() {
               <Row className="items position-relative">
                 {status === "loading" ? (
                   <Loading type="inline" />
-                ) : resultSearch.length > 0 ? (
-                  resultSearch.map((item, index) => {
-                    return <ItemFind key={index} data={item} />;
+                ) : afterFilter.length > 0 ? (
+                  afterFilter.map((item, index) => {
+                    return (
+                      <ItemFind
+                        key={index}
+                        data={item}
+                        type={searchInput.type}
+                      />
+                    );
                   })
                 ) : (
                   <p className="text-center mt-5 text-danger">
@@ -433,11 +283,11 @@ export default function FindPage() {
 async function getListVehicles(type) {
   let listVehicle = [];
   switch (type) {
-    case "driver":
+    case "car":
       // @ts-ignore
       listVehicle = await vehicleApi.getCarSelfDriver();
       break;
-    case "car":
+    case "driver":
       // @ts-ignore
       listVehicle = await vehicleApi.getCarDriver();
       break;
@@ -452,10 +302,11 @@ function getListLocation(list) {
   let rsLatLng = [];
   if (list.length > 0) {
     list.forEach((e) => {
-      let item = {
-        lat: parseFloat(e.location.latitude),
-        lng: parseFloat(e.location.longitude),
-      };
+      // let item = {
+      //   lat: parseFloat(e.location.latitude),
+      //   lng: parseFloat(e.location.longitude),
+      // };
+      let item = e.location.strAddress;
       rsLatLng.push(item);
     });
   }
@@ -467,9 +318,11 @@ function getListDistanceVehicles(response, listVehicles) {
   let oriList = response.originAddresses;
   let num = desList.length;
   let rowList = response.rows[0].elements;
+  console.log(rowList);
   for (let i = 0; i < num; i++) {
-    console.log(response,rowList[i].distance.text );
-    if (rowList[i].distance.value < 20000) {
+    if (rowList[i].distance) {
+    }
+    if (rowList[i].distance && rowList[i].distance.value < 20000) {
       let item = {
         id: i,
         des: desList[i],

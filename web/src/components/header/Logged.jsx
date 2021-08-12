@@ -46,6 +46,9 @@ export function LoggedNav(props) {
         <Link className="dropdown-item" to="/myfavs">
           Xe yêu thích
         </Link>
+        <Link className="dropdown-item" to="/myvehicles">
+          Xe của tôi
+        </Link>
         <Link className="dropdown-item" to="/mytrips">
           Chuyến của tôi
         </Link>
@@ -106,6 +109,9 @@ export function LoggedOffcanvas(props) {
           </Link>
           <Link className="nav-link" to="/myfavs">
             Xe yêu thích
+          </Link>
+          <Link className="dropdown-item" to="/myvehicles">
+            Xe của tôi
           </Link>
           <Link className="nav-link" to="/mytrips">
             Chuyến của tôi

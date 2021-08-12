@@ -29,7 +29,7 @@ axiosClient.interceptors.request.use(async (config) => {
 })
 
 axiosClient.interceptors.response.use((response) => {
-    if (response && response.data) {
+    if (response && 'data' in response) {
         return response.data
     }
     return response;

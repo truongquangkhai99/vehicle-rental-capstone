@@ -1,4 +1,4 @@
-*{ 
+* {
     margin: 0;
     padding: 0;
     border: 0;
@@ -6,37 +6,70 @@
 }
 
 .cover-profile {
-    background-image: url(https://www.w3schools.com/css/paris.jpg);
+    background-image: url(https://www.mioto.vn/static/media/car-9.e011fd78.jpg);
     width: 100%;
-    height: 300px;
+    height: 400px;
     background-repeat: no-repeat;
     background-size: cover;
-    position: relative;
+    background-position: center;
 }
 
 .profile {
     background-color: #E7EAEE;
 }
 
-.profile  {
-    .profile__content{
+.profile {
+    .profile__content {
         width: 80%;
         margin: 0 auto;
     }
-    
+
 }
 
 .profile__content__header {
     display: flex;
     margin-bottom: 50px;
+
     .profile__content__header-avatar {
         flex: 1;
         margin-top: -6%;
         z-index: 1;
+
         .avatar {
-            width: 50%;
+            width: fit-content;
             margin: 0 auto;
             border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+
+            &:hover {
+                &:after {
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    z-index: 1;
+                    content: "";
+                    background-color: rgba(0, 0, 0, .5);
+                }
+
+                &:before {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    z-index: 2;
+                    content: "";
+                    background: url(https://www.mioto.vn/static/media/main_sprites.b0848ef4.png) -72px -120px no-repeat;
+                    background-size: 400px 400px;
+                    width: 48px;
+                    height: 48px;
+                    margin-top: -24px;
+                    margin-left: -24px;
+                }
+            }
+
             img {
                 width: 200px;
                 height: 200px;
@@ -50,9 +83,11 @@
     flex: 2;
     display: flex;
     flex-direction: column;
+
     .profile__content__header-infor-heading {
         display: flex;
         justify-content: space-between;
+
         .item-points {
             text-align: center;
             padding: 10px;
@@ -60,16 +95,19 @@
             margin-right: 0 !important;
             border-radius: 5px;
             font-size: 20px;
-            .point{
+
+            .point {
                 line-height: 40px;
                 position: relative;
                 font-size: 24px;
+
                 .icon-star {
                     position: absolute;
                     right: 85px;
                     top: -11px;
                     color: #00A54F;
                 }
+
                 .icon-ques {
                     position: absolute;
                     right: -27px;
@@ -77,17 +115,20 @@
                     font-size: 18px;
                     opacity: .6;
                 }
-            }     
+            }
         }
+
         .item-content {
             display: flex;
             flex-direction: column;
             margin-top: 10px;
+
             .item-content-name {
                 font-size: 50px;
                 font-weight: 700;
-                p{
-                    a{  
+
+                p {
+                    a {
                         position: relative;
                         font-size: 30px;
                         top: -5px;
@@ -97,29 +138,34 @@
                     }
                 }
             }
+
             .item-content-status {
                 margin-top: -16px;
+
                 .date-john {
                     font-size: 15px;
                 }
-                
+
                 .date-john::after {
                     content: "-------";
                     margin: 0 10px;
                 }
-                
+
                 .count-trip {
                     font-size: 20px;
                 }
             }
         }
     }
+
     .profile__content__header-infor-footing {
         display: flex;
+
         .date-of-birth {
             display: flex;
             flex-direction: column;
         }
+
         .gender {
             display: flex;
             flex-direction: column;
@@ -147,9 +193,10 @@
     position: absolute;
     font-size: 20px;
     opacity: .6;
-    top:-3px;
+    top: -3px;
     right: -30px;
     cursor: pointer;
+
     :hover {
         color: palegreen;
     }
@@ -160,22 +207,26 @@
     height: 120px;
     background-color: white;
     border-radius: 5px;
-    .profile__content__body-infor{
-        .profile__content__body-infor-inside{
+
+    .profile__content__body-infor {
+        .profile__content__body-infor-inside {
             #ul {
                 display: flex;
                 justify-content: space-around;
                 padding: 10px;
                 list-style: none;
                 text-align: center;
-                #li{
+
+                #li {
                     position: relative;
                     display: flex;
                     flex-direction: column;
+
                     #lable {
                         font-size: 20px;
                         margin-bottom: 10px;
                     }
+
                     #ctn {
                         line-height: 33px;
                     }
@@ -184,17 +235,20 @@
         }
     }
 }
+
 .profile__footer {
     height: 50px;
     background-color: #E7EAEE;
 }
+
 @media (max-width: 996px) {
 
     .profile__content__header {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        .profile__content__header-avatar{
+
+        .profile__content__header-avatar {
             .avatar {
                 width: 20%;
                 height: auto;
@@ -203,25 +257,30 @@
             }
         }
     }
+
     .profile__content__body {
         width: 100%;
         height: 300px;
-        .profile__content__body-infor{
-            .profile__content__body-infor-inside{
+
+        .profile__content__body-infor {
+            .profile__content__body-infor-inside {
                 #ul {
                     width: 100%;
                     display: flex;
                     justify-content: space-around;
                     flex-direction: column;
                     float: left;
-                    #li{
+
+                    #li {
                         display: flex;
                         flex-direction: row;
                         padding: 10px;
-                        #lable{
+
+                        #lable {
                             flex: 1;
                             text-align: left;
                         }
+
                         #ctn {
                             flex: 3;
                             text-align: left;
@@ -243,10 +302,12 @@
 @media (max-width: 767px) {
     .profile .profile__content {
         width: 96%;
+
         .profile__content__header {
             display: flex;
             flex-direction: column;
-            .profile__content__header-avatar{
+
+            .profile__content__header-avatar {
                 .avatar {
                     width: 20%;
                     height: auto;
@@ -254,14 +315,17 @@
                     margin-bottom: 5%;
                 }
             }
-            .profile__content__header-infor{
+
+            .profile__content__header-infor {
                 .profile__content__header-infor-heading {
                     display: flex;
                     flex-direction: column;
                 }
+
                 .profile__content__header-infor-footing {
                     display: flex;
                     justify-content: space-between;
+
                     .gender {
                         margin-right: 0 !important;
                     }
@@ -269,11 +333,22 @@
             }
         }
     }
+
     #box {
         margin: 10px 0 0 0;
         width: 48%;
     }
 }
 
-
-
+#crop-container {
+    position: relative;
+    height: 466px;
+    width: 100%;
+    .crop-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}

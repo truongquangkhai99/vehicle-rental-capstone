@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container, Row, Col, } from "react-bootstrap";
 import BandRoll from 'components/homepage/BandRoll';
 import MainFeature from 'components/homepage/MainFeature';
-import GuideCarRental from 'components/homepage/GuideCarRental';
+import GuideCarRental from 'components/homepage/GuideCarrental';
 import ProminentPlace from 'components/homepage/ProminentPlace';
 import FeaturedCar from 'components/homepage/FeaturedCar';
 import Blogs from 'components/homepage/Blogs';

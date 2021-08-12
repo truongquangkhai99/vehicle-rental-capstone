@@ -9,6 +9,8 @@ import { useHistory } from "react-router-dom";
 import store from "app/store";
 import { search } from "app/slice/searchSlice";
 import { roundEndTime, roundStartTime } from "lib/Helper";
+import { DistanceMatrixService } from "@react-google-maps/api";
+import { FormGroup } from "@material-ui/core";
 export default function Findcar() {
   const today = new Date();
   const startDate = today.toLocaleDateString("en-CA");
@@ -26,6 +28,7 @@ export default function Findcar() {
     endDate,
     endTime,
     type: "bike",
+    distance: 0,
   });
   const history = useHistory();
   const handleSubmit = () => {
@@ -149,6 +152,20 @@ export default function Findcar() {
                 handleEndDate={handleEndDate}
                 handleEndTime={handleEndTime}
               />
+              {SearchCar.endLocal ? (
+                <DistanceMatrixService
+                  options={{
+                    destinations: [SearchCar.endLocal],
+                    origins: [SearchCar.startLocal],
+                    travelMode: "DRIVING",
+                  }}
+                  callback={(response) => {
+                    if (response) {
+                      console.log(response);
+                    }
+                  }}
+                />
+              ) : null}
             </Tab.Pane>
           </Tab.Content>
         </Col>
@@ -233,41 +250,13 @@ const Form2 = (props) => {
   const handleStartDate = props.handleStartDate;
   const handleEndDate = props.handleEndDate;
   const handleEndTime = props.handleEndTime;
-  const [isLocalEnd, setIsLocalEnd] = useState(false);
   return (
     <Form>
       <Row>
-        <Col xs={12}>
-          <Nav fill id="find-withdriver">
-            <Nav.Item className="flex-grow-1">
-              <Nav.Link
-                eventKey="1"
-                onClick={() => setIsLocalEnd(false)}
-                className={`${isLocalEnd ? null : "active"}`}
-              >
-                <div>Nội thành</div>
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item
-              className="flex-grow-1"
-              onClick={() => setIsLocalEnd(true)}
-            >
-              <Nav.Link eventKey="2">
-                <div>Liên tỉnh</div>
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Col>
         <Col xs={12} className="mt-3">
           <Form.Label className="findCarFormLabel">Địa điểm</Form.Label>
           <GoogleMaps getLocal={getLocalStart} />
         </Col>
-        {isLocalEnd ? (
-          <Col xs={12} className="mt-3">
-            <Form.Label className="findCarFormLabel">Điểm đến</Form.Label>
-            <GoogleMaps getLocal={getLocalEnd} />
-          </Col>
-        ) : null}
         <Col xs={6} className="mt-3">
           <Form.Label className="findCarFormLabel">Ngày đi</Form.Label>
           <Form.Control
@@ -288,23 +277,21 @@ const Form2 = (props) => {
             onChange={handleStartTime}
           />
         </Col>
-        <Col xs={6} className="mt-3">
-          <Form.Label className="findCarFormLabel">Ngày đến</Form.Label>
-          <Form.Control
-            type="date"
-            name="endDate"
-            value={SearchCar.endDate}
-            onChange={handleEndDate}
-          />
-        </Col>
-        <Col xs={6} className="mt-3">
-          <Form.Label>Thời gian đến</Form.Label>
-          <Form.Control
-            type="time"
-            name="endTime"
-            value={SearchCar.endTime}
-            onChange={handleEndTime}
-          />
+        <Col xs={12} className="mt-3">
+          <FormGroup>
+            <Form.Label>Khoảng thời gian</Form.Label>
+            <select
+              className="form-select form-select-md mb-3"
+              defaultValue="4h"
+            >
+              <option value="4h">4 tiếng</option>
+              <option value="6h">6 tiếng</option>
+              <option value="8h">8 tiếng</option>
+              <option value="10h">10 tiếng</option>
+              <option value="12h">12 tiếng</option>
+              <option value="14h">14 tiếng</option>
+            </select>
+          </FormGroup>
         </Col>
         <Col xs={12} className="mt-4">
           <Button className="w-100" type="button" onClick={handleSubmit}>

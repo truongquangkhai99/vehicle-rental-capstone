@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
-import { AiOutlineQuestionCircle, AiFillCheckCircle, AiFillWarning } from "react-icons/ai";
+import {
+  AiOutlineQuestionCircle,
+  AiFillCheckCircle,
+  AiFillWarning,
+} from "react-icons/ai";
 import { GiAlliedStar } from "react-icons/gi";
 import EditName from "components/account/EditName";
 import EditTelephone from "components/account/EditTelephone";
@@ -9,39 +13,55 @@ import EditGoogle from "components/account/EditGoogle";
 import GPLX from "components/account/GPLX";
 import userApi from "api/userApi";
 import { formatDateTime } from "lib/Helper";
+import EditAvatar from "components/account/EditAvatar";
 
 export default function AccountPage() {
   const [user, setUser] = useState({
-    id: 0,
-    avatarLink: "",
-    fullName: "",
-    dob: null,
-    gender: "",
-    phone: "",
     email: "",
-    drivingLincense: {
-      id: 0,
-      number: "",
-      name: "",
-      dob: "",
-      imageLink: "",
-      confirmed: false,
-    },
+    emailVerified: false,
   });
+  const [drivingLincense, setDrivingLincense] = useState({
+    id: 0,
+    number: "",
+    name: "",
+    dob: "",
+    imageLink: "",
+    confirmed: false,
+  });
+  const [avatarLink, setAvatarLink] = useState("");
+  const [phone, setPhone] = useState("");
+  const [info, setInfo] = useState({ fullName: "", dob: null, gender: "" });
   const [isShowEditName, setIsShowEditName] = React.useState(false);
   const [isShowEditTelephone, setIsShowEditTelephone] = React.useState(false);
   const [isShowGPLX, setIsShowGPLX] = React.useState(false);
   const [isShowEditEmail, setIsShowEditEmail] = React.useState(false);
+  const [isShowEditAvatar, setIsShowEditAvatar] = React.useState(false);
   const [isShowGoogle, setIsShowGoogle] = React.useState(false);
+  const updatePhone = (number) => {
+    setPhone(number);
+  };
+  const updateInfo = (info) => {
+    setInfo(info);
+  };
+  const updateAvatarLink = (link) => {
+    setAvatarLink(link);
+  };
+  const updateGPLX = (gplx) => {
+    setDrivingLincense(gplx);
+  };
+  const updateEmail = (data) => {
+    setUser(data);
+  };
   useEffect(() => {
     userApi.getInfo().then((res) => {
       // @ts-ignore
-      console.log(res);
-      // @ts-ignore
       setUser(res);
+      setInfo({ fullName: res.fullName, dob: res.dob, gender: res.gender });
+      setPhone(res.phone);
+      setAvatarLink(res.avatarLink);
+      setDrivingLincense(res.drivingLincense);
     });
   }, []);
-  const url = "#";
   return (
     <>
       <div className="account">
@@ -50,8 +70,11 @@ export default function AccountPage() {
           <div className="profile__content">
             <div className="profile__content__header">
               <div className="profile__content__header-avatar">
-                <div className="avatar">
-                  <img src={user.avatarLink} alt=""></img>
+                <div
+                  className="avatar"
+                  onClick={() => setIsShowEditAvatar(true)}
+                >
+                  <img src={avatarLink} alt=""></img>
                 </div>
               </div>
               <div className="profile__content__header-infor">
@@ -59,11 +82,11 @@ export default function AccountPage() {
                   <div className="item-content">
                     <div className="item-content-name">
                       <p>
-                        {user.fullName}
+                        {info.fullName}
                         <a
                           id="icon-name"
                           onClick={() => setIsShowEditName(true)}
-                          href={url} >
+                        >
                           <BiEdit />
                         </a>
                       </p>
@@ -91,7 +114,7 @@ export default function AccountPage() {
                       Ngày sinh
                     </span>
                     <span className="" id="ctn">
-                      {formatDateTime(user.dob, false)}
+                      {info.dob ? formatDateTime(info.dob, false) : null}
                     </span>
                   </div>
                   <div className="gender" id="box">
@@ -99,7 +122,7 @@ export default function AccountPage() {
                       Giới tính
                     </span>
                     <span className="" id="ctn">
-                      {user.gender === "M" ? "Nam" : user.gender === "F" ? "Nữ" : null}
+                      {info.gender}
                     </span>
                   </div>
                 </div>
@@ -114,11 +137,11 @@ export default function AccountPage() {
                         Điện thoại
                       </span>
                       <span className="" id="ctn">
-                        {user.phone}
+                        {phone}
                         <a
                           id="icon"
                           onClick={() => setIsShowEditTelephone(true)}
-                          href={url} >
+                        >
                           <BiEdit />
                         </a>
                       </span>
@@ -128,12 +151,16 @@ export default function AccountPage() {
                         GPLX
                       </span>
                       <span className="" id="ctn">
-                        {user.drivingLincense.confirmed ? (
-                          <span className="text-primary">Đã xác thực <AiFillCheckCircle /></span>
+                        {drivingLincense.confirmed ? (
+                          <span className="text-primary">
+                            Đã xác thực <AiFillCheckCircle className="icon" />
+                          </span>
                         ) : (
-                          <span className="text-primary">Chưa xác thực <AiFillWarning /></span>
+                          <span className="text-danger">
+                            Chưa xác thực <AiFillWarning className="icon" />
+                          </span>
                         )}
-                        <a id="icon" onClick={() => setIsShowGPLX(true)} href={url}>
+                        <a id="icon" onClick={() => setIsShowGPLX(true)}>
                           <BiEdit />
                         </a>
                       </span>
@@ -143,8 +170,17 @@ export default function AccountPage() {
                         Email
                       </span>
                       <span className="" id="ctn">
-                        {user.email}
-                        <a id="icon" onClick={() => setIsShowEditEmail(true)} href={url}>
+                        {user.email}{" "}
+                        {user.emailVerified ? (
+                          <span className="text-primary">
+                            <AiFillCheckCircle className="icon" />
+                          </span>
+                        ) : (
+                          <span className="text-danger">
+                            <AiFillWarning className="icon" />
+                          </span>
+                        )}
+                        <a id="icon" onClick={() => setIsShowEditEmail(true)}>
                           <BiEdit />
                         </a>
                       </span>
@@ -161,20 +197,36 @@ export default function AccountPage() {
       <EditName
         showEditName={isShowEditName}
         handleClose={() => setIsShowEditName(false)}
+        info={info}
+        update={updateInfo}
       />
       <EditTelephone
+        update={updatePhone}
+        phone={phone}
         showEditTelephone={isShowEditTelephone}
         handleClose={() => setIsShowEditTelephone(false)}
       />
-      <EditEmail
-        showEditEmail={isShowEditEmail}
-        handleClose={() => setIsShowEditEmail(false)}
+      {isShowEditEmail ? (
+        <EditEmail
+          update={updateEmail}
+          data={user}
+          showEditEmail={isShowEditEmail}
+          handleClose={() => setIsShowEditEmail(false)}
+        />
+      ) : null}
+      {isShowGPLX ? (
+        <GPLX
+          update={updateGPLX}
+          showGPLX={isShowGPLX}
+          gplx={drivingLincense}
+          handleClose={() => setIsShowGPLX(false)}
+        />
+      ) : null}
+      <EditAvatar
+        update={updateAvatarLink}
+        showEditAvatar={isShowEditAvatar}
+        handleClose={() => setIsShowEditAvatar(false)}
       />
-      <EditGoogle
-        showGoogle={isShowGoogle}
-        handleClose={() => setIsShowGoogle(false)}
-      />
-      <GPLX showGPLX={isShowGPLX} gplx handleClose={() => setIsShowGPLX(false)} />
     </>
   );
 }
