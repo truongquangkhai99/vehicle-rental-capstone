@@ -55,7 +55,7 @@ export default function RegisterVehiclePage(props) {
     const type = register.type;
     const data = { ...register.data };
     const images = register.images;
-    if (images.length) {
+    if (images.length && images.length>2) {
       const listImage = [];
       images.forEach((item, index) => {
         listImage.push({ id: index, mainImg: item.mainImg });

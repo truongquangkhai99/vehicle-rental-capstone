@@ -1,6 +1,15 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { Col, Row, Form, Button, Nav, Tab, Tabs } from "react-bootstrap";
+import {
+  Col,
+  Row,
+  Form,
+  Button,
+  Nav,
+  Tab,
+  Tabs,
+  Container,
+} from "react-bootstrap";
 import { BsSearch } from "react-icons/all";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../styles/pages/_home.scss";
@@ -27,13 +36,13 @@ export default function Findcar() {
     endLocal: "",
     endDate,
     endTime,
+    time:4,
     type: "bike",
     distance: 0,
   });
   const history = useHistory();
   const handleSubmit = () => {
     if (SearchCar.startLocal !== "") {
-      console.log(SearchCar.startLocal);
       store.dispatch(search(SearchCar));
       history.push("/find");
     } else {
@@ -48,7 +57,6 @@ export default function Findcar() {
     setSearchCar((state) => ({ ...state, endLocal: data }));
   };
   const handleStartTime = (evt) => {
-    console.log(evt.target.value);
     setSearchCar((state) => ({
       ...state,
       startTime: evt.target.value,
@@ -70,107 +78,113 @@ export default function Findcar() {
       ...state,
       endTime: target.value,
     }));
+  const handleChangeTime = ({ target }) =>
+    setSearchCar((state) => ({
+      ...state,
+      time: target.value,
+    }));
 
   return (
-    <Tab.Container defaultActiveKey="1">
-      <Row className="text-white justify-content-center pb-5" id="find-car">
-        <Col xxl={2} lg={3} sm={4} className="shadow-lg bg-dark--20 ">
-          <Nav
-            variant="pills"
-            className="flex-row flex-sm-column justify-content-around"
-          >
-            <Nav.Item className="flex-grow-1">
-              <Nav.Link
-                eventKey="1"
-                onClick={() =>
-                  setSearchCar((state) => ({ ...state, type: "bike" }))
-                }
-                className={SearchCar.type === "bike" ? "active" : null}
-              >
-                <i class="ict ict-bike d-none d-sm-inline-block"></i>
-                <div>Xe máy</div>
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="flex-grow-1">
-              <Nav.Link
-                eventKey="2"
-                onClick={() =>
-                  setSearchCar((state) => ({ ...state, type: "car" }))
-                }
-              >
-                <i class="ict ict-selfdrive d-none d-sm-inline-block"></i>
-                <div>Ô tô tự lái</div>
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="flex-grow-1">
-              <Nav.Link
-                eventKey="3"
-                onClick={() =>
-                  setSearchCar((state) => ({ ...state, type: "driver" }))
-                }
-              >
-                <i class="ict ict-withdriver d-none d-sm-inline-block"></i>
-                <div>Ô tô có tài xế</div>
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Col>
-        <Col xxl={4} lg={6} sm={8} className="shadow-lg p-3 bg-dark--20">
-          <Tab.Content>
-            <Tab.Pane eventKey="1">
-              <Form1
-                SearchCar={SearchCar}
-                handleSubmit={handleSubmit}
-                getLocalStart={getLocalStart}
-                getLocalEnd={getLocalEnd}
-                handleStartTime={handleStartTime}
-                handleStartDate={handleStartDate}
-                handleEndDate={handleEndDate}
-                handleEndTime={handleEndTime}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="2">
-              <Form1
-                SearchCar={SearchCar}
-                handleSubmit={handleSubmit}
-                getLocalStart={getLocalStart}
-                getLocalEnd={getLocalEnd}
-                handleStartTime={handleStartTime}
-                handleStartDate={handleStartDate}
-                handleEndDate={handleEndDate}
-                handleEndTime={handleEndTime}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="3">
-              <Form2
-                SearchCar={SearchCar}
-                handleSubmit={handleSubmit}
-                getLocalStart={getLocalStart}
-                getLocalEnd={getLocalEnd}
-                handleStartTime={handleStartTime}
-                handleStartDate={handleStartDate}
-                handleEndDate={handleEndDate}
-                handleEndTime={handleEndTime}
-              />
-              {SearchCar.endLocal ? (
-                <DistanceMatrixService
-                  options={{
-                    destinations: [SearchCar.endLocal],
-                    origins: [SearchCar.startLocal],
-                    travelMode: "DRIVING",
-                  }}
-                  callback={(response) => {
-                    if (response) {
-                      console.log(response);
-                    }
-                  }}
+    <Container>
+      <Tab.Container defaultActiveKey="1">
+        <Row className="text-white justify-content-center pb-5" id="find-car">
+          <Col xxl={2} lg={3} sm={4} className="shadow-lg bg-dark--20 ">
+            <Nav
+              variant="pills"
+              className="flex-row flex-sm-column justify-content-center"
+            >
+              <Nav.Item className="flex-grow-1">
+                <Nav.Link
+                  eventKey="1"
+                  onClick={() =>
+                    setSearchCar((state) => ({ ...state, type: "bike" }))
+                  }
+                  className={SearchCar.type === "bike" ? "active" : null}
+                >
+                  <i class="ict ict-bike d-none d-sm-inline-block"></i>
+                  <div>Xe máy</div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className="flex-grow-1">
+                <Nav.Link
+                  eventKey="2"
+                  onClick={() =>
+                    setSearchCar((state) => ({ ...state, type: "car" }))
+                  }
+                >
+                  <i class="ict ict-selfdrive d-none d-sm-inline-block"></i>
+                  <div>Ô tô tự lái</div>
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className="flex-grow-1">
+                <Nav.Link
+                  eventKey="3"
+                  onClick={() =>
+                    setSearchCar((state) => ({ ...state, type: "driver" }))
+                  }
+                >
+                  <i class="ict ict-withdriver d-none d-sm-inline-block"></i>
+                  <div>Ô tô có tài xế</div>
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </Col>
+          <Col xxl={4} lg={6} sm={8} className="shadow-lg p-3 bg-dark--20">
+            <Tab.Content>
+              <Tab.Pane eventKey="1">
+                <Form1
+                  SearchCar={SearchCar}
+                  handleSubmit={handleSubmit}
+                  getLocalStart={getLocalStart}
+                  getLocalEnd={getLocalEnd}
+                  handleStartTime={handleStartTime}
+                  handleStartDate={handleStartDate}
+                  handleEndDate={handleEndDate}
+                  handleEndTime={handleEndTime}
                 />
-              ) : null}
-            </Tab.Pane>
-          </Tab.Content>
-        </Col>
-      </Row>
-    </Tab.Container>
+              </Tab.Pane>
+              <Tab.Pane eventKey="2">
+                <Form1
+                  SearchCar={SearchCar}
+                  handleSubmit={handleSubmit}
+                  getLocalStart={getLocalStart}
+                  getLocalEnd={getLocalEnd}
+                  handleStartTime={handleStartTime}
+                  handleStartDate={handleStartDate}                  
+                  handleEndDate={handleEndDate}
+                  handleEndTime={handleEndTime}
+                />
+              </Tab.Pane>
+              <Tab.Pane eventKey="3">
+                <Form2
+                  SearchCar={SearchCar}
+                  handleSubmit={handleSubmit}
+                  getLocalStart={getLocalStart}
+                  getLocalEnd={getLocalEnd}
+                  handleStartTime={handleStartTime}
+                  handleStartDate={handleStartDate}                  
+                  handleChangeTime={handleChangeTime}
+                />
+                {SearchCar.endLocal ? (
+                  <DistanceMatrixService
+                    options={{
+                      destinations: [SearchCar.endLocal],
+                      origins: [SearchCar.startLocal],
+                      travelMode: "DRIVING",
+                    }}
+                    callback={(response) => {
+                      if (response) {
+                        console.log(response);
+                      }
+                    }}
+                  />
+                ) : null}
+              </Tab.Pane>
+            </Tab.Content>
+          </Col>
+        </Row>
+      </Tab.Container>
+    </Container>
   );
 }
 const Form1 = (props) => {
@@ -193,7 +207,6 @@ const Form1 = (props) => {
         <Col xs={6}>
           <Form.Label className="findCarFormLabel">Ngày đi</Form.Label>
           <Form.Control
-            className="findCarFormInput"
             type="date"
             name="startDate"
             value={SearchCar.startDate}
@@ -203,7 +216,6 @@ const Form1 = (props) => {
         <Col xs={6}>
           <Form.Label className="findCarFormLabel">Thời gian đi</Form.Label>
           <Form.Control
-            className="findCarFormInput"
             type="time"
             name="startTime"
             value={SearchCar.startTime}
@@ -222,7 +234,7 @@ const Form1 = (props) => {
           />
         </Col>
         <Col xs={6}>
-          <Form.Label>Thời gian đến</Form.Label>
+          <Form.Label className="findCarFormLabel">Thời gian đến</Form.Label>
           <Form.Control
             type="time"
             name="endTime"
@@ -245,22 +257,19 @@ const Form2 = (props) => {
   const SearchCar = props.SearchCar;
   const handleSubmit = props.handleSubmit;
   const getLocalStart = props.getLocalStart;
-  const getLocalEnd = props.getLocalEnd;
   const handleStartTime = props.handleStartTime;
   const handleStartDate = props.handleStartDate;
-  const handleEndDate = props.handleEndDate;
-  const handleEndTime = props.handleEndTime;
+  const handleChangeTime = props.handleChangeTime;
   return (
     <Form>
       <Row>
-        <Col xs={12} className="mt-3">
+        <Col xs={12}>
           <Form.Label className="findCarFormLabel">Địa điểm</Form.Label>
           <GoogleMaps getLocal={getLocalStart} />
         </Col>
         <Col xs={6} className="mt-3">
           <Form.Label className="findCarFormLabel">Ngày đi</Form.Label>
           <Form.Control
-            className="findCarFormInput"
             type="date"
             name="startDate"
             value={SearchCar.startDate}
@@ -270,7 +279,6 @@ const Form2 = (props) => {
         <Col xs={6} className="mt-3">
           <Form.Label className="findCarFormLabel">Thời gian đi</Form.Label>
           <Form.Control
-            className="findCarFormInput"
             type="time"
             name="startTime"
             value={SearchCar.startTime}
@@ -279,21 +287,24 @@ const Form2 = (props) => {
         </Col>
         <Col xs={12} className="mt-3">
           <FormGroup>
-            <Form.Label>Khoảng thời gian</Form.Label>
+            <Form.Label className="findCarFormLabel">
+              Khoảng thời gian
+            </Form.Label>
             <select
               className="form-select form-select-md mb-3"
-              defaultValue="4h"
+              defaultValue="4"
+              onChange={handleChangeTime}
             >
-              <option value="4h">4 tiếng</option>
-              <option value="6h">6 tiếng</option>
-              <option value="8h">8 tiếng</option>
-              <option value="10h">10 tiếng</option>
-              <option value="12h">12 tiếng</option>
-              <option value="14h">14 tiếng</option>
+              <option value="4">4 tiếng</option>
+              <option value="6">6 tiếng</option>
+              <option value="8">8 tiếng</option>
+              <option value="10">10 tiếng</option>
+              <option value="12">12 tiếng</option>
+              <option value="14">14 tiếng</option>
             </select>
           </FormGroup>
         </Col>
-        <Col xs={12} className="mt-4">
+        <Col xs={12} className="mt-3">
           <Button className="w-100" type="button" onClick={handleSubmit}>
             <BsSearch className="icon" /> Tìm xe
           </Button>

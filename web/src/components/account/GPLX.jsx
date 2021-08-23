@@ -96,6 +96,7 @@ const GPLX = (props) => {
               <FormText muted>Hình ảnh GPLX mặt trước</FormText>
               <FormControl
                 type="file"
+                accept="image/*"
                 onChange={handleSelectFile}
               ></FormControl>
             </FormGroup>

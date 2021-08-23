@@ -10,9 +10,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.va--top{
+
+.va--top {
     vertical-align: top;
 }
+
 //.fs--1 đến .fs--7 để chỉnh font-size (bootstrap có fs-1 -> fs-6 tương đương với h1 -> h6 )
 @for $i from 1 through 7 {
     .fs--#{$i} {
@@ -21,6 +23,25 @@
 
     .fw--#{$i} {
         font-weight: $i*100;
+    }
+}
+
+.link--text {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        color: inherit;
+    }
+}
+
+.text--link {
+    color: $primary;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+        color: #007942;
     }
 }
 
@@ -44,6 +65,7 @@
     width: 75px;
     height: 76px;
 }
+
 .ict.ict-selfdrive {
     background-position: -202px -171px;
     width: 75px;

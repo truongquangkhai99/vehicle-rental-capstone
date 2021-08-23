@@ -55,54 +55,21 @@ const settings1 = {
 };
 const slideLocal1 = [
     { src: lc1, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc2, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc3, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc4, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc5, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc6, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc7, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc8, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc9, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc10, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc11, title: 'Hồ Chí Minh', quality: '2000+' }
-]
-const slideLocal2 = [
-    { src: lc12, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc13, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc14, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc15, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc16, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc16, title: 'Hồ Chí Minh', quality: '2000+' },
-    { src: lc16, title: 'Hồ Chí Minh', quality: '2000+' }
+    { src: lc2, title: 'Hà Nội', quality: '700+' },
+    { src: lc3, title: 'Đà Nẵng', quality: '200+' },
+    { src: lc4, title: 'Bình Dương', quality: '150+' },
+    { src: lc5, title: 'Cần Thơ', quality: '70+' },
 ]
 export default function ProminentPlace() {
     return (
         <>
             <div className="local-self-driver">
-                <p>ĐỊA ĐIỂM NỔI BẬT-XE TỰ LÁI</p>
+                <p>ĐỊA ĐIỂM NỔI BẬT</p>
                 <Row className="content-self-driver">
                     <Slider
                         // @ts-ignore
                         Slider {...settings1}>
                         {slideLocal1.map(slider =>
-                            <Col className="content-detail" key={slider.src}>
-                                <Link style={{ textDecoration: "none" }} to="/howitword">
-                                    <img src={slider.src} alt='' />
-                                    <h4>{slider.title}</h4>
-                                    <p>{slider.quality}</p>
-                                </Link>
-                            </Col>
-                        )}
-                    </Slider>
-                </Row>
-            </div>
-            <div className="local-self-driver">
-                <p>ĐỊA ĐIỂM NỔI BẬT-XE CÓ TÀI XẾ</p>
-                <Row className="content-self-driver">
-                    <
-                        // @ts-ignore
-                        Slider {...settings1}>
-                        {slideLocal2.map(slider =>
                             <Col className="content-detail" key={slider.src}>
                                 <Link style={{ textDecoration: "none" }} to="/howitword">
                                     <img src={slider.src} alt='' />

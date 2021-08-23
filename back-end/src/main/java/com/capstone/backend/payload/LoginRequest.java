@@ -8,6 +8,7 @@ public class LoginRequest {
     @NotBlank
     private String email;
     private String fullName;
+    private String phone;
     @NotBlank
     private String password;
 }

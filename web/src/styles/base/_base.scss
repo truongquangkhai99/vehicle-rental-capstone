@@ -1,16 +1,25 @@
+html {
+    overflow-x: hidden;
+    width: 100vw;
+    body {
+        padding-right: 0 !important
+    }
+}
 
 //Độ cao tối thiểu của phần content page (cho đẹp), dùng với các page components nếu nội dung trang quá ngắn
-.page-content{
+.page-content {
     min-height: $page-min-height;
 }
+
 //dùng với <CloseButton/> của bootstrap để đặt dấu X ở góc trên bên phải
-.close-button{
+.close-button {
     position: absolute;
     right: 10px;
     top: 10px;
 }
+
 //Nền đen phía sau ví dụ khi bật form
-.backdrop{
+.backdrop {
     background-color: rgba(0, 0, 0, 0.075);
     position: fixed;
     top: 0;
@@ -19,11 +28,13 @@
     right: 0;
     z-index: 1051;
 }
+
 //Dùng với các icon components để chỉnh các icon ngang hàng chữ (chống cháy)
 .icon {
     display: inline-block;
     margin-bottom: 4px;
 }
+
 .image-wrapper {
     @include ratioImage(75);
 }

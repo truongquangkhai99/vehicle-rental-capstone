@@ -17,7 +17,7 @@ import { FaMap } from "react-icons/fa";
 import Address from "./Address";
 import { useSelector } from "react-redux";
 import store from "app/store";
-import { changeData, changeLocation } from "app/slice/registerSlice";
+import { changeData, changeLocation, changePrice } from "app/slice/registerSlice";
 import { formatMoneyK } from "lib/Helper";
 import GoogleMaps from "components/homepage/AutoComplete/AutoComplete";
 import { DistanceMatrixService } from "@react-google-maps/api";
@@ -27,6 +27,9 @@ export default function RegisterVehicleSecond() {
   const register = useSelector((state) => state.register);
   const handleChangeLocation = (data) => {
     store.dispatch(changeLocation({ id: 0, strAddress: data }));
+  };
+  const handleChangeOriginPrice = (evt) => {
+    store.dispatch(changePrice(evt.target.value));
   };
   const handleChangeDeliveryEnable = (evt) => {
     store.dispatch(
@@ -138,6 +141,7 @@ export default function RegisterVehicleSecond() {
                 placeholder="Đơn giá mong muốn thuê xe trong 1 ngày"
                 className="mt-3"
                 defaultValue={register.data.originPrice}
+                onChange={handleChangeOriginPrice}
               />
               <FormText className="text-danger">
                 {register.error.filter((item) => {
@@ -156,9 +160,9 @@ export default function RegisterVehicleSecond() {
               </Row>
               <FormText className="text-danger">
                 {register.error.filter((item) => {
-                  return item === "originPrice";
+                  return item === "location";
                 }).length
-                  ? "Vui lòng nhập số tiền muốn cho thuê"
+                  ? "Vui lòng nhập địa chỉ xe"
                   : null}
               </FormText>
             </FormGroup>

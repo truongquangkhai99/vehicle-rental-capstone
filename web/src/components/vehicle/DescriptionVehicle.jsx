@@ -181,34 +181,40 @@ function DescriptionVehicle(props) {
               <div className="mt-3">SĐT: {user.phone}</div>
             </Col>
           </Row>
-          <div className="response-desc">
-            <p>Tỉ lệ phản hồi</p>
-            <span className="rate">
-              {(
-                user.responseRate.totalResponse / user.responseRate.totalRequest
-              ).toFixed(1) * 100}
-              %
-            </span>
-          </div>
-          <div className="response-desc">
-            <p>Thời gian phản hồi</p>
-            <span className="rate">
-              {(
-                user.responseRate.totalHoursResponse /
-                user.responseRate.totalResponse
-              ).toFixed(1)}{" "}
-              giờ
-            </span>
-          </div>
-          <div className="response-desc">
-            <p>Tỉ lệ đồng ý</p>
-            <span className="rate">
-              {(
-                user.responseRate.totalAgree / user.responseRate.totalResponse
-              ).toFixed(1) * 100}
-              %
-            </span>
-          </div>
+          {user.responseRate.totalRequest?
+            <>
+              <div className="response-desc">
+                <p>Tỉ lệ phản hồi</p>
+                <span className="rate">
+                  {(
+                    user.responseRate.totalResponse /
+                    user.responseRate.totalRequest
+                  ).toFixed(1) * 100}
+                  %
+                </span>
+              </div>
+              <div className="response-desc">
+                <p>Thời gian phản hồi</p>
+                <span className="rate">
+                  {(
+                    (user.responseRate.totalHoursResponse/600000) /
+                    user.responseRate.totalResponse
+                  ).toFixed(2)}{" "}
+                  phút
+                </span>
+              </div>
+              <div className="response-desc">
+                <p>Tỉ lệ đồng ý</p>
+                <span className="rate">
+                  {(
+                    user.responseRate.totalAgree /
+                    user.responseRate.totalResponse
+                  ).toFixed(1) * 100}
+                  %
+                </span>
+              </div>
+            </>:null
+          }
         </Col>
       </Row>
       <Row className="desc-item">
@@ -216,29 +222,32 @@ function DescriptionVehicle(props) {
           VỊ TRÍ
         </Col>
         <Col lg={9} className="desc-content">
-          <div className="map" style={{ height: "300px" }}>
-            <GoogleMapReact
-              bootstrapURLKeys={{
-                key: "AIzaSyCl-VoCEBsPXrdreQzdsapPNrXGpOTFCWo",
-                language: "vi",
-                region: "vi",
-              }}
-              yesIWantToUseGoogleMapApiInternals={true}
-              defaultZoom={15}
-              defaultCenter={{
-                lat: parseFloat(vehicle.location.latitude),
-                lng: parseFloat(vehicle.location.longitude),
-              }}
-            >
-              <div
-                className="map--pointer"
-                lat={vehicle.location.latitude}
-                lng={vehicle.location.longitude}
+          {vehicle.location.latitude ? (
+            <div className="map" style={{ height: "300px" }}>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyCl-VoCEBsPXrdreQzdsapPNrXGpOTFCWo",
+                  language: "vi",
+                  region: "vi",
+                }}
+                yesIWantToUseGoogleMapApiInternals={true}
+                defaultZoom={15}
+                defaultCenter={{
+                  lat: parseFloat(vehicle.location.latitude),
+                  lng: parseFloat(vehicle.location.longitude),
+                  address: "Đà Nẵng",
+                }}
               >
-                <GrLocation />
-              </div>
-            </GoogleMapReact>
-          </div>
+                <div
+                  className="map--pointer"
+                  lat={vehicle.location.latitude}
+                  lng={vehicle.location.longitude}
+                >
+                  <GrLocation />
+                </div>
+              </GoogleMapReact>
+            </div>
+          ) : null}
           <span>
             <i id="icon-vehicle" style={{ top: "-2px" }}>
               <GrLocation />

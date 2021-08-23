@@ -22,18 +22,21 @@ const ItemFind = (props) => {
   return (
     <>
       <Col className="item" lg={6}>
-        <Link to={url+`?id=${vehicle.id}`}>
+        <Link to={url + `?id=${vehicle.id}`}>
           <div className="item__img">
             <div className="item__img-main">
-              <img
-                src={vehicle.mainImg}
-                alt=""
-              ></img>
+              <img src={vehicle.mainImg} alt=""></img>
             </div>
             <div className="item__img-infor">
-              <div className="item__img-infor-price">
-                {formatMoneyK(vehicle.originPrice)}
-              </div>
+              {vehicle.driver ? (
+                <div className="item__img-infor-price">
+                  {formatMoneyK(Math.round(4*vehicle.originPrice/6000)*1000)}
+                </div>
+              ) : (
+                <div className="item__img-infor-price">
+                  {formatMoneyK(vehicle.originPrice)}
+                </div>
+              )}
             </div>
           </div>
           <div className="item__decs">

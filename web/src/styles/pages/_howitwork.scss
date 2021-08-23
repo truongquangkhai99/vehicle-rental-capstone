@@ -6,13 +6,16 @@
         background-color: #00a54f;
         color: #fff;
     }
+
     .nav {
         background-color: #00a54f;
         text-align: center;
         justify-content: center;
+
         .nav-item {
             width: 20%;
             padding-bottom: 2px;
+
             .nav-link {
                 background-color: #00a54f;
                 border: none;
@@ -20,27 +23,33 @@
                 font-weight: 600;
                 color: #a9a9a9;
             }
+
             .active {
                 color: #fff;
             }
+
             .nav-link:hover {
                 color: #fff;
             }
         }
     }
+
     .tab-content {
         .tab-pane {
             .content {
                 width: 80%;
                 margin: 100px auto;
+
                 .step {
                     position: relative;
                     padding-bottom: 100px;
+
                     .left,
                     .right2 {
                         display: flex;
                         justify-content: flex-end;
                         padding: 0px 50px;
+
                         .img-step {
                             background-image: url("https://www.mioto.vn/static/media/tutorial.8d174a92.png");
                             background-repeat: no-repeat;
@@ -49,26 +58,31 @@
                             height: 130px;
                             vertical-align: middle;
                         }
+
                         .different-url {
                             background-image: url("https://www.mioto.vn/static/media/tutorial_sprites.6ee57007.png") !important;
                         }
                     }
+
                     .right,
                     .left2 {
                         display: flex;
                         justify-content: flex-start;
                         padding: 0px 50px;
+
                         .content-step {
                             position: relative;
                             width: 90%;
                             padding: 25px;
                             border: 1px solid #57dd98;
                             box-shadow: #00a550 5px 5px 1px 0px;
+
                             .title {
                                 font-size: 35px;
                                 font-weight: 600;
                                 margin-bottom: 10px;
                             }
+
                             .num-step {
                                 font-size: 50px;
                                 font-weight: 600;
@@ -82,6 +96,7 @@
                             }
                         }
                     }
+
                     .line-dot {
                         width: 5px;
                         height: 100%;
@@ -91,6 +106,7 @@
                         left: 50%;
                         background: #57dd98;
                     }
+
                     .line-dot::before {
                         content: "";
                         position: absolute;
@@ -109,46 +125,61 @@
 }
 
 @media (max-width: 990px) {
-    .nav-item {
-        width: 30%;
+    .how-it-work {
+        .nav-item {
+            width: 30%;
+        }
+
+        .step2 {
+            flex-direction: row-reverse;
+        }
+
+        .left2 {
+            justify-content: flex-start !important;
+        }
+
+        .right2 {
+            justify-content: flex-end !important;
+        }
+
+        .line-dot {
+            left: 33% !important;
+        }
     }
-    .step2 {
-        flex-direction: row-reverse;
-    }
-    .left2 {
-        justify-content: flex-start !important;
-    }
-    .right2 {
-        justify-content: flex-end !important;
-    }
-    .line-dot {
-        left: 33% !important;
-    }
+
 }
+
 @media (max-width: 848px) {
-    .content {
-        width: 100% !important;
+    .how-it-work {
+        .content {
+            width: 100% !important;
+        }
+
+        .nav-item {
+            width: 50% !important;
+        }
+
+        .left,
+        .left2,
+        .right,
+        .right2 {
+            padding: 0 !important;
+            padding-left: 20px !important;
+            justify-content: flex-start !important;
+        }
+
+        .line-dot {
+            left: 25% !important;
+        }
     }
-    .nav-item {
-        width: 50% !important;
-    }
-    .left,
-    .left2,
-    .right,
-    .right2 {
-        padding: 0 !important;
-        padding-left: 20px !important;
-        justify-content: flex-start !important;
-    }
-    .line-dot {
-        left: 25% !important;
-    }
+
 }
 
 @media (max-width: 768px) {
     .line-dot {
         left: 33% !important;
     }
+
     .left,
     .left2,
     .right,

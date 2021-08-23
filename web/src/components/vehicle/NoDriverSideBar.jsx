@@ -1,23 +1,50 @@
 import { FormGroup } from "@material-ui/core";
-import React from "react";
-import { Button, Col, Form, FormLabel, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import {
+  Button,
+  Col,
+  Form,
+  FormLabel,
+  InputGroup,
+  Modal,
+  Row,
+} from "react-bootstrap";
 import HeaderVehicle from "./HeaderVehicle";
 import {
-    changeEndDate,
-    changeEndTime,
-    changeStartDate,
-    changeStartTime,
-  } from "app/slice/searchSlice";
+  changeEndDate,
+  changeEndTime,
+  changeStartDate,
+  changeStartTime,
+} from "app/slice/searchSlice";
 import { useSelector } from "react-redux";
 import store from "app/store";
-import { calcTotalDate, comma, formatMoneyK } from "lib/Helper";
+import { calcTotalDate, comma, dateTimeToLong, formatMoneyK } from "lib/Helper";
 import { AiOutlineFileProtect } from "react-icons/ai";
 import { GrLocation } from "react-icons/gr";
+import { showLogin } from "app/slice/userSlice";
+import PromotionForm from "./PromotionForm";
+import { BsArrowLeftShort } from "react-icons/bs";
+import userApi from "api/userApi";
+import bookingApi from "api/bookingApi";
+import { NOTI } from "constants/index";
+import { store as noti } from "react-notifications-component";
 
 function NoDriverSideBar(props) {
   const vehicle = props.vehicle;
   const searched = useSelector((state) => state.searched).data;
   const date = calcTotalDate(searched);
+  const logged = useSelector((state) => state.logged);
+  const booking = useSelector((state) => state.booking);
+  const total = vehicle.originPrice + (vehicle.originPrice * 10) / 100;
+  const discount = booking.data.promotion ? booking.data.promotion.discount : 0;
+  const totalWithDiscount =
+    total * date - Math.round((total * date * discount) / 100000) * 1000;
+
+  const [openModal, setOpenModel] = useState(false);
+  const [method, setMethod] = useState(1);
+  const handleCloseModal = () => {
+    setOpenModel(false);
+  };
   const handleChangeEndDate = (evt) => {
     store.dispatch(changeEndDate(evt.target.value));
   };
@@ -30,6 +57,49 @@ function NoDriverSideBar(props) {
   const handleChangeStartTime = (evt) => {
     store.dispatch(changeStartTime(evt.target.value));
   };
+  const handleSubmit = () => {
+    if (logged.data) {
+      const permission = vehicle.bikeType ? 1 : 2;
+      bookingApi.checkGPLX({ permission }).then((res) => {
+        if (res) {
+          bookingApi
+            .createBooking({
+              startTime: dateTimeToLong(searched.startDate, searched.startTime),
+              endTime: dateTimeToLong(searched.endDate, searched.endTime),
+              amount: totalWithDiscount,
+              promotion: booking.data.promotion,
+              vehicleId: vehicle.id,
+              paymentMethod: method,
+            })
+            .then((res) => {
+              props.history.push("/booking?id=" + res.id);
+            });
+          noti.addNotification({
+            ...NOTI,
+            title: "Đặt xe thành công",
+            message: "Bạn đã đặt xe thành công, vui lòng chờ chủ xe xác nhận",
+            type: "success",
+            dismiss: {
+              duration: 2000,
+            },
+          });
+        } else {
+          noti.addNotification({
+            ...NOTI,
+            title: "GPLX không đủ yêu cầu",
+            message: "Vui lòng vào cài đặt tài khoản cập nhật GPLX của bạn",
+            type: "warning",
+            dismiss: {
+              duration: 2000,
+            },
+          });
+        }
+      });
+    } else {
+      store.dispatch(showLogin());
+    }
+  };
+  const handleCreateBooking = () => {};
   return (
     <Form id="sidebar">
       <div className="price-vehicle mb-3">
@@ -107,8 +177,10 @@ function NoDriverSideBar(props) {
       <FormGroup className="mb-3">
         <FormLabel className="lable-form">Giới hạn số km</FormLabel>
         <span>
-          Tối đa <span className="line-bold">{vehicle.limitDistance}</span> km/ngày. Phí{" "}
-          <span className="line-bold">{formatMoneyK(vehicle.outLimitFee)}</span>/km vượt quá giới hạn.
+          Tối đa <span className="line-bold">{vehicle.limitDistance}</span>{" "}
+          km/ngày. Phí{" "}
+          <span className="line-bold">{formatMoneyK(vehicle.outLimitFee)}</span>
+          /km vượt quá giới hạn.
         </span>
       </FormGroup>
       <FormGroup className="mb-3">
@@ -138,31 +210,36 @@ function NoDriverSideBar(props) {
           <div className="bill-item" id="total">
             <span>Tổng phí thuê xe</span>
             <span>
-              {comma(vehicle.originPrice + (vehicle.originPrice * 10) / 100)}₫ x{" "}
-              <span className="line-bold">{date}</span>
+              {comma(total)}₫ x <span className="line-bold">{date}</span>
             </span>
           </div>
           <div className="bill-item">
             <span className="line-bold">Tổng cộng</span>
             <span className="line-bold">
-              {comma((vehicle.originPrice + (vehicle.originPrice * 10) / 100) * date)}
-              ₫
+              {comma(totalWithDiscount)}₫
+              {totalWithDiscount < total * date ? (
+                <>
+                  {" "}
+                  {<BsArrowLeftShort />}{" "}
+                  <span className="text-decoration-line-through">
+                    {comma(total * date)}₫
+                  </span>
+                </>
+              ) : null}
             </span>
           </div>
           <br />
-          <a
-            href=""
-            style={{
-              float: "right",
-              textDecoration: "none",
-              color: "#56A8FF",
-            }}
-          >
-            Mã khuyến mãi
-          </a>
-          <Button className="mt-5">Đặt xe</Button>
+          {logged.data ? (
+            <Row className="mb-3 order-1 position-relative">
+              <PromotionForm />
+            </Row>
+          ) : null}
+          <Button className="mt-5" onClick={handleSubmit}>
+            Đặt xe
+          </Button>
         </div>
       </FormGroup>
+      
     </Form>
   );
 }

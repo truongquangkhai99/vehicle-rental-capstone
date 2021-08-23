@@ -39,7 +39,7 @@ export default function EditAvatar(props) {
   return (
     <Modal show={props.showEditAvatar} onHide={close}>
       <Modal.Header closeButton>
-        <Modal.Title>Cập nhật Email</Modal.Title>
+        <Modal.Title>Cập nhật Avatar</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormGroup className="mb-3">

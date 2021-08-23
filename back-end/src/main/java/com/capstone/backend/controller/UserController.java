@@ -9,6 +9,7 @@ import com.capstone.backend.model.DrivingLicense;
 import com.capstone.backend.model.Location;
 import com.capstone.backend.model.User;
 import com.capstone.backend.model.UserDetailImpl;
+import com.capstone.backend.payload.ChangePasswordRequest;
 import com.capstone.backend.payload.LoginRequest;
 import com.capstone.backend.payload.LoginResponse;
 import com.capstone.backend.payload.ResponseData;
@@ -65,6 +66,19 @@ public class UserController {
       return new LoginResponse(jwt, u.getFullName(), u.getAvatarLink(), u.getRole());
    }
 
+   @GetMapping("/changePassword")
+   public ResponseEntity<?> getLikedProducts(@RequestParam String password, @RequestParam String newPassword,
+         HttpServletRequest request) {
+      try {
+         long userId = jwtAuth.getUserIdFromRequest(request);
+         userService.changePassword(userId, password,newPassword);
+         return new ResponseEntity<>(HttpStatus.OK);
+      } catch (Exception e) {
+         e.printStackTrace();
+         return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+      }
+   }
+
    @PostMapping("/signup")
    public ResponseEntity<?> registerUser(@RequestBody LoginRequest signupRequest) {
       try {
@@ -73,6 +87,7 @@ public class UserController {
          LoginResponse lr = new LoginResponse(jwt, u.getFullName(), u.getAvatarLink(), u.getRole());
          return new ResponseEntity<LoginResponse>(lr, HttpStatus.OK);
       } catch (Exception e) {
+         e.printStackTrace();
          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
    }
@@ -158,6 +173,7 @@ public class UserController {
          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
    }
+
    @GetMapping("/updatePhone")
    public ResponseData updatePhone(HttpServletRequest request, @RequestParam String phone) {
       try {
@@ -171,26 +187,62 @@ public class UserController {
    public UploadFileResponse uploadFile(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
       long userId = jwtAuth.getUserIdFromRequest(request);
       String fileName = userService.updateAvatar(userId);
-      fileStorageService.storeFile(file,fileName);
+      fileStorageService.storeFile(file, fileName);
       String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/images/").path(fileName)
             .toUriString();
 
       return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
    }
+
    @PostMapping("/updateDrivingLicense")
-   public ResponseEntity<?> updateDrivingLincense(HttpServletRequest request, @RequestBody DrivingLicense drivingLicense) {
+   public ResponseEntity<?> updateDrivingLincense(HttpServletRequest request,
+         @RequestBody DrivingLicense drivingLicense) {
       long userId = jwtAuth.getUserIdFromRequest(request);
       userService.updateDrivingLincense(userId, drivingLicense);
       return new ResponseEntity<>(HttpStatus.OK);
    }
+
    @PostMapping("/updateGPLX")
    public UploadFileResponse updateGPLX(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
       long userId = jwtAuth.getUserIdFromRequest(request);
       String fileName = userService.updateGPLX(userId);
-      fileStorageService.storeFile(file,fileName);
+      fileStorageService.storeFile(file, fileName);
       String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/images/").path(fileName)
             .toUriString();
 
       return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
    }
+
+   @GetMapping("/promotions")
+   public ResponseData getPromotions() {
+      try {
+         return userService.getPromotions();
+      } catch (Exception e) {
+         return new ResponseData("error", null);
+      }
+   }
+   @GetMapping("/forgetPassword")
+    public ResponseEntity<?> forgetPassword(@RequestParam String email) {
+        try {
+            userService.forgetPassword(email);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/forgetChangePassword")
+    public ResponseEntity<?> forgetChangePassword(@RequestBody ChangePasswordRequest request) {
+        try {
+            User u = userService.forgetChangePassword(request);
+            String jwt = tokenProvider.generateToken(u);
+            return new ResponseEntity<LoginResponse>(
+               new LoginResponse(jwt, u.getFullName(), u.getAvatarLink(), u.getRole()),
+                    HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>( e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

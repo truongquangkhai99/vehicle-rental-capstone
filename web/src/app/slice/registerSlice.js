@@ -79,6 +79,12 @@ const registerSlice = createSlice({
                 state.error = state.error.filter((item) => { return item !== "fuelConsumption" });
             }
         },
+        changePrice: (state, action) => {
+            state.data.originPrice = +action.payload;
+            if (action.payload !== "") {
+                state.error = state.error.filter((item) => { return item !== "originPrice" });
+            }
+        },
         changeData: (state, action) => {
             const name = action.payload.name;
             const data = action.payload.data;
@@ -104,5 +110,5 @@ const registerSlice = createSlice({
     },
 })
 const { reducer, actions } = registerSlice;
-export const {changeLocation,setMainImg,removeImage,addImage, changeFuelConsumption, changeData, changeType, validate, validateOk, changeLicensePlates, changeModel } = actions;
+export const {changePrice,changeLocation,setMainImg,removeImage,addImage, changeFuelConsumption, changeData, changeType, validate, validateOk, changeLicensePlates, changeModel } = actions;
 export default reducer;

@@ -18,7 +18,7 @@ export default function EditTelephone(props) {
         setPhone(props.phone);
     }, [props])
     return (
-        <Modal show={props.showEditTelephone} onHide={props.handleClose}>
+        <Modal enforceFocus={false} show={props.showEditTelephone} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Cập nhật số điện thoại</Modal.Title>
             </Modal.Header>

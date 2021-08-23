@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;  
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class BlogController {
@@ -27,12 +27,12 @@ public class BlogController {
     @Autowired
     BlogRepository blogRepository;
 
-    @GetMapping("/blog")
+    @GetMapping("/blogs")
     public List<Blog> getBlog(){
         return blogRepository.findAll();
     }
-    @GetMapping("/blog/{id}")
-    public ResponseData getBlogById(@PathVariable long id){
+    @GetMapping("/blog")
+    public ResponseData getBlogById(@RequestParam long id){
         return blogService.getBlogById(id);
     }
     @PostMapping("/blog") 

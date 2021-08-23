@@ -1,18 +1,18 @@
-import axios from 'axios';
 
-const BLOG_API_BASE_URL = "http://localhost:8080/api/blog";
+import axiosClient from "./axiosClient";
 
-class blogApi {
-    getBlog(){
-        return axios.get(BLOG_API_BASE_URL);
-    }
-
-    getBlogById(blogId){
-        return axios.get(BLOG_API_BASE_URL+'/'+blogId);
-    }
-
-    createBlog(blog){
-        return axios.post(BLOG_API_BASE_URL,blog);
-    }
+const blogApi = {
+    getBlog : function(){
+        const url = '/blogs';
+        return axiosClient.get(url);
+    },
+    getBlogById : function(params){
+        const url = '/blog';
+        return axiosClient.get(url, { params });
+    },
+    createBlog : function(data){
+        const url = '/blog';
+        return axiosClient.post(url, data);
+    },
 }
-export default new blogApi();
+export default blogApi;

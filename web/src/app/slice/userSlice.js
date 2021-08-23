@@ -7,7 +7,7 @@ const token = cookies.get('token');
 
 const userSlice = createSlice({
     name: 'logged',
-    initialState: { status: 'idle', data: token, error: {} },
+    initialState: { status: 'idle', data: token, error: {},show:false },
     reducers: {
         logout: (state) => {
             cookies.remove('token', { path: '/' });
@@ -31,8 +31,15 @@ const userSlice = createSlice({
             token.emailVerify = true;
             cookies.set("token", token, { path: "/", maxAge: 3153600000 });
         },
+        showLogin: (state) => {
+            state.show=true;
+        },
+        closeLogin: (state) => {
+            state.show=false;
+        },
+
     },
 })
 const { reducer, actions } = userSlice;
-export const { logout, login, verifySuccess } = actions;
+export const {showLogin,closeLogin, logout, login, verifySuccess } = actions;
 export default reducer;

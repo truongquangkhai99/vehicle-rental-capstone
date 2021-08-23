@@ -39,7 +39,11 @@ const userApi = {
     },
     changeEmail: function (params) {
         const url = '/changeEmail';
-        return axiosClient.get(url, {params});
+        return axiosClient.get(url, { params });
+    },
+    getPromotions: function () {
+        const url = '/promotions';
+        return axiosClient.get(url);
     },
     updateGPLX: function (data) {
         let formData = new FormData();
@@ -58,6 +62,14 @@ const userApi = {
                 "Content-Type": "multipart/form-data",
             }
         });
+    },
+    forgetPassword: (params) => {
+        const url = '/forgetPassword';
+        return axiosClient.get(url, { params });
+    },
+    forgetChangePassword: (data) => {
+        const url = '/forgetChangePassword';
+        return axiosClient.post(url, data);
     },
 }
 export default userApi;

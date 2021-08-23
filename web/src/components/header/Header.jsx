@@ -10,6 +10,10 @@ import { LoggedNav, LoggedOffcanvas } from "./Logged";
 import LoginForm from "./LoginForm";
 import { NotLoggedNav, NotLoggedOffcanvas } from "./NotLogged";
 import logo from "assets/images/logo.png";
+import ChangePasswordForm from "./ChangePasswordForm";
+import store from "app/store";
+import { closeLogin } from "app/slice/userSlice";
+import { FaAmbulance } from "react-icons/fa";
 
 function Header() {
   //show offsetcanvas bootstrap mặc định
@@ -18,9 +22,24 @@ function Header() {
   const handleShow = () => setShow(true);
   const [showSignup, setShowSignup] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   const handleCloseSignup = () => setShowSignup(false);
-  const handleCloseLogin = () => setShowLogin(false);
-  const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => {
+    setShowLogin(false);
+    store.dispatch(closeLogin());
+  };
+  const handleCloseChangePassword = () => {
+    setShowChangePassword(false);
+    setShow(false);
+  };
+  const handleShowLogin = () => {
+    setShowLogin(true);
+    setShow(false);
+  };
+  const handleShowChangePassword = () => {
+    setShowChangePassword(true);
+    setShow(false);
+  };
   const handleShowSignup = () => {
     setShowSignup(true);
     setShow(false);
@@ -28,7 +47,7 @@ function Header() {
   // @ts-ignore
   const logged = useSelector((state) => state.logged);
   return (
-    <div>
+    <>
       <Navbar id="header" bg="dark" variant="dark" className="px-3">
         <Link className="navbar-brand" to="/">
           <img
@@ -39,7 +58,15 @@ function Header() {
         </Link>
         <Navbar className="ms-auto">
           <Nav>
-            <Nav.Link href="/howitwork">
+            <Nav.Link as={Link} to="/aid">
+              <FaAmbulance className="icon" />
+              <span className="d-none d-md-inline-block me-2 me-lg-5 ms-2">
+                Trợ giúp tai nạn
+              </span>
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={Link} to="/howitwork">
               <AiFillInfoCircle className="icon" />
               <span className="d-none d-md-inline-block me-2 me-lg-5 ms-2">
                 Hướng dẫn
@@ -47,7 +74,7 @@ function Header() {
             </Nav.Link>
           </Nav>
           {logged.data ? (
-            <LoggedNav />
+            <LoggedNav showChangePassword={handleShowChangePassword} />
           ) : (
             <NotLoggedNav
               showLoginForm={handleShowLogin}
@@ -63,7 +90,7 @@ function Header() {
       </Navbar>
       <Offcanvas id="offcanvas" show={show} onHide={handleClose}>
         {logged.data ? (
-          <LoggedOffcanvas />
+          <LoggedOffcanvas showChangePassword={handleShowChangePassword} />
         ) : (
           <NotLoggedOffcanvas
             showLoginForm={handleShowLogin}
@@ -71,14 +98,17 @@ function Header() {
           />
         )}
       </Offcanvas>
-      {showLogin ? (
+      {showLogin || logged.show ? (
         <LoginForm
           handleClose={handleCloseLogin}
           handleShowSignup={handleShowSignup}
         />
       ) : null}
       {showSignup ? <SignUpForm handleClose={handleCloseSignup} /> : null}
-    </div>
+      {showChangePassword ? (
+        <ChangePasswordForm handleClose={handleCloseChangePassword} />
+      ) : null}
+    </>
   );
 }
 

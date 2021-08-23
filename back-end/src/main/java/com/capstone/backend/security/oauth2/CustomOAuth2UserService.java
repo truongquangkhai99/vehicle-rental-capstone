@@ -71,12 +71,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setPassword(passwordEncoder.encode(helplerUtils.sendEmail(email, subject, text)));        
         user.setFullName(oAuth2UserInfo.getName());
         user.setEmail(email);
+        user.setEmailVerified(true);
         user.setAvatarLink(oAuth2UserInfo.getImageUrl());
         return userRepository.save(user);
     }
 
     private User updateExistingUser(final User existingUser, final OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setAvatarLink(oAuth2UserInfo.getImageUrl());
+        existingUser.setEmailVerified(true);
         return userRepository.save(existingUser);
     }
 

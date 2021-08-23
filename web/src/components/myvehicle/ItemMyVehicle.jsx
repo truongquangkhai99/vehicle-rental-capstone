@@ -8,7 +8,7 @@ import StarRatings from "react-star-ratings";
 
 export default function ItemMyVehicle(props) {
   const vehicle = props.item;
-  //   const url = type === "bike" ? "/bike" : type === "car" ? "car" : "withdriver";
+  const url = vehicle.bikeType === "bike" ? "/bike" : vehicle.driver ? "/withdriver" : "/car";
   const rates = vehicle.rating || [];
   const totalRate = rates.reduce((ini, item) => {
     return ini + item.numStar;
@@ -26,7 +26,9 @@ export default function ItemMyVehicle(props) {
               <div className="image-wrapper">
                 <img src={vehicle.mainImg}></img>
               </div>
-              <span className="img-status">{vehicle.actived?"Đang hoạt động":"Đang chờ duyệt"}</span>
+              <span className="img-status">
+                {vehicle.actived ? "Đang hoạt động" : "Đang chờ duyệt"}
+              </span>
             </div>
           </div>
         </Col>
@@ -65,10 +67,17 @@ export default function ItemMyVehicle(props) {
               <hr />
               <Row>
                 <Col lg={6}>
-                  <Link className="btn details-btn w-100" to="/car?id=3">Xem chi tiết</Link>
+                  <Link className="btn details-btn w-100" to={`${url}?id=${vehicle.id}`}>
+                    Xem chi tiết
+                  </Link>
                 </Col>
                 <Col lg={6}>
-                <Link className="btn btn-primary manage-btn w-100" to="/car?id=3">Quản lý xe</Link>
+                  <Link
+                    className="btn btn-primary manage-btn w-100"
+                    to={`/vehiclesetting?id=${vehicle.id}`}
+                  >
+                    Quản lý xe
+                  </Link>
                 </Col>
               </Row>
             </div>

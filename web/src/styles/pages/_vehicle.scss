@@ -243,24 +243,25 @@
                     text-decoration: none;
                     color: #000;
                 }
-
-                .bill {
-                    .bill-item {
-                        display: flex;
-                        justify-content: space-between;
-                        margin-bottom: 10px;
-                    }
-
-                    #total {
-                        padding: 5px 0;
-                        border-top: 1px solid #a9aaad;
-                        border-bottom: 1px solid #a9aaad;
-                    }
-                }
             }
         }
     }
 
+}
+
+
+.bill {
+    .bill-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    #total {
+        padding: 5px 0;
+        border-top: 1px solid #a9aaad;
+        border-bottom: 1px solid #a9aaad;
+    }
 }
 
 .star-ratings {
@@ -280,4 +281,58 @@ button {
 
 .map--pointer {
     font-size: 20px
+}
+
+.promotion--success {
+    box-shadow: $box-shadow;
+    $h: 38px;
+    display: flex;
+    height: $h;
+    line-height: $h;
+    text-align: center;
+    font-size: 1.3rem;
+    border-top: 1px solid $primary;
+    border-bottom: 1px solid $primary;
+    border-right: 1px solid $primary;
+}
+
+.promotion__item {
+    &:nth-child(1) {
+        flex-grow: 2;
+        border-right: 3px dotted white;
+        text-transform: uppercase;
+        padding-top: 2px;
+        background-color: $primary;
+        color: white;
+        flex-basis: 160px;
+    }
+
+    &:nth-child(2) {
+        flex-basis: 80px;
+        flex-grow: 1;
+    }
+
+    &:nth-child(3) {
+        background-color: $danger;
+        flex-basis: 40px;
+        cursor: pointer;
+    }
+}
+
+.paymethod__item {
+    width: 100%;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+    vertical-align: middle;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
 }

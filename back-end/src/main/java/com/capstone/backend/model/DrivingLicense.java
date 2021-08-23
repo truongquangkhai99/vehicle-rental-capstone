@@ -21,7 +21,7 @@ public class DrivingLicense {
     private Date dob;
     private String imageLink;
     private boolean confirmed;
-
+    private int permission;
     public DrivingLicense(String number, Date dob, String imageLink) {
         this.number = number;
         this.dob = dob;

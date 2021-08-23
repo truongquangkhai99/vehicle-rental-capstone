@@ -7,10 +7,13 @@ import javax.naming.NameAlreadyBoundException;
 
 import com.capstone.backend.model.DrivingLicense;
 import com.capstone.backend.model.Location;
+import com.capstone.backend.model.ResponseRate;
 import com.capstone.backend.model.User;
+import com.capstone.backend.payload.ChangePasswordRequest;
 import com.capstone.backend.payload.LoginRequest;
 import com.capstone.backend.payload.ResponseData;
 import com.capstone.backend.repository.LocationRepository;
+import com.capstone.backend.repository.PromotionRepository;
 import com.capstone.backend.repository.UserRepository;
 import com.capstone.backend.util.HelplerUtils;
 
@@ -26,6 +29,8 @@ public class UserServiceImpl implements UserService {
     private LocationRepository locationRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PromotionRepository promotionRepository;
     @Autowired
     private HelplerUtils helper;
 
@@ -47,6 +52,7 @@ public class UserServiceImpl implements UserService {
         } else {
             User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(),
                     email);
+            user.setPhone(signupRequest.getPhone());
             return userRepository.save(user);
         }
     }
@@ -147,23 +153,63 @@ public class UserServiceImpl implements UserService {
         userRepository.save(u);
     }
 
-	public String updateGPLX(long userId) {
-		User u = userRepository.findById(userId).get();
+    public String updateGPLX(long userId) {
+        User u = userRepository.findById(userId).get();
         DrivingLicense dl = u.getDrivingLincense();
+        if(dl==null){
+            dl= new DrivingLicense();
+        }
         dl.setImageLink("http://localhost:8080/api/images/drivingLicense" + userId);
+        dl.setPermission(2);
         u.setDrivingLincense(dl);
         userRepository.save(u);
         return "drivingLicense" + userId;
-	}
+    }
 
-	public void changeEmail(long id, String email) throws Exception {
+    public void changeEmail(long id, String email) throws Exception {
         User u = userRepository.findById(id).get();
         Optional<User> u2 = userRepository.findByEmail(email);
-        if(u2.isPresent()){
+        if (u2.isPresent()) {
             throw new Exception("Email đã có người sử dụng");
         }
         u.setEmail(email);
-        u.setEmailVerified(false);   
+        u.setEmailVerified(false);
         userRepository.save(u);
+    }
+
+    public void changePassword(long userId, String password, String newPassword) throws Exception {
+        User u = userRepository.findById(userId).get();
+        if (passwordEncoder.matches(password, u.getPassword())) {
+            u.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(u);
+        } else {
+            throw new Exception("Sai mật khẩu");
+        }
+    }
+
+	public ResponseData getPromotions() {
+		return new ResponseData("ok", promotionRepository.findAll());
 	}
+
+    public void forgetPassword(String email) throws Exception {
+        Optional<User> u = userRepository.findByEmail(email);
+        if (u.isPresent()) {
+            String code = helper.sendEmail(email, "Thay đổi mật khẩu", "Mật khẩu mới của bạn là: ");
+            User user = u.get();
+            user.setPassword(passwordEncoder.encode(code));
+            userRepository.save(user);
+        }else{
+            throw new Exception("Email không tồn tại!");
+        }
+    }
+
+    public User forgetChangePassword(ChangePasswordRequest request) {
+        User u = userRepository.findByEmail(request.getEmail()).get();
+        u.setEmailVerified(true);
+        if (passwordEncoder.matches(request.getPassword(), u.getPassword())) {
+            u.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        }
+        return userRepository.save(u);
+    }
+
 }

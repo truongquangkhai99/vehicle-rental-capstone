@@ -13,7 +13,7 @@ import MyTripsPage from 'pages/MyTripsPage';
 import PromoPage from 'pages/PromoPage';
 // import ShareCodePage from 'pages/ShareCodePage';
 import SignUpPage from 'pages/SignUpPage';
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import './App.scss';
 import NotFound from './components/layout/NotFound';
@@ -32,11 +32,20 @@ import MyVehiclesPage from 'pages/MyVehiclesPage';
 import RegisterVehiclePage from 'pages/RegisterVehiclePage';
 import MyWalltePage from 'pages/MyWalltePage';
 import HowItWorkPage from 'pages/HowItWorkPage';
-
+import VehicleSettingPage from 'pages/VehicleSettingPage';
+import BookingPage from 'pages/BookingPage';
+import AidPage from 'pages/AidPage';
+import tawkTo from "tawkto-react";
 
 function App(props) {
   // @ts-ignore
   const isAdmin = useSelector(state => state.isAdmin).status;
+  
+  const tawkToPropertyId = "601e2180c31c9117cb765c6f";
+  const tawkToKey = "f538fb182eecee02b01e005f723d161d72c2ac05";
+  useEffect(() => {
+    tawkTo(tawkToPropertyId, tawkToKey);
+  }, []);
   return (
     <div className="App">
       {isAdmin ? null : <Header />}
@@ -47,12 +56,14 @@ function App(props) {
           <UserRoute path="/find" component={FindPage} />
           <UserRoute path="/signup" component={SignUpPage} />
           <UserRoute path="/howitwork" component={HowItWorkPage} />
+          <UserRoute path="/aid" component={AidPage} />
           <UserRoute role={true} path="/account" component={AccountPage} />
           <UserRoute role={true} path="/myfavs" component={MyFavsPage} />
           <UserRoute role={true} path="/mytrips" component={MyTripsPage} />
           <UserRoute role={true} path="/myaddress" component={MyAddressPage} />
           <UserRoute role={true} path="/mycard" component={MyCardPage} />
           <UserRoute role={true} path="/promo" component={PromoPage} />
+          <UserRoute role={true} path="/booking" component={BookingPage} />
           <UserRoute path="/aboutus" component={AboutUsPage} />
           <UserRoute path="/oauth2/redirect" component={OAuth2RedirectHandler}></UserRoute>
           <UserRoute path="/blog" component={BlogPage} />
@@ -63,10 +74,9 @@ function App(props) {
           <UserRoute role={true} path="/myvehicles" component={MyVehiclesPage} />
           <UserRoute role={true} path="/registermode" component={RegisterVehiclePage} />
           <UserRoute role={true} path="/mywallet" component={MyWalltePage} />
-          {/* <UserRoute role={true} path="/carsetting" component={} /> */}
+          <UserRoute role={true} path="/vehiclesetting" component={VehicleSettingPage} />
           <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
           <UserRoute component={NotFound} />
-          {/* <Route path="/admin" exact component={AdminPage} /> */}
         </Switch>
       </Suspense>
       {isAdmin ? null : <Footer />}

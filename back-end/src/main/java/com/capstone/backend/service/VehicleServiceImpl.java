@@ -94,6 +94,17 @@ public class VehicleServiceImpl {
         bike.setImages(li);
         return new ResponseData("creat bike", bikeRepository.save(bike));
     }
+    public ResponseData updateCar(Car car) {
+        Location l =car.getLocation();
+        locationRepository.save(l);
+        return new ResponseData("creat car", carRepository.save(car));
+    }
+
+    public ResponseData updateBike(Bike bike) {
+        Location l =bike.getLocation();
+        locationRepository.save(l);
+        return new ResponseData("creat bike", bikeRepository.save(bike));
+    }
 
     public ResponseData getVehicleById(long id) {
         return new ResponseData("get vehicle", vehicleRepository.findById(id).get());

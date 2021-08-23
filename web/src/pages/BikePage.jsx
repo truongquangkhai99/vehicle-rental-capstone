@@ -9,12 +9,14 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { useSelector } from "react-redux";
 
-export default function BikePage() {
+export default function BikePage(props) {
   const param = queryString.parse(window.location.search);
   const [bike, setBike] = useState({});
   const [like, setLike] = useState(false);
   const [status, setStatus] = useState("loading");
+  const logged = useSelector(state=>state.logged).data;
   const handleUpdateLike = () => {
     if (like) {
       setLike(false);
@@ -30,14 +32,12 @@ export default function BikePage() {
       .getVehicle({ id: param.id })
       .then((res) => {
         setBike(res.data);
-        console.log(res.data);
         setStatus("success");
       })
       .catch((res) => {
         setStatus("error");
       });
-    vehicleApi.checkLiked({id:param.id}).then((res) => {
-      console.log(res);
+    vehicleApi.checkLiked({ id: param.id }).then((res) => {
       setLike(res);
     });
   }, [param.id]);
@@ -50,20 +50,16 @@ export default function BikePage() {
           <ImageSlide vehicle={bike} />
           <Row className="vehicle__body container">
             <Col lg={7} className="vehicle__body-content order-2 order-lg-1">
-              <HeaderVehicle vehicle={bike} className="d-none d-lg-block" />
-              <div className="desc">
-                <DescriptionVehicle vehicle={bike} type="bike" />
-
-                <Row className="mb-4">
-                  <Col lg={6}>
-                    <Button className="report-btn">Báo xấu</Button>
-                  </Col>
-                  <Col lg={6}>
-                    <Button onClick={handleUpdateLike} className="addFavs-btn">
+              <Row>
+                <Col>
+                  <HeaderVehicle vehicle={bike} className="d-none d-lg-block" />
+                </Col>
+                <Col xs={4}>
+                  {logged ? (
+                    <Button onClick={handleUpdateLike}>
                       {!like ? (
                         <>
-                          Thêm vào yêu thích{" "}
-                          <MdFavoriteBorder className="icon" />
+                          Yêu thích <MdFavoriteBorder className="icon" />
                         </>
                       ) : (
                         <>
@@ -71,8 +67,12 @@ export default function BikePage() {
                         </>
                       )}
                     </Button>
-                  </Col>
-                </Row>
+                  ) : null}
+                </Col>
+              </Row>
+
+              <div className="desc">
+                <DescriptionVehicle vehicle={bike} type="bike" />
               </div>
               <RatingVehicle vehicle={bike} />
             </Col>
@@ -80,7 +80,7 @@ export default function BikePage() {
               lg={5}
               className="vehicle__body-sidebar order-1 order-lg-2 mt-5 mt-lg-0"
             >
-              <NoDriverSideBar vehicle={bike} />
+              <NoDriverSideBar history={props.history} vehicle={bike} />
             </Col>
           </Row>
         </div>

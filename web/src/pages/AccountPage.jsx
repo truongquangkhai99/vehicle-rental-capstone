@@ -59,7 +59,10 @@ export default function AccountPage() {
       setInfo({ fullName: res.fullName, dob: res.dob, gender: res.gender });
       setPhone(res.phone);
       setAvatarLink(res.avatarLink);
-      setDrivingLincense(res.drivingLincense);
+      if (res.drivingLincense) {
+        setDrivingLincense(res.drivingLincense);
+      }
+      console.log(res);
     });
   }, []);
   return (
@@ -95,17 +98,6 @@ export default function AccountPage() {
                       <span className="date-john">Tham gia: 01/06/2021 </span>
                       <span className="count-trip">Chưa có chuyến</span>
                     </div>
-                  </div>
-                  <div className="item-points" id="box">
-                    <span className="point">
-                      <span className="icon-star">
-                        <GiAlliedStar />
-                      </span>
-                      0 Điểm
-                      <span className="icon-ques">
-                        <AiOutlineQuestionCircle />
-                      </span>
-                    </span>
                   </div>
                 </div>
                 <div className="profile__content__header-infor-footing">

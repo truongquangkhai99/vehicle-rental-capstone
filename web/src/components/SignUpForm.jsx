@@ -1,16 +1,10 @@
-
 import UserApi from "api/userApi";
 import { login } from "app/slice/userSlice";
 import store from "app/store";
 import { FACEBOOK_AUTH_URL, GOOGLE_AUTH_URL } from "constants/index";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useState } from "react";
-import {
-  Button,
-  Col, Form as BForm,
-  Modal,
-  Row
-} from "react-bootstrap";
+import { Button, Col, Form as BForm, Modal, Row } from "react-bootstrap";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { GrFacebookOption } from "react-icons/gr";
 // import { useSelector } from "react-redux";
@@ -27,6 +21,7 @@ const SignUpForm = (props) => {
       initialValues={{
         password: "",
         fullName: "",
+        phone: "",
         email: "",
         rePassword: "",
         policy: false,
@@ -34,6 +29,10 @@ const SignUpForm = (props) => {
       validationSchema={Yup.object({
         password: Yup.string().required("Đây là trường bắt buộc"),
         fullName: Yup.string().required("Đây là trường bắt buộc"),
+        phone: Yup.string()
+          .required("Đây là trường bắt buộc")
+          .test("len", "Phải có 10 số", (val) => val && val.length === 10)
+          .matches(/^[0-9\s]+$/, "Chỉ nhập số"),
         email: Yup.string()
           .required("Đây là trường bắt buộc")
           .email("Sai định dạng email"),
@@ -51,6 +50,7 @@ const SignUpForm = (props) => {
           email: values.email,
           password: values.password,
           fullName: values.fullName,
+          phone:values.phone
         })
           .then((res) => {
             store.dispatch(login(res));
@@ -115,6 +115,21 @@ const SignUpForm = (props) => {
                 </Field>
                 <BForm.Text className="text-danger">
                   <ErrorMessage name="fullName" />
+                </BForm.Text>
+              </BForm.Group>
+              <BForm.Group className="mb-3" controlId="fullName">
+                <BForm.Label>Số điện thoại*:</BForm.Label>
+                <Field name="phone">
+                  {({ field }) => (
+                    <BForm.Control
+                      type="text"
+                      {...field}
+                      placeholder="Nhập số điện thoại của bạn"
+                    />
+                  )}
+                </Field>
+                <BForm.Text className="text-danger">
+                  <ErrorMessage name="phone" />
                 </BForm.Text>
               </BForm.Group>
               <Row>

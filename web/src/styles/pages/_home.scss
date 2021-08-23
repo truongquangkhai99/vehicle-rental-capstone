@@ -377,11 +377,12 @@ body {
 //     height: 26px;
 // }
 .blog {
-    width: 100%;
+    width: 100vw;
     height: 800px;
     // background-image: url("../../assets/images/bg-blog.png");
     background-image: linear-gradient(to right, #00c8ffa2, #e66fe6c2), url("../../assets/images/rolroi.jpg");
     background-size: 100%;
+    overflow-x: hidden;
     background-repeat: no-repeat;
 }
 

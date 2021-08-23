@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Tabs, Tab, Row } from "react-bootstrap";
+import { Tabs, Tab, Row, Container } from "react-bootstrap";
 import ItemMyFavorite from "components/myfavorite/ItemMyFavorite";
 import vehicleApi from "api/vehicleApi";
 import Loading from "components/layout/Loading";
@@ -23,7 +23,7 @@ export default function MyFavsPage() {
     });
   }, []);
   return (
-    <div className="page-content">
+    <Container className="page-content">
      {status==="loading"?<Loading/>: <div className="myfavs">
         <Tabs defaultActiveKey="motor" transition={false}>
           <Tab eventKey="motor" title="Xe máy yêu thích">
@@ -49,6 +49,6 @@ export default function MyFavsPage() {
           </Tab>
         </Tabs>
       </div>}
-    </div>
+    </Container>
   );
 }

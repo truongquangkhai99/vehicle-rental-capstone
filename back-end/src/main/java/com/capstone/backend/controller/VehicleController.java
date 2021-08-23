@@ -44,6 +44,15 @@ public class VehicleController {
         long userId = jwtAuth.getUserIdFromRequest(request);
         return vehicleService.saveBike(bike,userId);
     }
+    @PostMapping("/update/car") // đăng ký oto
+    public ResponseData updateVehicle(@RequestBody Car car) {
+        return vehicleService.updateCar(car);
+    }
+
+    @PostMapping("/update/bike") // đăng ký xe máy
+    public ResponseData updateVehicle(@RequestBody Bike bike) {
+        return vehicleService.updateBike(bike);
+    }
 
     @GetMapping("/MyVehicles") // danh sách xe của mình
     public ResponseEntity<?> getMyVehicle(HttpServletRequest request) {

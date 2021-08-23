@@ -2,7 +2,6 @@ import { logout } from "app/slice/userSlice";
 import store from "app/store";
 import React from "react";
 import { Dropdown, Nav, NavDropdown, Offcanvas } from "react-bootstrap";
-import { IoMdNotifications } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Notification from "./Notification";
@@ -13,16 +12,7 @@ const handleLogoutClick = () => {
 export function LoggedNav(props) {
   // @ts-ignore
   const logged = useSelector((state) => state.logged);
-  const listNoti = [
-    {
-      avatarLink: "https://n1-cstg.mioto.vn/v6/p/m/avatars_notify/common.jpg",
-      title: "Welcome to LOGO",
-      content:
-        "Chào mừng bạn tham gia cộng đồng to vcl, bấm vào đây để xem những kinh nghiệm thuê xe hữ ích",
-      createTime: new Date().toISOString(),
-      link: "google.com.vn",
-    },
-  ];
+  const showChangePassword = props.showChangePassword;
   return (
     <Nav className="text-white">
       <NavDropdown
@@ -52,42 +42,24 @@ export function LoggedNav(props) {
         <Link className="dropdown-item" to="/mytrips">
           Chuyến của tôi
         </Link>
-        <Link className="dropdown-item" to="/myaddress">
-          Địa chỉ của tôi
-        </Link>
         <Link className="dropdown-item" to="/promo">
           Khuyễn mãi
         </Link>
-        <Link className="dropdown-item" to="/myreward">
-          Quà tặng
-        </Link>
-        <Link className="dropdown-item" to="/admin">
-          Admin
-        </Link>
-        <NavDropdown.Item>Đổi mật khẩu</NavDropdown.Item>
+        <NavDropdown.Item onClick={showChangePassword}>
+          Đổi mật khẩu
+        </NavDropdown.Item>
         <NavDropdown.Item onClick={handleLogoutClick}>
           Đăng xuất
         </NavDropdown.Item>
       </NavDropdown>
-      <NavDropdown
-        id="notification"
-        className="me-2"
-        menuVariant="light"
-        title={
-          <span>
-            <IoMdNotifications className="icon" />
-          </span>
-        }
-      >
-        <Notification listNoti={listNoti} />
-      </NavDropdown>
+      <Notification/>      
     </Nav>
   );
 }
 export function LoggedOffcanvas(props) {
   // @ts-ignore
   const logged = useSelector((state) => state.logged);
-
+  const showChangePassword = props.showChangePassword;
   return (
     <>
       <Offcanvas.Header className="logged" closeVariant="white" closeButton>
@@ -116,16 +88,10 @@ export function LoggedOffcanvas(props) {
           <Link className="nav-link" to="/mytrips">
             Chuyến của tôi
           </Link>
-          <Link className="nav-link" to="/myaddress">
-            Địa chỉ của tôi
-          </Link>
           <Link className="nav-link" to="/promo">
             Khuyễn mãi
           </Link>
-          <Link className="nav-link" to="/myreward">
-            Quà tặng
-          </Link>
-          <Nav.Link>Đổi mật khẩu</Nav.Link>
+          <Nav.Link onClick={showChangePassword}>Đổi mật khẩu</Nav.Link>
           <Nav.Link onClick={handleLogoutClick}>Đăng xuất</Nav.Link>
         </Nav>
       </Offcanvas.Body>

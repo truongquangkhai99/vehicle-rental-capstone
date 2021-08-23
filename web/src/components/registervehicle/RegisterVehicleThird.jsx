@@ -137,7 +137,7 @@ export default function RegisterVehicleThird() {
                 {register.error.filter((item) => {
                   return item === "originPrice";
                 }).length
-                  ? "Vui lòng thêm ít nhất 1 ảnh"
+                  ? "Vui lòng thêm ít nhất 3 ảnh"
                   : null}
               </FormText>
             </FormGroup>

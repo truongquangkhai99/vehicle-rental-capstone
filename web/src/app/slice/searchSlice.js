@@ -23,8 +23,12 @@ const searchSlice = createSlice({
             state.data.startTime = action.payload;
             localStorage.setItem("searchInput", JSON.stringify(state.data));
         },
+        changeTime: (state, action) => {
+            state.data.time = action.payload;
+            localStorage.setItem("searchInput", JSON.stringify(state.data));
+        },
     },
 })
 const { reducer, actions } = searchSlice;
-export const { search,changeEndDate,changeEndTime,changeStartDate,changeStartTime} = actions;
+export const { search,changeEndDate,changeEndTime,changeStartDate,changeStartTime,changeTime} = actions;
 export default reducer;

@@ -87,7 +87,7 @@ export function roundEndTime(time) {
     return endTime;
 }
 export function formatMoneyK(number) {
-    number = number / 1000;
+    number = Math.round(number / 1000);
     number = number + 'k';
     return number;
 }
@@ -96,4 +96,14 @@ export function calcTotalDate(searched) {
     const end = `${searched.endDate} ${searched.endTime}`;
     const hours = (new Date(end).getTime() - new Date(start).getTime()) / 3600000;
     return Math.ceil(hours / 24);
+}
+export function dateTimeToLong(date,time) {
+    const d = `${date} ${time}`;
+    return new Date(d).getTime();    
+}
+export function timeToLong(startDate,startTime,time) {
+    const d = `${startDate} ${startTime}`;
+    const date = new Date(d);
+    date.setHours(date.getHours()+time);
+    return date.getTime();    
 }

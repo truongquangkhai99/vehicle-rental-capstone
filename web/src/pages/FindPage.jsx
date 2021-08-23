@@ -17,8 +17,6 @@ import { GrPowerReset } from "react-icons/gr";
 import { useSelector } from "react-redux";
 
 export default function FindPage() {
-  const [isShowExtra, setIsShowExtra] = useState(true);
-  const [styleExtra, setStyleExtra] = useState({ display: "none" });
   const [resultSearch, setResultSearch] = useState([]);
   const [afterFilter, setAfterFilter] = useState([]);
   const [isFresh, setIsFresh] = useState(true);
@@ -134,15 +132,24 @@ export default function FindPage() {
                 <p>{searchInput.startTime}</p>
               </div>
             </Col>
-            <Col className="find__header-end" lg={3} id="heading">
-              <label htmlFor="">Kết thúc:</label>
-              <div className="date-end" id="date">
-                <p>{searchInput.startDate}</p>
-              </div>
-              <div className="time-end ms-3">
-                <p>{searchInput.startTime}</p>
-              </div>
-            </Col>
+            {searchInput.type === "driver" ? (
+              <Col className="find__header-end" lg={3} id="heading">
+                <label htmlFor="">Thời gian:</label>
+                <div className="date-end" id="date">
+                  <p>{searchInput.time} Tiếng</p>
+                </div>
+              </Col>
+            ) : (
+              <Col className="find__header-end" lg={3} id="heading">
+                <label htmlFor="">Kết thúc:</label>
+                <div className="date-end" id="date">
+                  <p>{searchInput.startDate}</p>
+                </div>
+                <div className="time-end ms-3">
+                  <p>{searchInput.startTime}</p>
+                </div>
+              </Col>
+            )}
           </Row>
           <Row className="find__content">
             <Col className="find__content-options" lg={4}>
@@ -227,16 +234,6 @@ export default function FindPage() {
                   className="mb-4"
                   style={{ textAlign: "right", color: "#00a54f" }}
                 ></FormGroup>
-                <div className="find__content-options-extra" style={styleExtra}>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Số chỗ</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                  <FormGroup id="group" className="mb-4">
-                    <FormLabel id="lable">Năm sản xuất</FormLabel>
-                    <FormRange></FormRange>
-                  </FormGroup>
-                </div>
                 <Button
                   type="reset"
                   className="w-100"
@@ -302,10 +299,6 @@ function getListLocation(list) {
   let rsLatLng = [];
   if (list.length > 0) {
     list.forEach((e) => {
-      // let item = {
-      //   lat: parseFloat(e.location.latitude),
-      //   lng: parseFloat(e.location.longitude),
-      // };
       let item = e.location.strAddress;
       rsLatLng.push(item);
     });
@@ -318,7 +311,6 @@ function getListDistanceVehicles(response, listVehicles) {
   let oriList = response.originAddresses;
   let num = desList.length;
   let rowList = response.rows[0].elements;
-  console.log(rowList);
   for (let i = 0; i < num; i++) {
     if (rowList[i].distance) {
     }
