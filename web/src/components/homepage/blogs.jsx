@@ -1,31 +1,31 @@
-import React, {useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Card } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../styles/pages/_home.scss'
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import blogApi from '../../api/blogApi'
+import adminApi from '../../api/adminApi'
 import { IoIosArrowForward } from 'react-icons/io';
-  const settings3 = {
+const settings3 = {
     infinite: true,
     speed: 1000,
     slidesToShow: 2,
     slidesToScroll: 1,
     draggable: true,
-    dots:true
-  };
+    dots: true
+};
 export default function Blogs() {
-       //get list blog
-       const [getDataBlog,setDataBlog]=useState({list:[]});
-       useEffect(() => {
-            blogApi.getBlog().then((res) => {
-                setDataBlog({ list: res.data});
-            });
-        },[getDataBlog]);
+    //get list blog
+    // const [getDataBlog, setDataBlog] = useState({ list: [] });
+    // useEffect(() => {
+    //     adminApi.getBlog().then((res) => {
+    //         setDataBlog({ list: res.data });
+    //     });
+    // }, [getDataBlog]);
     return (
         <Row>
-            <div className="blog">
+            {/* <div className="blog">
                 <p className="blog-title">Blogs</p>
                 <div className="blog-content">
                     <Slider {...settings3}>
@@ -42,7 +42,7 @@ export default function Blogs() {
                         )}
                     </Slider>
                 </div>
-            </div>
+            </div> */}
         </Row>
     )
 }

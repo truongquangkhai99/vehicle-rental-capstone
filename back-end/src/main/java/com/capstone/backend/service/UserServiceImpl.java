@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
         if (u.isPresent()) {
             throw new Exception("Email đã được sử dụng");
         } else {
-            User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(), email);
+            User user = new User(passwordEncoder.encode(signupRequest.getPassword()), signupRequest.getFullName(),
+                    email);
             return userRepository.save(user);
         }
     }
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseData banUser(long id) {
         User u = getUserById(id);
-        u.setBanned(true);
+        u.setBanned(!u.isBanned());
         userRepository.save(u);
         return new ResponseData("ok", null);
     }
@@ -108,7 +109,7 @@ public class UserServiceImpl implements UserService {
         return new ResponseData("ok", locations);
     }
 
-	public User getInfo(long id) {
-		return userRepository.findById(id).get();
-	}
+    public User getInfo(long id) {
+        return userRepository.findById(id).get();
+    }
 }

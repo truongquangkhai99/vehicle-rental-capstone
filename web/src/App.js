@@ -16,7 +16,7 @@ import PromoPage from 'pages/PromoPage';
 import SignUpPage from 'pages/SignUpPage';
 import VehiclePage from 'pages/VehiclePage';
 import React, { Suspense } from 'react';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import './App.scss';
 import NotFound from './components/layout/NotFound';
 import ReactNotification from "react-notifications-component";
@@ -24,9 +24,16 @@ import OAuth2RedirectHandler from 'pages/OAuth2RedirectHandlerPage';
 import { useSelector } from 'react-redux';
 import AdminRoute from 'components/AdminRoute';
 import UserRoute from 'components/UserRoute';
-import AdminPage from 'pages/AdminPage';
 import { Route } from 'react-router-dom';
-
+import UserList from 'components/adminpage/content/UserList';
+import BlogList from 'components/adminpage/content/BlogList';
+import AdminHome from 'components/adminpage/content/adminHome/AdminHome';
+import Sidebar from 'components/adminpage/layout/SideBar';
+import TopBar from 'components/adminpage/layout/TopBar';
+import AdminPage from 'pages/AdminPage';
+import BlogDetail from 'components/adminpage/content/BlogDetail';
+import VehicleList from './components/adminpage/content/VehicleList';
+import TransactionList from './components/adminpage/content/TransactionList';
 
 function App(props) {
   // @ts-ignore
@@ -52,9 +59,8 @@ function App(props) {
           <UserRoute path="/blog" component={BlogPage} />
           <UserRoute path="/find" component={FindPage} />
           <UserRoute path="/vehicle" component={VehiclePage} />
-          <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
           <UserRoute component={NotFound} />
-          {/* <Route path="/admin" exact component={AdminPage} /> */}
+          <AdminRoute />
         </Switch>
       </Suspense>
       {isAdmin ? null : <Footer />}
@@ -63,3 +69,5 @@ function App(props) {
 }
 
 export default App;
+
+

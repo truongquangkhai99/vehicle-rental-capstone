@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -27,51 +26,50 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "users")
 public class User {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-        @JsonIgnore
-        private String password;
-        private String fullName;
-        private String phone;
-        private char gender;
-        private String email;
-        private boolean emailVerified;
-        private String role;
-        private boolean banned;
-        private Date dob; // ngày sinh
-        private String avatarLink="http://localhost:8080/api/images/default-avatar.jpg"; // ảnh đại diện
-        @OneToOne
-        @JoinColumn(name = "wallet_id")
-        private Wallet wallet;
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "response_id")
-        private ResponseRate responseRate; // tỉ lệ phản hồi
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "license_id")
-        private DrivingLicense drivingLincense; // bằng lái xe
-        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<Location> addresses;
-        @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
-        @JsonIgnore
-        private List<Rating> ratings;
-        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
-        @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
-        @JoinTable(name = "favorite_vehicle", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-        private List<Vehicle> likedVehicles;
-        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<Vehicle> myVehicles;
-        @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        @EqualsAndHashCode.Exclude
-        @JoinTable(name = "user_relative", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "relatives_id"))
-        private List<RelativesVehicle> relativesVehicles;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @JsonIgnore
+    private String password;
+    private String fullName;
+    private String phone;
+    private String gender;
+    private String email;
+    private boolean emailVerified;
+    private String role;
+    private boolean banned;
+    private Date dob; // ngày sinh
+    private String avatarLink = "http://localhost:8080/api/images/default-avatar.jpg"; // ảnh đại diện
+    @OneToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "response_id")
+    private ResponseRate responseRate; // tỉ lệ phản hồi
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "license_id")
+    private DrivingLicense drivingLincense; // bằng lái xe
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Location> addresses;
+    @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Rating> ratings;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Rating> ratedByOther; // Danh sách đánh giá của chủ xe về mình
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "favorite_vehicle", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+    @JsonIgnore
+    private List<Vehicle> likedVehicles;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Vehicle> myVehicles;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_relative", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "relatives_id"))
+    private List<RelativesVehicle> relativesVehicles;
 
-        public User(String password, String fullName, String email) {
-		this.password = password;
-		this.fullName = fullName;
-		this.email = email;
-	}
+    public User(String password, String fullName, String email) {
+        this.password = password;
+        this.fullName = fullName;
+        this.email = email;
+    }
 }

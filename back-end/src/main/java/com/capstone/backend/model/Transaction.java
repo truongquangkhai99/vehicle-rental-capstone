@@ -20,7 +20,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private Date createDate;
-    private char type;
+    private String type;
     private int amount;
     @ManyToOne
     @JoinColumn(name = "wallet_id")

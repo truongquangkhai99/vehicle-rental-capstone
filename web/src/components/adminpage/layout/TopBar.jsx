@@ -1,12 +1,11 @@
 import React from 'react'
 import { NotificationsNone, Language, Settings } from '@material-ui/icons';
-import '../../../styles/pages/_admin.scss'
 export default function TopBar() {
     return (
         <div className="topbar">
             <div className="topbarWrapper">
                 <div className="topLeft">
-                    <span className="logo">Admin Panel</span>
+                    <span className="logo">Trang Quản Trị</span>
                 </div>
                 <div className="topRight">
                     <div className="topbarIcons">

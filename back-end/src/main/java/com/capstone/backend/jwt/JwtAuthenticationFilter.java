@@ -14,12 +14,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
+// import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.extern.slf4j.Slf4j;
-
 
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -36,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // Lấy jwt từ request
             Long userId = getUserIdFromRequest(request);
 
-            if (userId!=null) {
+            if (userId != null) {
                 // Lấy thông tin người dùng từ id
                 UserDetails userDetails = userDetailService.loadUserById(userId);
                 if (userDetails != null) {

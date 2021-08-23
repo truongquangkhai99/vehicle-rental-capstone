@@ -25,45 +25,45 @@ export default function FindPage() {
     }
     // @ts-ignore
     const searchInput = useSelector(state => state.searched);
-    var listVehicle = getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar);
-    var listLocationVehicle = getListLocation(listVehicle);
-    // var listVehicle = [
-    //     {
-    //         id: 1,
-    //         name: "xe A",
-    //         location: {
-    //             latitude: "16.04765299496521",
-    //             longitude: "108.21890939151176",
-    //         }
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "xe B",
-    //         location: {
-    //             latitude: "16.070087935507395",
-    //             longitude: "108.221484312158",
-    //         }
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "xe C",
-    //         location: {
-    //             latitude: "16.033134921877576",
-    //             longitude: "108.22800744446177",
-    //         }
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "xe D",
-    //         location: {
-    //             latitude: "16.075366377435078",
-    //             longitude: "108.17530740190229",
-    //         }
-    //     }
-    // ]
+    // var listVehicle = getListVehicles(searchInput.selfDrive, searchInput.withDrive, searchInput.intercityCar);
     // var listLocationVehicle = getListLocation(listVehicle);
+    var listVehicle = [
+        {
+            id: 1,
+            name: "xe A",
+            location: {
+                latitude: "16.04765299496521",
+                longitude: "108.21890939151176",
+            }
+        },
+        {
+            id: 2,
+            name: "xe B",
+            location: {
+                latitude: "16.070087935507395",
+                longitude: "108.221484312158",
+            }
+        },
+        {
+            id: 3,
+            name: "xe C",
+            location: {
+                latitude: "16.033134921877576",
+                longitude: "108.22800744446177",
+            }
+        },
+        {
+            id: 4,
+            name: "xe D",
+            location: {
+                latitude: "16.075366377435078",
+                longitude: "108.17530740190229",
+            }
+        }
+    ]
+    var listLocationVehicle = getListLocation(listVehicle);
     const url = '#';
-    console.log(searchInput);
+    console.log(resultSreach);
     return (
         <>
             {isFresh && searchInput?.startLocal !== "" && (

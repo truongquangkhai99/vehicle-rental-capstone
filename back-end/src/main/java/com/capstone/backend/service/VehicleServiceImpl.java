@@ -19,18 +19,17 @@ public class VehicleServiceImpl implements VehicleService {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Autowired 
+    @Autowired
     private CarRepository carRepository;
 
-    @ Autowired
+    @Autowired
     private BikeRepository bikeRepository;
 
-   
     @Override
     public ResponseData getAllVehiclesByUserId(long id) {
-        List<Vehicle> listVehicle =new ArrayList<>();
+        List<Vehicle> listVehicle = new ArrayList<>();
         for (Vehicle vehicle : vehicleRepository.findAllByUserId(id)) {
-            if(vehicle.getUser().getId()==id){
+            if (vehicle.getUser().getId() == id) {
                 listVehicle.add(vehicle);
             }
         }
@@ -38,7 +37,7 @@ public class VehicleServiceImpl implements VehicleService {
     }
 
     @Override
-    public ResponseData saveCar(Car car) {   
+    public ResponseData saveCar(Car car) {
         return new ResponseData("create car", vehicleRepository.save(car));
     }
 
@@ -51,45 +50,54 @@ public class VehicleServiceImpl implements VehicleService {
     public ResponseData getVehicleById(long id) {
         return new ResponseData("get vehicle", vehicleRepository.findById(id).get());
     }
+
     @Override
-    public ResponseData findCarDriver() { 
-        List<Car> lCars=new ArrayList<>();
-        if(carRepository.findAll()!=null){
+    public ResponseData findCarDriver() {
+        List<Car> lCars = new ArrayList<>();
+        if (carRepository.findAll() != null) {
             for (Car car : carRepository.findAll()) {
-                if(car.isDriver()){
+                if (car.isDriver()) {
                     lCars.add(car);
                 }
-            }  
+            }
             return new ResponseData("ok", lCars);
-        }else{
+        } else {
             return new ResponseData("list car null", lCars);
         }
-       
+
     }
 
     @Override
     public ResponseData findCarSelfDriver() {
-        List<Car> lCars=new ArrayList<>();
-        if(carRepository.findAll()!=null){
+        List<Car> lCars = new ArrayList<>();
+        if (carRepository.findAll() != null) {
             for (Car car : carRepository.findAll()) {
-                if(car.isDriver()==false){
+                if (car.isDriver() == false) {
                     lCars.add(car);
                 }
-            }  
+            }
             return new ResponseData("ok", lCars);
-        }else{
+        } else {
             return new ResponseData("list car null", lCars);
         }
-       
+
     }
 
     @Override
     public ResponseData findBike() {
-       try{
+        try {
             return new ResponseData("ok", bikeRepository.findAll());
-       }catch(Exception ex){
+        } catch (Exception ex) {
             return new ResponseData("error", null);
-       }
-       
+        }
+
+    }
+
+    @Override
+    public ResponseData approachCar(long id) {
+        Vehicle v = vehicleRepository.findById(id).get();
+        v.setActived(!v.isActived());
+        vehicleRepository.save(v);
+        return new ResponseData("ok", null);
     }
 }

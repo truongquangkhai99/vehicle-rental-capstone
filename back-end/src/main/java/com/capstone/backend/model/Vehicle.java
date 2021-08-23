@@ -1,6 +1,5 @@
 package com.capstone.backend.model;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,27 +35,26 @@ public class Vehicle {
     private long id;
     private String licensePlates;
     private boolean actived;
-    private Date yom; // năm sản xuất
-    private char fuelType;
+    private String yom; // năm sản xuất
+    private String fuelType;
     private int fuelConsumption; // tiêu thụ nhiên liệu/100km
     private int originPrice;
-    private int nowPrice;
     private String description;
-    private boolean discountEnable;
-    private int weekDiscount; // giảm giá theo tuần (%)
-    private int monthDiscount;
     private boolean deliveryEnable;
     private int deliveryRadius; // Khoảng cách giao xe tối đa(km)
     private int deliveryRadiusFree; // khoảng cách miễn phí giao xe(km)
     private int deliveryFee; // (*1000đ/km)
+    private boolean limitEnable;
     private int limitDistance; // giới hạn quãng đường tối đa(km)
     private int outLimitFee; // giá vượt giới hạn(*1000đ/km)
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    @JsonIgnore
-    private User user;
+    private int numBooking; // giá vượt giới hạn(*1000đ/km)
+    private String mainImg;
     @Transient
     private int distance; // Khoảng cách từ xe tới vị trí đặt xe
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @OneToOne
     @JoinColumn(name = "location_id")
     private Location location;
