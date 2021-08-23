@@ -36,16 +36,16 @@ public class User {
     private String gender;
     private String email;
     private boolean emailVerified;
-    private String role;
+    private String role = "ROLE_USER";
     private boolean banned;
     private Date dob; // ngày sinh
     private String avatarLink = "http://localhost:8080/api/images/default-avatar.jpg"; // ảnh đại diện
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "wallet_id")
-    private Wallet wallet;
+    private Wallet wallet = new Wallet();
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "response_id")
-    private ResponseRate responseRate; // tỉ lệ phản hồi
+    private ResponseRate responseRate = new ResponseRate(); // tỉ lệ phản hồi
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "license_id")
     private DrivingLicense drivingLincense; // bằng lái xe

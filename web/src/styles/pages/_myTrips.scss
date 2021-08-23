@@ -1,0 +1,39 @@
+.booking__item {
+    margin: auto;
+    padding: 15px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    box-shadow: $box-shadow;
+    max-width: 700px;
+
+    &--container {
+        display: flex;
+    }
+
+    &--img {
+        width: 100%;
+        max-width: 150px;
+        margin-right: 30px;
+    }
+
+    &--footer {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid $border-color;
+        padding-top: 10px;
+    }
+}
+
+.booking--width {
+    margin: auto;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.tab-number.active {
+    background-color: $primary !important;
+    color: white;
+}

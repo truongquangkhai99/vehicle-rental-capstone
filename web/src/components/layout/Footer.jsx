@@ -1,21 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { FaYoutube, FaFacebookF, FaTwitter, FaLinkedin, FaInstagram, } from "react-icons/fa";
-import { HiOutlineMail, HiPhone, HiOutlineLocationMarker, } from "react-icons/hi";
+import {
+  FaYoutube,
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+  FaAngleUp,
+} from "react-icons/fa";
+import {
+  HiOutlineMail,
+  HiPhone,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 import logofull from "assets/images/logofull.png";
 
-function Footer() {
+function Footer() {  
+  
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+  }, []);
+  
   return (
     <div id="footer" className="text-white">
       <Container>
         <Row>
           <Col xs={6} lg={3}>
             <div>
-              <img
-                src={logofull}
-                alt="logo"
-                width={145}
-              />
+              <img src={logofull} alt="logo" width={145} />
             </div>
             <div>
               <a href="facebook.com">
@@ -94,6 +120,11 @@ function Footer() {
         <hr />
         <h6>©Copyright</h6>
       </Container>
+      {isVisible && (
+        <div className="scroll-to-top" onClick={scrollToTop}>
+          <FaAngleUp />
+        </div>
+      )}
     </div>
   );
 }

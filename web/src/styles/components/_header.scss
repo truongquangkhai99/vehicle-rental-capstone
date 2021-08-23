@@ -9,7 +9,7 @@
     color: white;
     border-right: 1px solid #f8b3b379;
     padding-right: 20px;
-
+    margin-top:2px;
     a {
       display: inline-block;
       margin-left: 40px;
@@ -47,7 +47,7 @@
     }
 
     &__register {
-      margin-left: 15px;
+      margin:0 15px;
       border: 1px solid white;
       border-radius: 3px;
 
@@ -107,8 +107,22 @@
   max-width: 280px;
   width: 100vw;
   font-size: 12px;
+  max-height: 280px;
+  overflow-y: scroll;
+
   .noti {
     list-style: none;
+    padding-top: 10px;
+    border-bottom: 1px solid $border-color;
+    user-select: none;
+    cursor: pointer;
+    &.not-read {
+      background-color: #e8eaef;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, .08);
+    }
   }
 
   a {
@@ -120,7 +134,7 @@
   .noti__avatar {
     box-sizing: border-box;
     width: 15%;
-    margin-right: 3px;
+    margin-right: 10px;
     display: inline-block;
 
     img {
@@ -132,10 +146,11 @@
   .noti__desc {
     width: 85%;
     display: inline-block;
-    p{
+
+    p {
       margin-bottom: 10px;
       display: inline-block;
-    }    
+    }
 
     &--tittle {
       font-weight: 600;
@@ -147,4 +162,19 @@
       color: $text-muted;
     }
   }
+  
+}
+.noti--unread{
+  position: absolute;
+  display:block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border:1px solid red;
+  line-height: 100%;
+  text-align: center;
+  background-color: red;
+  color:white !important;
+  top:0;
+  left:20px;
 }

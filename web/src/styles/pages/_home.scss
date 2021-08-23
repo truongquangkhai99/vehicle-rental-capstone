@@ -1,135 +1,176 @@
-@import url('https://fonts.googleapis.com/css?family=Goldman');
-body{
-    font-family: "Goldman", cursive;
-}
-.slick-prev:before{
+// @import url('https://fonts.googleapis.com/css?family=Goldman');
+// body{
+//     font-family: "Goldman", cursive;
+// }
+.slick-prev:before {
     color: green;
     font-size: 2rem;
     margin-left: -2rem;
 }
-.slick-next:before{
+
+.slick-next:before {
     color: green;
     font-size: 2rem;
     margin-left: 1rem;
 }
-body{
-    background-color:#fff;
+.local-self-driver {
+    .content-self-driver {
+        .slick-slider {
+            .slick-list {
+                padding: 10px 0;
+            }
+        }
+    }
 }
-.banners{
-    background-image:linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)),url("../../assets/images/banner.jpg");
-    width:100%;
-    height:auto;
+
+body {
+    background-color: #fff;
+}
+.banners {
+    background-image: linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)),
+        url("../../assets/images/banner.jpg");
+    width: 100%;
+    height: auto;
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-.bandrollContent{
+
+.banners {
+    background-image: linear-gradient(0deg, rgba(41, 45, 69, 0.8), rgba(12, 12, 15, 0.6)),
+        url("../../assets/images/banner.jpg");
+    width: 100%;
+    height: 877px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.bandrollContent {
     width: 100%;
     height: 350px;
     padding-top: 50px;
     padding-left: 25px;
-    h1{
+
+    h1 {
         font-style: italic;
         color: #008248;
         font-weight: 900;
-        font-size: 5rem;
+        font-size: 3rem;
     }
-    h2{
-        color: white ;
+
+    h2 {
+        color: white;
         font-style: italic;
         font-weight: 900;
         font-size: 1.8rem;
     }
 }
-.bandrollImage{
+
+.bandrollImage {
     width: 100%;
-    height: 400px;
     display: flex;
-    img{
+
+    img {
         width: 100%;
         height: 100%;
-    }      
+    }
 }
-.bandrollImageShort{
+.bandrollImageShort {
     height: 350px;
     width: 240px;
-    margin-top:25px ;
+}
+.bandrollImageShort {
+    height: 206px;
+    width: 150px;
+    margin-top: 25px;
     position: relative;
     transform: skew(-25deg);
     margin-left: 15px;
 }
-.overlayLeft{
+
+.overlayLeft {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: #5e83fa;
-    mix-blend-mode:multiply;
+    mix-blend-mode: multiply;
 }
-.overlayRight{
+
+.overlayRight {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    mix-blend-mode:multiply;
-    background-color: rgba(0,0,0,.3);
+    mix-blend-mode: multiply;
+    background-color: rgba(0, 0, 0, 0.3);
 }
-.overlayCenter{
+
+.overlayCenter {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    mix-blend-mode:multiply;
-    background-color:#e40000 ;
+    mix-blend-mode: multiply;
+    background-color: #e40000;
 }
-.bandrollImageTall{
+.bandrollImageTall {
     height: 400px;
     width: 240px;
     position: relative;
     transform: skew(-25deg);
     margin-left: 15px;
 }
-.findCar{
+.findCar {
     width: 100%;
     height: 500px;
 }
-.red{
+
+.bandrollImageTall {
+    height: 274px;
+    width: 200px;
+    position: relative;
+    transform: skew(-25deg);
+    margin-left: 8px;
+}
+
+.red {
     font-size: 3rem;
-    color:#008248;
+    color: #008248;
     font-weight: 800;
     margin-right: 1rem;
     margin-left: 1rem;
 }
-.findCarTitle{
+.findCarTitle {
     color: white;
     font-size: 3rem;
     text-align: center;
-    font-weight: 800; 
+    font-weight: 800;
     margin-bottom: 30px;
 }
-.findCarFormLabel{
+.findCarFormLabel {
     font-size: 20px;
     font-weight: 500;
-    color: white ;
+    color: white;
 }
-.findCarFormInput{
+.findCarFormInput {
     height: 56px;
 }
-.findCarFormCheck{
-    input{
+.findCarFormCheck {
+    input {
         width: 24px;
         height: 24px;
         margin-right: 10px;
     }
-    label{
+    label {
         font-size: 20px;
         font-weight: 500;
-        color: white ; 
+        color: white;
     }
 }
-.findCarFormButton{
+.findCarFormButton {
     width: 100%;
     height: 60px;
     border: none;
@@ -137,78 +178,91 @@ body{
     background-color: #008248;
     color: white;
     font-size: 20px;
-    font-weight: 500; 
+    font-weight: 500;
 }
 
-.main-feature{
-    width:1300px;
-    height:250px;
+.main-feature {
+    width: 70%;
     margin: 0 auto;
-    margin-top:50px;
+    padding-top: 50px;
     font-weight: bold;
 }
-.main-feature .title-feature{
-    width:100%;
-    height:20%;
+
+.main-feature .title-feature {
+    width: 100%;
+    height: 20%;
 }
-.main-feature .image-feature img{
-  width: 80%;
-  height: 80%;
-  box-shadow: 10px 10px #b2b5b8;
+.main-feature .image-feature img {
+    margin: 0 auto;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
 }
 
 .slick-slide.slick-center img {
-    box-shadow:none; 
+    box-shadow: none;
     transform: scaleY(1.3) scaleX(1.4);
     transition-duration: 1s;
 }
-.car-rental-guide{
+
+.car-rental-guide {
     width: 100%;
-    height:auto;
-    margin-top: 100px; 
+    height: auto;
+    margin-top: 100px;
     // background: #c7f3d4;
-    background-image: linear-gradient(to right,#50C878,#996ce0);
+    background-image: linear-gradient(to right, #50c878, #996ce0);
+    background-image: linear-gradient(to right, #50c878, #996ce0);
     padding: 50px 0;
     border-top: 1px solid #e8eaef;
     border-bottom: 1px solid #e8eaef;
 }
-.car-rental-guide .title-guide{ 
-    width:100%;
-    height:auto;
+
+.car-rental-guide .title-guide {
+    width: 100%;
+    height: auto;
     padding-top: 20px;
     font-weight: bold;
     text-align: center;
-    font-size:3rem;
+    font-size: 3rem;
 }
-.car-rental-guide .content-guide{   
+
+.car-rental-guide .content-guide {
     width: 100%;
-    height:auto;
-    display:flex;
+    height: auto;
+    display: flex;
     grid-template-columns: auto auto auto auto;
-    justify-content:space-around;
+    justify-content: space-around;
 }
-.car-rental-guide .content-guide .image-guide{
-    width:250px;
-    height:250px;
+
+.car-rental-guide .content-guide .image-guide {
+    width: 250px;
+    height: 250px;
 }
-.car-rental-guide .content-guide .image-guide img{
-    width:100%;
-    height:100%;
+
+.car-rental-guide .content-guide .image-guide img {
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
-.car-rental-guide .see-more{
-    width:100%;
+
+.car-rental-guide .see-more {
+    width: 100%;
     height: 100px;
     padding-top: 60px;
 }
-.car-rental-guide .see-more .see-link{  
-    float:right;
+
+.car-rental-guide .see-more .see-link {
+    float: right;
     margin-right: 8%;
-    font-size:1.5rem;
+    font-size: 1.5rem;
     position: relative;
 }
-.car-rental-guide .see-more .see-link::before{
-    content: '';
+.car-rental-guide .see-more .see-link::before {
+    content: "";
+}
+
+.car-rental-guide .see-more .see-link::before {
+    content: "";
     position: absolute;
     bottom: 0;
     right: 0;
@@ -216,139 +270,161 @@ body{
     height: 1px;
     background-color: #1e1e1f;
     transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-.car-rental-guide .see-more .see-link:hover::before{
+}
+
+.car-rental-guide .see-more .see-link:hover::before {
     left: 0;
     right: auto;
     width: 100%;
-  }
+}
 
-.local-self-driver{
+.local-self-driver {
     width: 75%;
     height: 250px;
     margin: 50px auto;
     margin-bottom: 0px;
 }
-.local-self-driver{
+
+.local-self-driver {
     font-size: 1.5rem;
     font-weight: 900;
 }
+
 .local-self-driver .slick-slide img {
     border-radius: 10px;
     width: 90%;
-    margin:0 auto;
+    margin: 0 auto;
 }
-.local-self-driver .slick-slide{
+
+.local-self-driver .slick-slide {
     transition-property: width height;
     transition-duration: 1s;
 }
-.local-self-driver .slick-slide:hover{
+.local-self-driver .slick-slide:hover {
     transform: scale(1.1);
 }
-.local-self-driver .slick-slide h4{
+
+.local-self-driver .slick-slide:hover {
+    transform: scale(1.1);
+}
+
+.local-self-driver .slick-slide h4 {
     margin-top: -4.5rem;
     margin-left: 2rem;
     margin-bottom: 0;
     color: #fff;
 }
-.local-self-driver .slick-slide p{
+
+.local-self-driver .slick-slide p {
     margin-left: 2rem;
     color: #fff;
 }
-.banner2{
+
+.banner2 {
     width: 100%;
     height: 500px;
-    background-image: url('../../assets/images/bg3.jpg');
+    background-image: url("../../assets/images/bg3.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     position: relative;
     margin-top: 50px;
 }
-.banner2 .content-banner{
-    position: absolute;
+.banner2 .content-banner {
+    position: relative;
     left: 60%;
-    width: 40%;
-    height: 100%;
-    padding-top: 140px;
-    padding-left: 30px;
-    padding-right: 160px;   
+    top: 10%;
+    width: 35%;
 }
-.banner2 .content-banner button{
+
+.banner2 .content-banner button {
     margin-right: 16px;
-}
-.car-self-driver{
-    width: 75%;
-    height: 350px;
-    margin: 50px auto;
-    font-size: 1.5rem;
-    font-weight: 900;
-}
-.car-self-driver .slick-slide img{
-    border-radius: 5px;
     width: 90%;
-    height: 200px;
-    margin:0 auto ;
 }
-.car-self-driver .slick-slide h4{
-    padding-left: 1rem;
-    margin-top: -4rem;
-    color: green !important;
-    transition: color 0.5s;
+
+.car-self-driver {
+    width: 75%;
+    margin: 50px auto;
+    .item {
+        width: 90% !important;
+        margin-left: 5%;
+    }
 }
-.car-self-driver .slick-slide:hover h4{
-   color: white !important;
-}
-.car-self-driver .slick-slide p {
-    margin: 0;
-    font-size: 1rem;
-    padding-left: 1rem;
-}
-.car-self-driver .slick-slide .num-rental{
-    margin-left: 2.5rem;
-}
-.car-self-driver .slick-slide .icon{
-    width: 26px;
-    height: 26px;
-}
-.blog{
-    width: 100%;
-    height:800px;
+// .car-self-driver .slick-slide img {
+//     border-radius: 5px;
+//     width: 90%;
+//     height: 200px;
+//     margin: 0 auto;
+// }
+// .car-self-driver .slick-slide h4 {
+//     padding-left: 1rem;
+//     margin-top: -4rem;
+//     color: green !important;
+//     transition: color 0.5s;
+// }
+// .car-self-driver .slick-slide:hover h4 {
+//     color: white !important;
+// }
+// .car-self-driver .slick-slide p {
+//     margin: 0;
+//     font-size: 1rem;
+//     padding-left: 1rem;
+// }
+// .car-self-driver .slick-slide .num-rental {
+//     margin-left: 2.5rem;
+// }
+// .car-self-driver .slick-slide .icon {
+//     width: 26px;
+//     height: 26px;
+// }
+.blog {
+    width: 100vw;
+    height: 800px;
     // background-image: url("../../assets/images/bg-blog.png");
-    background-image: linear-gradient(to right,#00c8ffa2,#e66fe6c2),url("../../assets/images/rolroi.jpg");
+    background-image: linear-gradient(to right, #00c8ffa2, #e66fe6c2), url("../../assets/images/rolroi.jpg");
     background-size: 100%;
+    overflow-x: hidden;
     background-repeat: no-repeat;
 }
-.blog .blog-title{
+
+.blog .blog-title {
     text-align: center;
     font-size: 3rem;
     margin-top: 1rem;
 }
+
 .blog .blog-content {
     width: 80%;
     height: 600px;
     margin: 0 auto;
 }
-.blog .blog-content div{
+
+.blog .blog-content div {
     padding-bottom: 15px;
     position: relative;
 }
-.blog .blog-content .card{
+
+.blog .blog-content .card {
     width: 90% !important;
-    height:90% !important;
+    height: 90% !important;
     margin-left: 5%;
     box-shadow: 10px 10px 10px #888888;
     border-radius: 10px;
     transition: all 250ms ease-in-out;
 }
-.blog .blog-content .card:hover{
+
+.blog .blog-content .card:hover {
     box-shadow: 0 4px 1rem -4px #000;
     transform: translateY(-3px);
 }
-.blog .blog-content .card .card-link{
+.blog .blog-content .card .card-link {
     position: relative;
 }
-.blog .blog-content .card .card-link::before{
-    content: '';
+.blog .blog-content .card .card-link {
+    position: relative;
+}
+
+.blog .blog-content .card .card-link::before {
+    content: "";
     position: absolute;
     bottom: 0;
     right: 0;
@@ -357,39 +433,99 @@ body{
     background-color: #1e1e1f;
     transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.blog .blog-content .card .card-link:hover::before{
+
+.blog .blog-content .card .card-link:hover::before {
     left: 0;
     right: auto;
     width: 100%;
 }
-.blog .blog-content .card .card-text{
+.blog .blog-content .card .card-text {
     font-weight: 300;
-}    
-.app-container{
-    width:100%;
-    height: 600px;
+}
+.app-container {
+    margin: 0;
+    width: 100%;
+}
+.blog .blog-content .card .card-text {
+    font-weight: 300;
+}
+
+.app-container {
+    width: 100%;
     background-image: url("../../assets/images/bg2.png");
-    background-size: 100% ;
+    background-size: 100%;
     background-repeat: no-repeat;
+    padding: 50px 0;
 }
-.app-container .app-left{
-    width:50%;
-    height: 100%;
-    float:left;
-    padding-top: 10rem;
-    padding-left: 8rem;
+.app-image {
+    float: left;
 }
-.app-container .app-left .app-image-apple{
-    float:left;
-    margin-right: 1rem;
+.app-container .app-left {
+    padding-top: 50px;
 }
 
-.app-container .app-right{
-    width:50%;
-    height: 100%;
-    float:right;
-    padding-left: 8rem;
-    padding-top: 5rem;
+.app-left,
+.app-right {
+    padding-left: 100px;
+}
+@media (max-width: 1080px) {
+    .app-container {
+        background-size: auto;
+    }
+    .app-left,
+    .app-right {
+        padding-left: 40px;
+    }
 }
 
+@media (max-width: 876px) {
+    .banner2 {
+        height: 400px;
+        background-size: auto;
+        .content-banner {
+            width: 70%;
+            left: 50px;
+        }
+    }
+}
 
+.MuiInputBase-root {
+    font-family: "Josefin Sans" !important;
+    height: 38px !important;
+    padding: 6px 12px !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    color: #212529 !important;
+    background-color: #fff !important;
+
+    &::after,
+    &::before {
+        content: none !important;
+    }
+}
+
+#find-car {
+    .nav-link {
+        color: white !important;
+        text-align: center;
+    }
+}
+
+#find-withdriver {
+    .nav-link {
+        border-bottom: 1px solid white;
+
+        &.active {
+            border-top: 1px solid white;
+            border-left: 1px solid white;
+            border-right: 1px solid white;
+            border-bottom: none;
+        }
+    }
+}
+
+.MuiIconButton-label {
+    margin-bottom: 20px;
+    display: none !important;
+}

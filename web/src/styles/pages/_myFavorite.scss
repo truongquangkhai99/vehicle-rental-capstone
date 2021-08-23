@@ -1,6 +1,5 @@
 .myfavs {
-    width: 80%;
-    margin: 0 auto;
+    margin: 10px auto;
     ul {
         li {
             button {
@@ -11,7 +10,12 @@
         }
     }
     .tab-content {
-        margin: 80px 0;
+        margin: 30px 0;
+    }
+    .nav-link.active{
+        border-top: 1px solid $primary !important;
+        border-left: 1px solid $primary !important;
+        border-right: 1px solid $primary !important;
     }
 }
 

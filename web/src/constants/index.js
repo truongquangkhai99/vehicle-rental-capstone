@@ -10,9 +10,9 @@ export const NOTI = {
     animationIn: ["animated", "fadeIn"],
     animationOut: ["animated", "fadeOut"],    
     slidingEnter: {
-        duration: 250,
+        duration: 300,
       },
       slidingExit: {
-        duration: 250,
+        duration: 300,
       },
 }

@@ -11,128 +11,148 @@ import { GrFacebookOption } from "react-icons/gr";
 // import { useDispatch } from "react-redux";
 // import Cookies from "universal-cookie";
 import * as Yup from "yup";
+import ForgetPasswordForm from "./ForgetPasswordForm";
 
 const LoginForm = (props) => {
   const handleClose = props.handleClose;
   const handleShowSignup = props.handleShowSignup;
   const [status, setStatus] = useState(0);
+  const handleForgetPassword = () => {
+    setStatus(2);
+  };
   const redirect = () => {
     localStorage.setItem("_pathname", window.location.pathname);
     localStorage.setItem("_search", window.location.search);
   };
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={Yup.object({
-        email: Yup.string().required("Đây là trường bắt buộc"),
-        password: Yup.string().required("Đây là trường bắt buộc"),
-      })}
-      onSubmit={(values) => {
-        setStatus(1);
-        UserApi.login(values)
-          .then((res) => {
-            store.dispatch(login(res));
-            handleClose();
-            setStatus(0);
-          })
-          .catch((res) => {
-            console.log(res);
-            setStatus(-1);
-          });
-      }}
+    <Modal
+      show={true}
+      onHide={handleClose}
+      fullscreen="sm-down"
+      backdrop="static"
     >
-      <Modal
-        show={true}
-        onHide={handleClose}
-        fullscreen="sm-down"
-        backdrop="static"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Đăng nhập</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            {status === 1 ? (
-              <div className="position-relative">
-                <Loading type="inline" />
-              </div>
-            ) : (
-              <p className="text-danger text-center">
-                {status === -1 ? "Sai tên đăng nhập hoặc mật khẩu" : null}
-              </p>
-            )}
-            <BForm.Group className="mb-3" controlId="email">
-              <BForm.Label>Tên đăng nhập*:</BForm.Label>
-              <Field name="email">
-                {({ field }) => (
-                  <BForm.Control
-                    type="text"
-                    {...field}
-                    placeholder="Nhập email của bạn"
-                  />
-                )}
-              </Field>
-              <BForm.Text className="text-danger">
-                <ErrorMessage name="email" />
-              </BForm.Text>
-            </BForm.Group>
-            <BForm.Group className="mb-3" controlId="password">
-              <BForm.Label>Mật khẩu*:</BForm.Label>
-              <Field name="password">
-                {({ field }) => (
-                  <BForm.Control
-                    type="password"
-                    {...field}
-                    placeholder="Nhập mật khẩu"
-                  />
-                )}
-              </Field>
-              <BForm.Text className="text-danger">
-                <ErrorMessage name="password" />
-              </BForm.Text>
-            </BForm.Group>
-            <BForm.Text className="text-muted">
-              Bạn chưa là thành viên?{" "}
-              <span
-                className="link-primary text-decoration-underline cursor--pointer"
-                onClick={() => {
+      <Modal.Header closeButton>
+        <Modal.Title>Đăng nhập</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {status === 2 ? (
+          <ForgetPasswordForm close={handleClose} />
+        ) : (
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={Yup.object({
+              email: Yup.string().required("Đây là trường bắt buộc"),
+              password: Yup.string().required("Đây là trường bắt buộc"),
+            })}
+            onSubmit={(values) => {
+              setStatus(1);
+              UserApi.login(values)
+                .then((res) => {
+                  store.dispatch(login(res));
                   handleClose();
-                  handleShowSignup();
-                }}
-              >
-                Hãy đăng ký ngay!
-              </span>
-            </BForm.Text>
-            <Button variant="primary" className="w-100 my-3" type="submit">
-              Đăng nhập
-            </Button>
-            <hr />
-            <BForm.Text className="text-muted text-center d-block mb-3">
-              Hoặc đăng nhập bằng tài khoản
-            </BForm.Text>
-            <div className="d-flex gap-2">
-              <Button
-                href={FACEBOOK_AUTH_URL}
-                className="w-50"
-                onClick={redirect}
-                style={{ backgroundColor: "#285091" }}
-              >
-                <GrFacebookOption className="icon" />
-                Facebook
+                  setStatus(0);
+                })
+                .catch((res) => {
+                  console.log(res);
+                  setStatus(-1);
+                });
+            }}
+          >
+            <Form>
+              {status === 1 ? (
+                <div className="position-relative">
+                  <Loading type="inline" />
+                </div>
+              ) : (
+                <p className="text-danger text-center">
+                  {status === -1 ? "Sai tên đăng nhập hoặc mật khẩu" : null}
+                </p>
+              )}
+              <BForm.Group className="mb-3" controlId="email">
+                <BForm.Label>Tên đăng nhập*:</BForm.Label>
+                <Field name="email">
+                  {({ field }) => (
+                    <BForm.Control
+                      type="text"
+                      {...field}
+                      placeholder="Nhập email của bạn"
+                    />
+                  )}
+                </Field>
+                <BForm.Text className="text-danger">
+                  <ErrorMessage name="email" />
+                </BForm.Text>
+              </BForm.Group>
+              <BForm.Group className="mb-3" controlId="password">
+                <BForm.Label>Mật khẩu*:</BForm.Label>
+                <Field name="password">
+                  {({ field }) => (
+                    <BForm.Control
+                      type="password"
+                      {...field}
+                      placeholder="Nhập mật khẩu"
+                    />
+                  )}
+                </Field>
+                <BForm.Text className="text-danger">
+                  <ErrorMessage name="password" />
+                </BForm.Text>
+              </BForm.Group>
+              <div className="d-flex justify-content-between">
+                <BForm.Text className="text-muted">
+                  Bạn chưa là thành viên?{" "}
+                  <span
+                    className="link-primary text-decoration-underline cursor--pointer"
+                    onClick={() => {
+                      handleClose();
+                      handleShowSignup();
+                    }}
+                  >
+                    Hãy đăng ký ngay!
+                  </span>
+                </BForm.Text>
+                <BForm.Text className="text-muted">
+                  <span
+                    className="link-primary text-decoration-underline cursor--pointer"
+                    onClick={() => {
+                      handleForgetPassword();
+                    }}
+                  >
+                    Quên mật khẩu?
+                  </span>
+                </BForm.Text>
+              </div>
+              <Button variant="primary" className="w-100 my-3" type="submit">
+                Đăng nhập
               </Button>
-              <Button
-                href={GOOGLE_AUTH_URL}
-                variant="danger"
-                className="w-50 text-white"
-                onClick={redirect}
-              >
-                <AiOutlineGoogle className="icon" /> Google
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </Formik>
+              <hr />
+              <BForm.Text className="text-muted text-center d-block mb-3">
+                Hoặc đăng nhập bằng tài khoản
+              </BForm.Text>
+              <div className="d-flex gap-2">
+                <Button
+                  href={FACEBOOK_AUTH_URL}
+                  className="w-50"
+                  onClick={redirect}
+                  style={{ backgroundColor: "#285091" }}
+                >
+                  <GrFacebookOption className="icon" />
+                  Facebook
+                </Button>
+                <Button
+                  href={GOOGLE_AUTH_URL}
+                  variant="danger"
+                  className="w-50 text-white"
+                  onClick={redirect}
+                >
+                  <AiOutlineGoogle className="icon" /> Google
+                </Button>
+              </div>
+            </Form>
+          </Formik>
+        )}
+      </Modal.Body>
+    </Modal>
   );
 };
 export default React.memo(LoginForm);

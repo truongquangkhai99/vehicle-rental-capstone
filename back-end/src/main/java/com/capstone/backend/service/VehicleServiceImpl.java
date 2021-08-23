@@ -2,20 +2,30 @@ package com.capstone.backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.capstone.backend.model.Bike;
+import com.capstone.backend.model.Brand;
 import com.capstone.backend.model.Car;
+import com.capstone.backend.model.Image;
+import com.capstone.backend.model.Location;
+import com.capstone.backend.model.Model;
+import com.capstone.backend.model.User;
 import com.capstone.backend.model.Vehicle;
 import com.capstone.backend.payload.ResponseData;
 import com.capstone.backend.repository.BikeRepository;
+import com.capstone.backend.repository.BrandRepository;
 import com.capstone.backend.repository.CarRepository;
+import com.capstone.backend.repository.LocationRepository;
+import com.capstone.backend.repository.ModelRepository;
+import com.capstone.backend.repository.UserRepository;
 import com.capstone.backend.repository.VehicleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VehicleServiceImpl implements VehicleService {
+public class VehicleServiceImpl {
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -24,76 +34,120 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Autowired
     private BikeRepository bikeRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private BrandRepository brandRepository;
+    @Autowired
+    private ModelRepository modelRepository;
+    @Autowired
+    private LocationRepository locationRepository;
 
-    @Override
-    public ResponseData getAllVehiclesByUserId(long id) {
-        List<Vehicle> listVehicle = new ArrayList<>();
-        for (Vehicle vehicle : vehicleRepository.findAllByUserId(id)) {
-            if (vehicle.getUser().getId() == id) {
-                listVehicle.add(vehicle);
+    public List<Vehicle> getAllVehiclesByUserId(long id) {
+        return vehicleRepository.findAllByUserId(id);
+    }
+
+    public ResponseData saveCar(Car car, long userId) {
+        User u = userRepository.findById(userId).get();
+        car.setUser(u);
+        Model m = modelRepository.findById(car.getModel().getId()).get();
+        car.setModel(m);
+        Location l = car.getLocation();
+        l.setUser(u);
+        l = locationRepository.save(l);
+        car.setLocation(l);
+        List<Image> li = car.getImages();
+        car.setImages(null);
+        car = carRepository.save(car);
+        for (Image i : li) {
+            i.setLink("http://localhost:8080/api/images/vehicle" + car.getId() + "-" + i.getId());
+            i.setVehicle(car);
+            i.setId(0l);
+            if (i.isMainImg()) {
+                car.setMainImg(i.getLink());
             }
         }
-        return new ResponseData("get all my vehicle", listVehicle);
+        car.setImages(li);
+        return new ResponseData("creat car", carRepository.save(car));
     }
 
-    @Override
-    public ResponseData saveCar(Car car) {
-        return new ResponseData("create car", vehicleRepository.save(car));
+    public ResponseData saveBike(Bike bike, long userId) {
+        User u = userRepository.findById(userId).get();
+        bike.setUser(u);
+        Model m = modelRepository.findById(bike.getModel().getId()).get();
+        bike.setModel(m);
+        Location l = bike.getLocation();
+        l.setUser(u);
+        l = locationRepository.save(l);
+        bike.setLocation(l);
+        List<Image> li = bike.getImages();
+        bike.setImages(null);
+        bike = bikeRepository.save(bike);
+        for (Image i : li) {
+            i.setLink("http://localhost:8080/api/images/vehicle" + bike.getId() + "-" + i.getId());
+            i.setVehicle(bike);
+            i.setId(0l);
+            if (i.isMainImg()) {
+                bike.setMainImg(i.getLink());
+            }
+        }
+        bike.setImages(li);
+        return new ResponseData("creat bike", bikeRepository.save(bike));
     }
 
-    @Override
-    public ResponseData saveBike(Bike bike) {
-        return new ResponseData("creat bike", vehicleRepository.save(bike));
+    public ResponseData updateCar(Car car) {
+        Location l = car.getLocation();
+        locationRepository.save(l);
+        return new ResponseData("creat car", carRepository.save(car));
     }
 
-    @Override
+    public ResponseData updateBike(Bike bike) {
+        Location l = bike.getLocation();
+        locationRepository.save(l);
+        return new ResponseData("creat bike", bikeRepository.save(bike));
+    }
+
     public ResponseData getVehicleById(long id) {
         return new ResponseData("get vehicle", vehicleRepository.findById(id).get());
     }
 
-    @Override
-    public ResponseData findCarDriver() {
-        List<Car> lCars = new ArrayList<>();
-        if (carRepository.findAll() != null) {
-            for (Car car : carRepository.findAll()) {
-                if (car.isDriver()) {
-                    lCars.add(car);
-                }
-            }
-            return new ResponseData("ok", lCars);
+    public List<Car> findCarDriver() {
+        return carRepository.findByDriverAndActived(true, true);
+    }
+
+    public List<Car> findCarSelfDriver() {
+        return carRepository.findByDriverAndActived(false, true);
+    }
+
+    public List<Bike> findBike() {
+        return bikeRepository.findByActived(true);
+    }
+
+    public List<Vehicle> getMyFavs(Long userId) {
+        return vehicleRepository.findByUserLikedId(userId);
+    }
+
+    public boolean checkLiked(long id, long userId) {
+        return vehicleRepository.existsByIdAndUserLikedId(id, userId);
+    }
+
+    public void updateLike(long id, boolean status, long userId) {
+        User u = userRepository.findById(userId).get();
+        List<Vehicle> lv = u.getLikedVehicles();
+        if (status) {
+            Vehicle v = vehicleRepository.findById(id).get();
+            lv.add(v);
         } else {
-            return new ResponseData("list car null", lCars);
+            lv.removeIf(vehicle -> vehicle.getId() == id);
         }
-
+        u.setLikedVehicles(lv);
+        userRepository.save(u);
     }
 
-    @Override
-    public ResponseData findCarSelfDriver() {
-        List<Car> lCars = new ArrayList<>();
-        if (carRepository.findAll() != null) {
-            for (Car car : carRepository.findAll()) {
-                if (car.isDriver() == false) {
-                    lCars.add(car);
-                }
-            }
-            return new ResponseData("ok", lCars);
-        } else {
-            return new ResponseData("list car null", lCars);
-        }
-
+    public List<Brand> getBrands() {
+        return brandRepository.findAll();
     }
 
-    @Override
-    public ResponseData findBike() {
-        try {
-            return new ResponseData("ok", bikeRepository.findAll());
-        } catch (Exception ex) {
-            return new ResponseData("error", null);
-        }
-
-    }
-
-    @Override
     public ResponseData approachCar(long id) {
         Vehicle v = vehicleRepository.findById(id).get();
         v.setActived(!v.isActived());

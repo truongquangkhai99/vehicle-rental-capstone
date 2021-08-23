@@ -62,12 +62,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String token = tokenProvider.generateToken(ud.getUser());
         User u = ud.getUser();
         try {
-            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token)
+            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("accessToken", token)
                     .queryParam("fullName", URLEncoder.encode(u.getFullName(), "UTF-8"))
                     .queryParam("avatarLink", u.getAvatarLink()).queryParam("emailVerify", true)
                     .queryParam("role", "ROLE_USER").build().toUriString();
         } catch (UnsupportedEncodingException e) {
-            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("token", token)
+            return UriComponentsBuilder.fromUriString(targetUrl).queryParam("accessToken", token)
                     .queryParam("fullName", u.getFullName())
                     .queryParam("avatarLink", u.getAvatarLink()).queryParam("emailVerify", true)
                     .queryParam("role", "ROLE_USER").build().toUriString();

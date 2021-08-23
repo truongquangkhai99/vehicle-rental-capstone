@@ -1,13 +1,16 @@
 .item {
     color: #000;
     justify-items: flex-start;
+
     a {
         text-decoration: none;
+
         .item__img {
             .item__img-main {
                 width: 100%;
                 height: 300px;
                 position: relative;
+
                 img {
                     width: 100%;
                     height: 250px;
@@ -15,8 +18,10 @@
                     background-repeat: no-repeat;
                 }
             }
+
             .item__img-infor {
                 position: relative;
+
                 .item__img-infor-passport {
                     width: 50%;
                     height: 35px;
@@ -32,33 +37,34 @@
                 }
             }
         }
+
         .item__decs {
             position: relative;
             background-color: #fff;
             padding: 20px 0 5px 5px;
-            
+
             top: -20px;
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
+
             h2 {
                 font-size: 20px;
                 color: #000;
                 margin-left: 3px;
             }
-            .item__decs-rating {
-                display: flex;
-                .item__decs-rating-star {
-                    font-size: 25px;
-                }
+
+            .item__decs--rating {
                 span {
                     font-size: 15px;
-                    margin-left: 15px;
                     text-align: center;
                     line-height: 42px;
-                    color: #000;
+                    color: $text-muted !important;
+                    vertical-align: sub;
                 }
             }
-            .item__decs-auto {
+
+            .item__decs--auto {
+                display: inline-block;
                 width: 30%;
                 height: 25px;
                 background-color: #e7eaef;
@@ -66,10 +72,12 @@
                 line-height: 25px;
                 text-align: center;
                 font-size: 14px;
-                margin: 5px 3px;
+                margin: 0 10px 0 0;
             }
+
             .item__decs-local {
                 display: flex;
+
                 span {
                     font-size: 12px;
                     line-height: 29px;

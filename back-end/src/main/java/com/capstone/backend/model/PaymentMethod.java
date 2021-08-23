@@ -16,5 +16,10 @@ public class PaymentMethod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+
+    public PaymentMethod(long id) {
+        this.id = id;
+    }
+    
     
 }

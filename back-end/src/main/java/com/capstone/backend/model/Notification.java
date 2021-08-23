@@ -23,6 +23,7 @@ public class Notification {
    private String content;
    private String contentDetail;
    private String imgLink;
+   private String link;
    private Date createTime= new Date();
    private boolean readed;
    @OneToOne

@@ -1,0 +1,338 @@
+.vehicle {
+    background-color: #fff;
+
+    .vehicle__header {
+        .image-wrapper {
+            display: block !important;
+        }
+
+        .slick-dots {
+            bottom: 5px;
+        }
+
+        .slick-dots li button:before {
+            color: white;
+        }
+
+        .slick-prev,
+        .slick-next {
+            transition: opacity .3s;
+            width: 35px;
+            height: 100%;
+            z-index: 100;
+            color: $primary;
+            opacity: 0;
+
+            &:hover {
+                opacity: 1 !important;
+            }
+
+            &::before {
+                color: $primary;
+            }
+        }
+
+        .slick-prev {
+            left: 20px;
+        }
+
+        .slick-next {
+            right: 20px
+        }
+
+        &:hover {
+
+            .slick-prev,
+            .slick-next {
+                opacity: .5;
+            }
+        }
+    }
+
+    .vehicle__body {
+        margin: 0 auto;
+        padding-top: 40px;
+
+        .vehicle__body-content {
+            .heading {
+                margin-bottom: 80px;
+
+                .title-vehicle {
+                    margin-bottom: 0;
+                }
+
+                .status-vehicle {
+                    margin-bottom: 15px;
+
+                    .star-ratings {
+                        margin-right: 10px;
+                    }
+
+                    .number-trips {
+                        margin-left: 10px;
+                    }
+                }
+
+                .footer-vehicle {
+                    span {
+                        color: #6e6e6e;
+                        padding: 3px 10px;
+                        background-color: #e7eaee;
+                        margin-right: 10px;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .desc {
+                .desc-item {
+                    margin-bottom: 20px;
+
+                    .desc-title {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #a9aaad;
+                    }
+
+                    .desc-content {
+                        position: relative;
+
+                        span {
+                            #icon-vehicle {
+                                position: relative;
+                                margin-right: 3px;
+                                top: -8%;
+                            }
+                        }
+
+                        .infor-owner {
+                            .avatar-owner {
+                                border-radius: 50%;
+
+                                img {
+                                    width: 100px;
+                                    height: 100px;
+                                    border-radius: 100%;
+                                }
+                            }
+
+                            .status-owner {
+                                #owner-name {
+                                    text-decoration: none;
+                                    color: #000;
+
+                                    h4 {
+                                        margin: 0;
+                                    }
+                                }
+                            }
+                        }
+
+                        .response-desc {
+                            display: flex;
+                            justify-content: space-between;
+                            margin: 15px 0;
+                            border-bottom: 1px solid #cccccc;
+
+                            .rate {
+                                font-size: 20px;
+                                font-weight: 500px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .review {
+                margin-top: 100px;
+
+                .review-heading {
+                    border-bottom: 2px solid #b2b2b2;
+                    margin-bottom: 30px;
+                    padding: 0 0 10px 0;
+
+                    h3 {
+                        margin: 0;
+                    }
+
+                    .status-vehicle {
+                        .star-ratings {
+                            margin-right: 15px;
+                        }
+
+                        .number-report {
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .vehicle__body-sidebar {
+            #sidebar {
+                padding: 15px 45px;
+                background-color: #fff;
+                position: relative;
+                top: -110px;
+                border: solid 1px #e7eaee;
+                border-radius: 25px;
+                box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+                margin-bottom: -60px;
+
+                .price-vehicle {
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+
+                    .price {
+                        font-size: 50px;
+                        font-weight: 600;
+                        color: #00a54f;
+                    }
+
+                    .unit {
+                        font-weight: 500;
+                        color: #a9aaad;
+                    }
+                }
+
+                .lable-form {
+                    font-weight: 600;
+                    font-size: 18px;
+                }
+
+                .local-sidebar {
+                    position: relative;
+
+                    #icon-vehicle {
+                        position: relative;
+                        top: -3px;
+                    }
+                }
+
+                #date-time {
+                    width: 100%;
+                    margin: 0 auto;
+
+                    .date-time {
+                        height: 40px;
+                        border: solid 1px #e7eaee;
+                        line-height: 38px;
+                        text-align: center;
+                    }
+                }
+
+                #line-form {
+                    width: 100%;
+                    background-color: #f9ede6;
+                    padding: 5px 0;
+
+                    #line-item {
+                        width: 90%;
+                        margin: 0 auto;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+
+                .line-bold {
+                    font-weight: 600;
+                }
+
+                .line-insur {
+                    text-decoration: none;
+                    color: #000;
+                }
+            }
+        }
+    }
+
+}
+
+
+.bill {
+    .bill-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    #total {
+        padding: 5px 0;
+        border-top: 1px solid #a9aaad;
+        border-bottom: 1px solid #a9aaad;
+    }
+}
+
+.star-ratings {
+    color: #00a54f;
+    font-size: 20px;
+}
+
+.report-btn {
+    background-color: #fff;
+    color: #00a54f;
+}
+
+button {
+    width: 100%;
+    height: 50px;
+}
+
+.map--pointer {
+    font-size: 20px
+}
+
+.promotion--success {
+    box-shadow: $box-shadow;
+    $h: 38px;
+    display: flex;
+    height: $h;
+    line-height: $h;
+    text-align: center;
+    font-size: 1.3rem;
+    border-top: 1px solid $primary;
+    border-bottom: 1px solid $primary;
+    border-right: 1px solid $primary;
+}
+
+.promotion__item {
+    &:nth-child(1) {
+        flex-grow: 2;
+        border-right: 3px dotted white;
+        text-transform: uppercase;
+        padding-top: 2px;
+        background-color: $primary;
+        color: white;
+        flex-basis: 160px;
+    }
+
+    &:nth-child(2) {
+        flex-basis: 80px;
+        flex-grow: 1;
+    }
+
+    &:nth-child(3) {
+        background-color: $danger;
+        flex-basis: 40px;
+        cursor: pointer;
+    }
+}
+
+.paymethod__item {
+    width: 100%;
+    line-height: 100px;
+    text-align: center;
+    height: 100px;
+    vertical-align: middle;
+    border: 1px solid $primary;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+
+    &.active,
+    &:hover {
+        background-color: $primary;
+        color: white;
+    }
+}

@@ -1,0 +1,75 @@
+.register-vehicle {
+    background-color: #e7eaee;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    .register-heading {
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        background-color: #fff;
+        text-align: center;
+        .register-heading-tab {
+            position: relative;
+            padding: 15px 0;
+            .tab-number {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+                margin: 0 auto;
+                line-height: 60px;
+                border-radius: 50%;
+                background-color: #f8f9fb;
+            }
+            p {
+                margin: 0;
+                margin-top: 10px;
+                color: #a9aaad;
+            }
+            .icon-after {
+                position: absolute;
+                right: 0;
+                top: 28%;
+            }
+        }
+    }
+    .register-body {
+        .register-form {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fff;
+            .form-label {
+                font-weight: 600;
+            }
+            select {
+                font-size: 14px;
+            }
+            textarea {
+                width: 100%;
+                border: solid 1px #e7eaee;
+                padding: 5px 10px;
+            }
+            .form-check-input {
+                margin: 2px 5px 0 0;
+            }
+            span {
+                position: relative;
+                .icon-tools {
+                    position: relative;
+                    top: -2px;
+                    margin-right: 2px;
+                }
+            }
+            .address-vehicle {
+                text-align: center;
+
+                .icon-map-vehicle {
+                    font-size: 30px;
+                    line-height: 37.6px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

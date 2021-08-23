@@ -1,0 +1,189 @@
+.how-it-work {
+    .heading {
+        text-align: center;
+        padding: 50px 0;
+        margin: 0;
+        background-color: #00a54f;
+        color: #fff;
+    }
+
+    .nav {
+        background-color: #00a54f;
+        text-align: center;
+        justify-content: center;
+
+        .nav-item {
+            width: 20%;
+            padding-bottom: 2px;
+
+            .nav-link {
+                background-color: #00a54f;
+                border: none;
+                font-size: 18px;
+                font-weight: 600;
+                color: #a9a9a9;
+            }
+
+            .active {
+                color: #fff;
+            }
+
+            .nav-link:hover {
+                color: #fff;
+            }
+        }
+    }
+
+    .tab-content {
+        .tab-pane {
+            .content {
+                width: 80%;
+                margin: 100px auto;
+
+                .step {
+                    position: relative;
+                    padding-bottom: 100px;
+
+                    .left,
+                    .right2 {
+                        display: flex;
+                        justify-content: flex-end;
+                        padding: 0px 50px;
+
+                        .img-step {
+                            background-image: url("https://www.mioto.vn/static/media/tutorial.8d174a92.png");
+                            background-repeat: no-repeat;
+                            background-size: 800px 400px;
+                            width: 130px;
+                            height: 130px;
+                            vertical-align: middle;
+                        }
+
+                        .different-url {
+                            background-image: url("https://www.mioto.vn/static/media/tutorial_sprites.6ee57007.png") !important;
+                        }
+                    }
+
+                    .right,
+                    .left2 {
+                        display: flex;
+                        justify-content: flex-start;
+                        padding: 0px 50px;
+
+                        .content-step {
+                            position: relative;
+                            width: 90%;
+                            padding: 25px;
+                            border: 1px solid #57dd98;
+                            box-shadow: #00a550 5px 5px 1px 0px;
+
+                            .title {
+                                font-size: 35px;
+                                font-weight: 600;
+                                margin-bottom: 10px;
+                            }
+
+                            .num-step {
+                                font-size: 50px;
+                                font-weight: 600;
+                                padding: 0 20px;
+                                color: #00a550;
+                                background-color: #fff;
+                                z-index: 1;
+                                position: absolute;
+                                top: -40px;
+                                right: 40px;
+                            }
+                        }
+                    }
+
+                    .line-dot {
+                        width: 5px;
+                        height: 100%;
+                        padding: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 50%;
+                        background: #57dd98;
+                    }
+
+                    .line-dot::before {
+                        content: "";
+                        position: absolute;
+                        top: 15%;
+                        left: -10px;
+                        width: 25px;
+                        height: 25px;
+                        background: #00a550;
+                        border-radius: 100%;
+                        border: 5px solid #57dd98;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 990px) {
+    .how-it-work {
+        .nav-item {
+            width: 30%;
+        }
+
+        .step2 {
+            flex-direction: row-reverse;
+        }
+
+        .left2 {
+            justify-content: flex-start !important;
+        }
+
+        .right2 {
+            justify-content: flex-end !important;
+        }
+
+        .line-dot {
+            left: 33% !important;
+        }
+    }
+
+}
+
+@media (max-width: 848px) {
+    .how-it-work {
+        .content {
+            width: 100% !important;
+        }
+
+        .nav-item {
+            width: 50% !important;
+        }
+
+        .left,
+        .left2,
+        .right,
+        .right2 {
+            padding: 0 !important;
+            padding-left: 20px !important;
+            justify-content: flex-start !important;
+        }
+
+        .line-dot {
+            left: 25% !important;
+        }
+    }
+
+}
+
+@media (max-width: 768px) {
+    .line-dot {
+        left: 33% !important;
+    }
+
+    .left,
+    .left2,
+    .right,
+    .right2 {
+        padding-left: 15px !important;
+    }
+}

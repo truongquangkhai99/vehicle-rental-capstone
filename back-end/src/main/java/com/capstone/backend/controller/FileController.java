@@ -17,6 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +40,8 @@ public class FileController {
 
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
-        String fileName = fileStorageService.storeFile(file);
+        String name = StringUtils.cleanPath(file.getOriginalFilename());
+        String fileName = fileStorageService.storeFile(file, name);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/images/")
                 .path(fileName).toUriString();
 

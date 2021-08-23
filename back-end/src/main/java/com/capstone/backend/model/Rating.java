@@ -1,5 +1,7 @@
 package com.capstone.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,17 +25,17 @@ public class Rating {
     private long id;
     private String content;
     private int numStar;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Date createTime;
+    private String type;
+    @ManyToOne
     @JoinColumn(name = "reviewer_id")
     private User reviewer; //Người đánh giá
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "vehicle_id")
-    @EqualsAndHashCode.Exclude
     @JsonIgnore
     private Vehicle vehicle; //xe được đánh giá
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    @EqualsAndHashCode.Exclude
     @JsonIgnore
     private User user; //Người sau khi thuê xe đc chủ xe đánh giá
 }
