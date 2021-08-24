@@ -260,6 +260,7 @@ public class BookingController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/getUserBookingRating")
     public ResponseEntity<?> getUserBookingRating(HttpServletRequest request, @RequestParam long id) {
         try {
@@ -271,6 +272,7 @@ public class BookingController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/getVehicleBookingRating")
     public ResponseEntity<?> getVehicleBookingRating(HttpServletRequest request, @RequestParam long id) {
         try {
@@ -295,9 +297,10 @@ public class BookingController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/ratingUser")
-    public ResponseEntity<?> ratingUser(HttpServletRequest request, @RequestParam long id,
-            @RequestParam String content, @RequestParam int numStar, @RequestParam String type) {
+    public ResponseEntity<?> ratingUser(HttpServletRequest request, @RequestParam long id, @RequestParam String content,
+            @RequestParam int numStar, @RequestParam String type) {
         try {
             long userId = jwtAuth.getUserIdFromRequest(request);
             bookingService.ratingUser(userId, id, content, numStar, type);

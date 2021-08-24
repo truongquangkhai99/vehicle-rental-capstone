@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import BandRoll from "components/homepage/BandRoll";
-import MainFeature from "components/homepage/MainFeature";
+import MainFeature from "components/homepage/Mainfeature";
 import GuideCarRental from "components/homepage/GuideCarrental";
 import ProminentPlace from "components/homepage/ProminentPlace";
 import FeaturedCar from "components/homepage/FeatureCar";
 import Blogs from "components/homepage/Blogs";
-import FindCar from "components/homepage/FindCar";
+import FindCar from "components/homepage/Findcar";
 import { Link } from "react-router-dom";
 function HomePage() {
   return (

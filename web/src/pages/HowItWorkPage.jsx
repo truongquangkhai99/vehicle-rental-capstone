@@ -71,7 +71,7 @@ export default function HowItWorkPage() {
                                     <div className="content-step">
                                         <div className="title">Nhận xe</div>
                                         <div className="desc">Bạn và chủ xe liên hệ gặp nhau để nhận xe. Ở Mioto, có nhiều chủ xe sẵn sàng đem xe đến tận nơi cho bạn.<br /> <br />
-                                        Kiểm tra tình trạng và giấy tờ xe, xuất trình bản gốc các giấy tờ, kí xác nhận biên bản giao xe, nhận chìa khóa và bắt đầu hành trình của bạn</div>
+                                            Kiểm tra tình trạng và giấy tờ xe, xuất trình bản gốc các giấy tờ, kí xác nhận biên bản giao xe, nhận chìa khóa và bắt đầu hành trình của bạn</div>
                                         <span className="num-step">5</span>
                                     </div>
                                 </Col>
@@ -82,7 +82,7 @@ export default function HowItWorkPage() {
                                     <div className="content-step">
                                         <div className="title">Trả xe</div>
                                         <div className="desc">Sau khi hết thời gian thuê, bạn hoàn trả xe giống như tình trạng và thỏa thuận ban đầu. Kí xác nhận biên bản bàn giao, nhận lại giấy tờ để hoàn thành chuyến đi tuyệt vời của bạn. <br /><br />
-                                        Đừng quên cho điểm rating và nhận xét của bạn đến chủ xe để nâng cao chất lượng phục vụ cho những hành trình sắp tới nhé!</div>
+                                            Đừng quên cho điểm rating và nhận xét của bạn đến chủ xe để nâng cao chất lượng phục vụ cho những hành trình sắp tới nhé!</div>
                                         <span className="num-step">6</span>
                                     </div>
                                 </Col>
@@ -113,7 +113,7 @@ export default function HowItWorkPage() {
                                     <div className="content-step">
                                         <div className="title">Đăng Ký Xe</div>
                                         <div className="desc">Bạn chỉ cần đưa thông tin, mô tả, hình ảnh xe của bạn lên hệ thống. Cập nhật thời gian, mức giá mong muốn và các yêu cầu khác của bạn đối với khách thuê.&nbsp;
-                                        <a href="">Hoặc bạn có thể đăng ký chủ xe tại đây</a></div>
+                                            <a href="">Hoặc bạn có thể đăng ký chủ xe tại đây</a></div>
                                         <span className="num-step">2</span>
                                     </div>
                                 </Col>
@@ -140,7 +140,7 @@ export default function HowItWorkPage() {
                                     <div className="content-step">
                                         <div className="title">Nhận Và Phản Hồi</div>
                                         <div className="desc">Khi có khách gửi yêu cầu thuê xe, bạn sẽ nhận được thông báo từ Mioto. Kiểm tra thông tin cá nhân của khách và xác nhận cho thuê sớm nhất có thể.
-                                           <br /> <br /> Khi có sự đồng ý cho thuê từ bạn, khách thuê sẽ chuyển tiền đặt cọc để hoàn tất việc đặt xe.</div>
+                                            <br /> <br /> Khi có sự đồng ý cho thuê từ bạn, khách thuê sẽ chuyển tiền đặt cọc để hoàn tất việc đặt xe.</div>
                                         <span className="num-step">4</span>
                                     </div>
                                 </Col>

@@ -22,7 +22,6 @@ import OAuth2RedirectHandler from 'pages/OAuth2RedirectHandlerPage';
 import { useSelector } from 'react-redux';
 import AdminRoute from 'components/AdminRoute';
 import UserRoute from 'components/UserRoute';
-import AdminPage from 'pages/AdminPage';
 import { Route } from 'react-router-dom';
 import Header from 'components/header/Header';
 import CarPage from 'pages/CarPage';
@@ -40,7 +39,7 @@ import tawkTo from "tawkto-react";
 function App(props) {
   // @ts-ignore
   const isAdmin = useSelector(state => state.isAdmin).status;
-  
+
   const tawkToPropertyId = "601e2180c31c9117cb765c6f";
   const tawkToKey = "f538fb182eecee02b01e005f723d161d72c2ac05";
   useEffect(() => {
@@ -75,7 +74,7 @@ function App(props) {
           <UserRoute role={true} path="/registermode" component={RegisterVehiclePage} />
           <UserRoute role={true} path="/mywallet" component={MyWalltePage} />
           <UserRoute role={true} path="/vehiclesetting" component={VehicleSettingPage} />
-          <AdminRoute exact path="/admin" role="admin" component={AdminPage} />
+          <AdminRoute />
           <UserRoute component={NotFound} />
         </Switch>
       </Suspense>
@@ -85,3 +84,5 @@ function App(props) {
 }
 
 export default App;
+
+

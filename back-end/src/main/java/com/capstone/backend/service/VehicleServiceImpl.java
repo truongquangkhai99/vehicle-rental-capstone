@@ -47,23 +47,23 @@ public class VehicleServiceImpl {
         return vehicleRepository.findAllByUserId(id);
     }
 
-    public ResponseData saveCar(Car car,long userId) {
+    public ResponseData saveCar(Car car, long userId) {
         User u = userRepository.findById(userId).get();
         car.setUser(u);
         Model m = modelRepository.findById(car.getModel().getId()).get();
         car.setModel(m);
-        Location l =car.getLocation();
+        Location l = car.getLocation();
         l.setUser(u);
         l = locationRepository.save(l);
         car.setLocation(l);
         List<Image> li = car.getImages();
         car.setImages(null);
         car = carRepository.save(car);
-        for (Image i : li) {            
-            i.setLink("http://localhost:8080/api/images/vehicle"+car.getId()+"-"+i.getId());
+        for (Image i : li) {
+            i.setLink("http://localhost:8080/api/images/vehicle" + car.getId() + "-" + i.getId());
             i.setVehicle(car);
             i.setId(0l);
-            if(i.isMainImg()){
+            if (i.isMainImg()) {
                 car.setMainImg(i.getLink());
             }
         }
@@ -71,37 +71,38 @@ public class VehicleServiceImpl {
         return new ResponseData("creat car", carRepository.save(car));
     }
 
-    public ResponseData saveBike(Bike bike,long userId) {
+    public ResponseData saveBike(Bike bike, long userId) {
         User u = userRepository.findById(userId).get();
         bike.setUser(u);
         Model m = modelRepository.findById(bike.getModel().getId()).get();
         bike.setModel(m);
-        Location l =bike.getLocation();
+        Location l = bike.getLocation();
         l.setUser(u);
         l = locationRepository.save(l);
         bike.setLocation(l);
         List<Image> li = bike.getImages();
         bike.setImages(null);
         bike = bikeRepository.save(bike);
-        for (Image i : li) {            
-            i.setLink("http://localhost:8080/api/images/vehicle"+bike.getId()+"-"+i.getId());
+        for (Image i : li) {
+            i.setLink("http://localhost:8080/api/images/vehicle" + bike.getId() + "-" + i.getId());
             i.setVehicle(bike);
             i.setId(0l);
-            if(i.isMainImg()){
+            if (i.isMainImg()) {
                 bike.setMainImg(i.getLink());
             }
         }
         bike.setImages(li);
         return new ResponseData("creat bike", bikeRepository.save(bike));
     }
+
     public ResponseData updateCar(Car car) {
-        Location l =car.getLocation();
+        Location l = car.getLocation();
         locationRepository.save(l);
         return new ResponseData("creat car", carRepository.save(car));
     }
 
     public ResponseData updateBike(Bike bike) {
-        Location l =bike.getLocation();
+        Location l = bike.getLocation();
         locationRepository.save(l);
         return new ResponseData("creat bike", bikeRepository.save(bike));
     }
@@ -111,11 +112,11 @@ public class VehicleServiceImpl {
     }
 
     public List<Car> findCarDriver() {
-        return carRepository.findByDriverAndActived(true,true);
+        return carRepository.findByDriverAndActived(true, true);
     }
 
     public List<Car> findCarSelfDriver() {
-        return carRepository.findByDriverAndActived(false,true);
+        return carRepository.findByDriverAndActived(false, true);
     }
 
     public List<Bike> findBike() {
@@ -143,7 +144,14 @@ public class VehicleServiceImpl {
         userRepository.save(u);
     }
 
-	public List<Brand> getBrands() {
-		return brandRepository.findAll();
-	}
+    public List<Brand> getBrands() {
+        return brandRepository.findAll();
+    }
+
+    public ResponseData approachCar(long id) {
+        Vehicle v = vehicleRepository.findById(id).get();
+        v.setActived(!v.isActived());
+        vehicleRepository.save(v);
+        return new ResponseData("ok", null);
+    }
 }

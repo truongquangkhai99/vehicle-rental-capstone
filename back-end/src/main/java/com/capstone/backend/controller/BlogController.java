@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
@@ -28,15 +27,17 @@ public class BlogController {
     BlogRepository blogRepository;
 
     @GetMapping("/blogs")
-    public List<Blog> getBlog(){
+    public List<Blog> getBlog() {
         return blogRepository.findAll();
     }
+
     @GetMapping("/blog")
-    public ResponseData getBlogById(@RequestParam long id){
+    public ResponseData getBlogById(@RequestParam long id) {
         return blogService.getBlogById(id);
     }
-    @PostMapping("/blog") 
-    public ResponseData saveBlog(@RequestBody Blog blog){
+
+    @PostMapping("/blog")
+    public ResponseData saveBlog(@RequestBody Blog blog) {
         return blogService.saveBlog(blog);
     }
 }

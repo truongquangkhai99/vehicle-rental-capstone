@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseData banUser(long id) {
         User u = getUserById(id);
-        u.setBanned(true);
+        u.setBanned(!u.isBanned());
         userRepository.save(u);
         return new ResponseData("ok", null);
     }
@@ -156,8 +156,8 @@ public class UserServiceImpl implements UserService {
     public String updateGPLX(long userId) {
         User u = userRepository.findById(userId).get();
         DrivingLicense dl = u.getDrivingLincense();
-        if(dl==null){
-            dl= new DrivingLicense();
+        if (dl == null) {
+            dl = new DrivingLicense();
         }
         dl.setImageLink("http://localhost:8080/api/images/drivingLicense" + userId);
         dl.setPermission(2);
@@ -187,9 +187,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-	public ResponseData getPromotions() {
-		return new ResponseData("ok", promotionRepository.findAll());
-	}
+    public ResponseData getPromotions() {
+        return new ResponseData("ok", promotionRepository.findAll());
+    }
 
     public void forgetPassword(String email) throws Exception {
         Optional<User> u = userRepository.findByEmail(email);
@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
             User user = u.get();
             user.setPassword(passwordEncoder.encode(code));
             userRepository.save(user);
-        }else{
+        } else {
             throw new Exception("Email không tồn tại!");
         }
     }

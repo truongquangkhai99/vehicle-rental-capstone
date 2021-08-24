@@ -1,7 +1,5 @@
 package com.capstone.backend.model;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -40,10 +37,8 @@ public class Booking {
     private Deposit deposit;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    @EqualsAndHashCode.Exclude
     private User user;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_id")
-    @EqualsAndHashCode.Exclude
     private Vehicle vehicle;
 }

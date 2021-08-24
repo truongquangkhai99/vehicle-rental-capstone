@@ -11,5 +11,5 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 public class Bike extends Vehicle {
-    private String bikeType; //{tay ga: g, xe số: s, tay côn: c}
+    private String bikeType; // {tay ga: g, xe số: s, tay côn: c}
 }

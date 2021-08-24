@@ -1,6 +1,5 @@
 package com.capstone.backend.model;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -49,12 +48,12 @@ public class Vehicle {
     private int limitDistance; // giới hạn quãng đường tối đa(km)
     private int outLimitFee; // giá vượt giới hạn(*1000đ/km)
     private int numBooking; // giá vượt giới hạn(*1000đ/km)
-    private String mainImg;    
+    private String mainImg;
     @Transient
     private int distance; // Khoảng cách từ xe tới vị trí đặt xe
-    
+
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     @OneToOne
     @JoinColumn(name = "location_id")

@@ -27,6 +27,7 @@ export default function Blogs() {
   const [getDataBlog, setDataBlog] = useState({ list: [] });
   useEffect(() => {
     blogApi.getBlog().then((res) => {
+      // @ts-ignore
       setDataBlog({ list: res });
     });
   }, []);
@@ -36,7 +37,7 @@ export default function Blogs() {
         <p className="blog-title">Blogs</p>
         <div className="blog-content">
           <Slider {...settings3}>
-            {getDataBlog.list.map((slider,index) => (
+            {getDataBlog.list.map((slider, index) => (
               <Card key={index}>
                 <Card.Img variant="top" src={slider.mainImgLink} />
                 <Card.Body>
@@ -45,7 +46,7 @@ export default function Blogs() {
                   <Card.Link
                     as={Link}
                     style={{ textDecoration: "none", color: "black" }}
-                    to={"/blog?id="+slider.id}
+                    to={"/blog?id=" + slider.id}
                   >
                     Xem thêm
                   </Card.Link>
