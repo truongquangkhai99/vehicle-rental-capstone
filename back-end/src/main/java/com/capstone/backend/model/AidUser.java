@@ -25,8 +25,7 @@ public class AidUser {
     private String name;
     private String phone;
     @ManyToMany(mappedBy = "aidUser")
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
+    @EqualsAndHashCode.Exclude    
     private List<AidVehicle> aidVehicle = new ArrayList<>();
 
     public AidUser(String name, String phone) {
