@@ -1,6 +1,7 @@
 package com.capstone.backend.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,9 +23,9 @@ public class Model {
     private Long id;
     private String name;
     private int suggestPrice;
-    private boolean carProduction; //mẫu xe oto? (false là xe máy)
-    @ManyToOne
-    @JoinColumn(name ="brand_id")
+    private boolean carProduction; // mẫu xe oto? (false là xe máy)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id")
     @JsonIgnore
     @EqualsAndHashCode.Exclude
     private Brand brand;

@@ -14,11 +14,9 @@ import com.capstone.backend.model.User;
 import com.capstone.backend.model.Vehicle;
 import com.capstone.backend.payload.BookingRequest;
 import com.capstone.backend.repository.BookingRepository;
-import com.capstone.backend.repository.DrivingLicenseRepository;
 import com.capstone.backend.repository.PaymentMethodRepository;
 import com.capstone.backend.repository.PromotionRepository;
 import com.capstone.backend.repository.RatingRepository;
-import com.capstone.backend.repository.ResponseRateRepository;
 import com.capstone.backend.repository.UserRepository;
 import com.capstone.backend.repository.VehicleRepository;
 
@@ -30,15 +28,11 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     private PromotionRepository promotionRepository;
     @Autowired
-    private DrivingLicenseRepository drivingLicenseRepository;
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
     @Autowired
     private BookingRepository bookingRepository;
-    @Autowired
-    private ResponseRateRepository responseRateRepository;
     @Autowired
     private PaymentMethodRepository paymentMethodRepository;
     @Autowired
@@ -175,7 +169,7 @@ public class BookingServiceImpl implements BookingService {
     public Booking receiveBackVehicle(long userId, long id) {
         Booking b = bookingRepository.findById(id).get();
         Vehicle v = b.getVehicle();
-        v.setNumBooking(v.getNumBooking()+1);
+        v.setNumBooking(v.getNumBooking() + 1);
         b.setStatus("Hoàn thành");
         b.setReturnTime(new Date().getTime());
         return bookingRepository.save(b);
@@ -187,10 +181,10 @@ public class BookingServiceImpl implements BookingService {
         return lr;
     }
 
-    public void ratingVehicle(long userId,long id, String content, int numStar,String type) {
+    public void ratingVehicle(long userId, long id, String content, int numStar, String type) {
         Booking b = bookingRepository.findById(id).get();
         Rating lr = ratingRepository.findByVehicleIdAndReviewerId(b.getVehicle().getId(), userId);
-        if(lr==null){
+        if (lr == null) {
             lr = new Rating();
         }
         lr.setNumStar(numStar);
@@ -201,10 +195,11 @@ public class BookingServiceImpl implements BookingService {
         lr.setVehicle(b.getVehicle());
         ratingRepository.save(lr);
     }
-    public void ratingUser(long userId,long id, String content, int numStar,String type) {
+
+    public void ratingUser(long userId, long id, String content, int numStar, String type) {
         Booking b = bookingRepository.findById(id).get();
-        Rating lr = ratingRepository.findByUserIdAndReviewerId(b.getUser().getId(),userId);
-        if(lr==null){
+        Rating lr = ratingRepository.findByUserIdAndReviewerId(b.getUser().getId(), userId);
+        if (lr == null) {
             lr = new Rating();
         }
         lr.setNumStar(numStar);
@@ -216,16 +211,16 @@ public class BookingServiceImpl implements BookingService {
         ratingRepository.save(lr);
     }
 
-	public Rating getUserBookingRating(long userId, long id) {
-		Booking b = bookingRepository.findById(id).get();
-        Rating lr = ratingRepository.findByUserIdAndReviewerId(b.getUser().getId(),userId);
+    public Rating getUserBookingRating(long userId, long id) {
+        Booking b = bookingRepository.findById(id).get();
+        Rating lr = ratingRepository.findByUserIdAndReviewerId(b.getUser().getId(), userId);
         return lr;
-	}
+    }
 
-	public List<Rating> getAllUserRating(long userId, long id) {
+    public List<Rating> getAllUserRating(long userId, long id) {
         Booking b = bookingRepository.findById(id).get();
         List<Rating> lr = ratingRepository.findByUserId(b.getUser().getId());
-		return lr;
-	}
+        return lr;
+    }
 
 }

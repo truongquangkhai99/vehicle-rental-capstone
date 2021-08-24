@@ -1,8 +1,6 @@
 package com.capstone.backend.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.capstone.backend.model.Bike;
 import com.capstone.backend.model.Brand;

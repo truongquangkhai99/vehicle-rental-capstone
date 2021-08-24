@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -29,13 +28,13 @@ public class Rating {
     private String type;
     @ManyToOne
     @JoinColumn(name = "reviewer_id")
-    private User reviewer; //Người đánh giá
+    private User reviewer; // Người đánh giá
     @ManyToOne
     @JoinColumn(name = "vehicle_id")
     @JsonIgnore
-    private Vehicle vehicle; //xe được đánh giá
+    private Vehicle vehicle; // xe được đánh giá
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
-    private User user; //Người sau khi thuê xe đc chủ xe đánh giá
+    private User user; // Người sau khi thuê xe đc chủ xe đánh giá
 }

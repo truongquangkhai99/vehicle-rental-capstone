@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin
@@ -34,16 +33,17 @@ public class VehicleController {
     JwtAuthenticationFilter jwtAuth;
 
     @PostMapping("/register/car") // đăng ký oto
-    public ResponseData saveVehicle(HttpServletRequest request,@RequestBody Car car) {
+    public ResponseData saveVehicle(HttpServletRequest request, @RequestBody Car car) {
         long userId = jwtAuth.getUserIdFromRequest(request);
-        return vehicleService.saveCar(car,userId);
+        return vehicleService.saveCar(car, userId);
     }
 
     @PostMapping("/register/bike") // đăng ký xe máy
-    public ResponseData saveVehicle(HttpServletRequest request,@RequestBody Bike bike) {
+    public ResponseData saveVehicle(HttpServletRequest request, @RequestBody Bike bike) {
         long userId = jwtAuth.getUserIdFromRequest(request);
-        return vehicleService.saveBike(bike,userId);
+        return vehicleService.saveBike(bike, userId);
     }
+
     @PostMapping("/update/car") // đăng ký oto
     public ResponseData updateVehicle(@RequestBody Car car) {
         return vehicleService.updateCar(car);

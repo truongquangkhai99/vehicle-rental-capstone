@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -35,7 +34,7 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file,String fileName) {
+    public String storeFile(MultipartFile file, String fileName) {
         // Normalize file name
         // String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 

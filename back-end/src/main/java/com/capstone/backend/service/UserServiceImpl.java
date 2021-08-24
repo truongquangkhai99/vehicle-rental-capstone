@@ -7,7 +7,6 @@ import javax.naming.NameAlreadyBoundException;
 
 import com.capstone.backend.model.DrivingLicense;
 import com.capstone.backend.model.Location;
-import com.capstone.backend.model.ResponseRate;
 import com.capstone.backend.model.User;
 import com.capstone.backend.payload.ChangePasswordRequest;
 import com.capstone.backend.payload.LoginRequest;
