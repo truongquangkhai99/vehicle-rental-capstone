@@ -36,8 +36,17 @@ const adminApi = {
             }
         })
     },
-    // getImageBlog:function(){
-    //     return axios.get("http://localhost:8080/api/images/{fileName:.+}")
-    // }
+    getBrand: function () {
+        return axiosClient.get('/admin/brands');
+    },
+    createBrand: function (data) {
+        return axiosClient.post('/admin/brand', data);
+    },
+    getModel: function () {
+        return axiosClient.get('/admin/models');
+    },
+    createModel: function (data) {
+        return axiosClient.post('/admin/model', data);
+    }
 }
 export default adminApi;

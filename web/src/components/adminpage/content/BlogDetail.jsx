@@ -9,7 +9,6 @@ import { createBlog } from 'app/slice/blogSlice';
 export default function BlogDetail() {
     // @ts-ignore
     const [isUpdate, setIsUpdate] = useState(false);
-    const [urlfile, seturlfile] = useState(null);
     const history = useHistory();
     const [file, setFile] = useState(null);
     const [blog, setBlog] = useState({
@@ -75,7 +74,6 @@ export default function BlogDetail() {
                     // @ts-ignore
                     onChange={handleChangeImage}
                     name="mainImgLink"
-                    value={blog.mainImgLink}
                 />
                 <Form.Label>Nội dung bài viết:</Form.Label>
                 <textarea

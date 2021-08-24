@@ -14,10 +14,6 @@ export default function Sidebar() {
                                 Trang Chủ
                             </li>
                         </Link>
-                        <li className="sidebarListItem">
-                            <Timeline className="sidebarIcon" />
-                            Phân tích
-                        </li>
                     </ul>
                 </div>
                 <div className="sidebarMenu">
@@ -46,22 +42,6 @@ export default function Sidebar() {
                                 Giao Dịch
                             </li>
                         </Link>
-                    </ul>
-                </div>
-                <div className="sidebarMenu">
-                    <ul className="sidebarList">
-                        <li className="sidebarListItem">
-                            <Mail className="sidebarIcon" />
-                            Email
-                        </li>
-                        <li className="sidebarListItem">
-                            <Message className="sidebarIcon" />
-                            Bình Luận
-                        </li>
-                        <li className="sidebarListItem">
-                            <Feedback className="sidebarIcon" />
-                            Thông Báo
-                        </li>
                     </ul>
                 </div>
             </div>
