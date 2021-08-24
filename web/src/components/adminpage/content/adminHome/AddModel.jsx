@@ -67,7 +67,7 @@ export default function AddModel() {
                         </Form.Select>
                     </Col>
                     <Col sm={4}>
-                        <FormLabel>Chọn hãng xe</FormLabel>
+                        <FormLabel>Chọn dòng xe</FormLabel>
                         <FormControl name="name" value={model.name} required
                             onChange={({ target }) => setModel(state => ({ ...state, name: target.value }))}
                         />
@@ -84,7 +84,7 @@ export default function AddModel() {
                         </div>
                     </Col>
                     <Col sm={2}>
-                        <FormLabel>Giá khởi điểm</FormLabel>
+                        <FormLabel>Giá thuê gợi ý</FormLabel>
                         <FormControl name="suggestPrice" value={model.suggestPrice} type="number" required
                             // @ts-ignore
                             onChange={({ target }) => setModel(state => ({ ...state, suggestPrice: parseInt(target.value) }))}

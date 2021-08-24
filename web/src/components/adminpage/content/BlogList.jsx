@@ -17,6 +17,7 @@ export default function BlogList() {
     useEffect(() => {
         // @ts-ignore
         adminApi.getBlog().then(res => setList(res))
+        console.log("ầ");
     }, [blogcmm])
     console.log(list.length);
     const [show, setShow] = useState(false);

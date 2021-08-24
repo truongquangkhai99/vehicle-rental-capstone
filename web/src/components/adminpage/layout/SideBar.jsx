@@ -36,12 +36,6 @@ export default function Sidebar() {
                                 Bài viết
                             </li>
                         </Link>
-                        <Link to="/admin/transactions" style={{ color: 'white', textDecoration: 'none' }}>
-                            <li className="sidebarListItem">
-                                <TrendingUp className="sidebarIcon" />
-                                Giao Dịch
-                            </li>
-                        </Link>
                     </ul>
                 </div>
             </div>

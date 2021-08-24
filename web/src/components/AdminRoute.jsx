@@ -57,7 +57,7 @@ const AdminRoute = () => {
               <Route path={`${url}/vehicles`} component={VehicleList} />
               <Route path={`${url}/blog/create`} component={BlogDetail} />
               <Route path={`${url}/blog/:bid`} component={BlogDetail} />
-              <Route path={`${url}/transactions`} component={TransactionList} />
+              {/* <Route path={`${url}/transactions`} component={TransactionList} /> */}
             </Switch>
           </div>
         </div>

@@ -55,8 +55,6 @@ export default function BlogDetail() {
                 adminApi.createBlog(blog);
                 store.dispatch(createBlog(blog));
             })
-
-
         }
         history.push("/admin/blogs");
         handleCancel();

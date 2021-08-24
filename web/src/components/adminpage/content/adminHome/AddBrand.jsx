@@ -9,7 +9,7 @@ export default function AddBrand() {
     const [brand, setBrand] = useState({
         id: null,
         name: "",
-        bikeProduction: false,
+        bikeProduction: true,
         carProduction: false,
     });
     const [brandList, setBrandList] = useState([]);
@@ -25,7 +25,7 @@ export default function AddBrand() {
         setBrand({
             id: null,
             name: "",
-            bikeProduction: false,
+            bikeProduction: true,
             carProduction: false,
         })
     }

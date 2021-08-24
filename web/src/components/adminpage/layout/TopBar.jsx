@@ -1,6 +1,17 @@
 import React from 'react'
 import { NotificationsNone, Language, Settings } from '@material-ui/icons';
-export default function TopBar() {
+import { useSelector } from 'react-redux';
+import store from 'app/store';
+import { logout } from 'app/slice/userSlice';
+import { useHistory } from 'react-router-dom';
+export default function TopBar(props) {
+    // @ts-ignore
+    const user = useSelector(state => state.logged).data
+    const history = useHistory()
+    const handleLogout = () => {
+        history.push("/")
+        store.dispatch(logout())
+    }
     return (
         <div className="topbar">
             <div className="topbarWrapper">
@@ -8,18 +19,10 @@ export default function TopBar() {
                     <span className="logo">Trang Quản Trị</span>
                 </div>
                 <div className="topRight">
-                    <div className="topbarIcons">
-                        <NotificationsNone />
-                        <span className="topIconBag">2</span>
-                    </div>
-                    <div className="topbarIcons">
-                        <Language />
-                    </div>
-                    <div className="topbarIcons">
-                        <Settings />
-                    </div>
-                    <img src="https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-dai-dien-dep.jpg"
+                    <span className="text-white" >{user.fullName}</span>
+                    <img src={user.avatarLink}
                         alt="" className="topAvatar" />
+                    <button className="btn" onClick={handleLogout}>Đăng xuất</button>
                 </div>
             </div>
         </div>
